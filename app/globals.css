@@ -1,26 +1,175 @@
 @import "tailwindcss";
+@import "./fonts/fonts.css";
+@import "./fonts/heading-1.css";
+@import "./fonts/heading-1b.css";
+@import "./fonts/heading-2-l.css";
+@import "./fonts/heading-2-s.css";
+@import "./fonts/heading-3.css";
+@import "./fonts/heading-3-s.css";
+@import "./fonts/heading-4.css";
+@import "./fonts/body-1.css";
+@import "./fonts/body-2.css";
+@import "./fonts/body-3.css";
+@import "./fonts/paragraph-l.css";
+@import "./fonts/paragraph-s.css";
+@import "./fonts/nav-menu.css";
+@import "./fonts/footer-nav.css";
+@import "./fonts/footer-text-xxl.css";
+@import "./fonts/buttons.css";
+@import "./fonts/site-nav.css";
+@import "./fonts/hero.css";
+@import "./brands.css";
+@import "./works.css";
+@import "./services.css";
+@import "./reviews-ticker.css";
+@import "./blogs.css";
+@import "./faq.css";
+@import "./service-cube.css";
+@import "./album-corner.css";
+@import "./aperture-cta.css";
+@import "./social-contact-card.css";
 
+/**
+ * Design tokens: each color hex is defined exactly once below.
+ * Semantic `--color-*` aliases reference only these base tokens.
+ */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /**
+   * Global layout breakpoints (documented for design parity; use these literals in @media).
+   * Phone: max 809px · Tablet: 810px–1199px · Desktop: 1200px and up.
+   * Tablet tier in CSS uses `(min-width: 810px) and (not (min-width: 1200px))` so widths
+   * between 1199px and 1200px (subpixel/zoom) still get tablet styles — not base/phone sizes.
+   */
+  --breakpoint-phone-max: 809px;
+  --breakpoint-tablet-min: 810px;
+  --breakpoint-tablet-max: 1199px;
+  --breakpoint-desktop-min: 1200px;
+
+  /* Base palette — creamy ivory, near-black ink, orange accents */
+  --color-creamy-white: #faf5ea;
+  --color-matt-black: #111111;
+  /** Primary accent — deep orange (CTAs, links, focus) */
+  --color-deep-orange: #ff6017;
+  /** Lighter orange — hovers, highlights (site-wide) */
+  --color-light-orange: #ff7738;
+  /** Current page text for default `.link` variant */
+  --color-link-current: #111111;
+  /* Neutrals */
+  --color-white: #ffffff;
+  /** White 100% — pure #ffffff (alias) */
+  --color-white-100: var(--color-white);
+  /** White 50% — #ffffff at 50% opacity */
+  --color-white-50: color-mix(in srgb, var(--color-white) 50%, transparent);
+  /** White 30% — #ffffff at 30% opacity */
+  --color-white-30: color-mix(in srgb, var(--color-white) 30%, transparent);
+  --color-black: #000000;
+  /** Black 100% — pure #000000 (alias) */
+  --color-black-100: var(--color-black);
+  /** Page section surface (e.g. Works outer band) */
+  --color-surface-base: var(--color-black-100);
+  --color-gray-mid: #999999;
+
+  /* Typography & UI — semantic names → base tokens */
+  --color-heading-1: var(--color-creamy-white);
+  --color-heading-1b: var(--color-white);
+  --color-heading-2-l: var(--color-white);
+  --color-heading-2-s: var(--color-white);
+  --color-heading-3: var(--color-creamy-white);
+  --color-heading-3-s: var(--color-creamy-white);
+  --color-heading-4: var(--color-creamy-white);
+  --color-body-1: var(--color-creamy-white);
+  --color-body-2: var(--color-gray-mid);
+  --color-body-3: var(--color-white);
+  --color-paragraph-l: var(--color-white);
+  --color-paragraph-s: var(--color-gray-mid);
+  --color-nav-menu: var(--color-white);
+  --color-footer-nav: var(--color-creamy-white);
+  --color-footer-text-xxl: var(--color-black);
+
+  --heading-1-paragraph-spacing: 40px;
+  --heading-1b-paragraph-spacing: 40px;
+  --heading-2-l-paragraph-spacing: 40px;
+  --heading-2-s-paragraph-spacing: 40px;
+  --heading-3-paragraph-spacing: 40px;
+  --heading-3-s-paragraph-spacing: 40px;
+  --heading-4-paragraph-spacing: 40px;
+  --body-1-paragraph-spacing: 20px;
+  --body-2-paragraph-spacing: 20px;
+  --body-3-paragraph-spacing: 10px;
+  --paragraph-l-paragraph-spacing: 20px;
+  --paragraph-s-paragraph-spacing: 20px;
+  --nav-menu-paragraph-spacing: 20px;
+  --footer-nav-paragraph-spacing: 20px;
+  --footer-text-xxl-paragraph-spacing: 20px;
+
+  /** In-page scroll target offset for `#quote` (Y 0) */
+  --scroll-section-quote-offset-y: 0;
+  /** In-page scroll target offset for `#heading` (Y 0) */
+  --scroll-section-heading-offset-y: 0;
+  /** In-page scroll target offset for `#about-me` (Y 0) */
+  --scroll-section-about-me-offset-y: 0;
+  /** In-page scroll target offset for `#about` — Services sticky (Y 0) */
+  --scroll-section-about-offset-y: 0;
+  /** In-page scroll target offset for `#services` (Y 0) */
+  --scroll-section-services-offset-y: 0;
+
+  /**
+   * Smooth scroll “intensity” (Framer-style scale). Lenis `lerp` = intensity ÷ 100 (clamped 0.01–1).
+   */
+  --scroll-smooth-intensity: 12;
 }
 
+/* Tailwind theme: forwards :root tokens to utilities (bg-*, text-*, etc.) */
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-white: var(--color-white);
+  --color-white-100: var(--color-white-100);
+  --color-white-50: var(--color-white-50);
+  --color-white-30: var(--color-white-30);
+  --color-black: var(--color-black);
+  --color-black-100: var(--color-black-100);
+  --color-creamy-white: var(--color-creamy-white);
+  --color-matt-black: var(--color-matt-black);
+  --color-gray-mid: var(--color-gray-mid);
+  --color-deep-orange: var(--color-deep-orange);
+  --color-light-orange: var(--color-light-orange);
+  --color-link-current: var(--color-link-current);
+  --color-surface-base: var(--color-surface-base);
+  --font-family-heading: var(--font-heading);
+  --font-family-body: var(--font-body);
+  --font-family-paragraph: var(--font-paragraph);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+#about-me {
+  scroll-margin-top: var(--scroll-section-about-me-offset-y);
+}
+
+#about {
+  scroll-margin-top: var(--scroll-section-about-offset-y);
+}
+
+#services {
+  scroll-margin-top: var(--scroll-section-services-offset-y);
+}
+
+#reviews {
+  scroll-margin-top: 0;
+}
+
+#blogs {
+  scroll-margin-top: 0;
+}
+
+#faq {
+  scroll-margin-top: 0;
+}
+
+/* Avoid layout shift when scroll is locked (e.g. nav overlay): width stays stable when scrollbar hides. */
+html {
+  scrollbar-gutter: stable;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
+  background: var(--color-black-100);
+  color: var(--color-white-100);
   font-family: Arial, Helvetica, sans-serif;
 }

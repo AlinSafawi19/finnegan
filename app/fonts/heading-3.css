@@ -1,0 +1,58 @@
+/**
+ * Heading 3 — Clash Display Regular, Creamy White, left-aligned.
+ * Breakpoints: phone (≤809px), tablet (810–1199px), desktop (≥1200px).
+ * S uses fixed line-height (30px); M/L use 1.3em. L font size is smaller than M per design.
+ */
+.heading-3 {
+  font-family: var(--font-heading);
+  font-weight: 400;
+  color: var(--color-heading-3);
+  text-transform: none;
+  text-align: left;
+  font-size: 24px;
+  letter-spacing: -0.01em;
+  line-height: 30px;
+  margin: 0 0 var(--heading-3-paragraph-spacing);
+}
+
+@media (min-width: 810px) and (not (min-width: 1200px)) {
+  .heading-3 {
+    font-size: 32px;
+    line-height: 1.3em;
+  }
+}
+
+@media (min-width: 1200px) {
+  .heading-3 {
+    font-size: 28px;
+    line-height: 1.3em;
+  }
+}
+
+/* Size variants: default = large — full S → M → L scale. */
+
+/** Small — S tier at all viewports. */
+@media (min-width: 810px) and (not (min-width: 1200px)) {
+  .heading-3.heading-3--sm {
+    font-size: 24px;
+    line-height: 30px;
+    letter-spacing: -0.01em;
+  }
+}
+
+@media (min-width: 1200px) {
+  .heading-3.heading-3--sm {
+    font-size: 24px;
+    line-height: 30px;
+    letter-spacing: -0.01em;
+  }
+}
+
+/** Medium — S → M, cap at M on large screens (no L step to 28px). */
+@media (min-width: 1200px) {
+  .heading-3.heading-3--md {
+    font-size: 32px;
+    line-height: 1.3em;
+    letter-spacing: -0.01em;
+  }
+}

@@ -1,0 +1,87 @@
+/* Variant 1 */
+.album-info-card--v1 {
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 800px;
+  height: min-content;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 0px 10px 0px;
+  overflow: visible;
+  align-content: center;
+  flex-wrap: nowrap;
+  border-radius: 0px 0px 0px 0px;
+  border-color: var(
+    --token-5d5de10c-51bb-4596-ab88-00139ed62b55,
+    rgba(20, 20, 20, 0.2)
+  );
+  border-style: solid;
+  border-top-width: 0px;
+  border-bottom-width: 1px;
+  border-left-width: 0px;
+  border-right-width: 0px;
+}
+
+.album-info-card--v1:last-child {
+  border-bottom-width: 0px;
+}
+
+.album-info-card__stack {
+  flex: 1;
+  min-width: 1px;
+  width: 1px;
+  height: min-content;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  overflow: visible;
+  padding: 0px;
+  align-content: center;
+  flex-wrap: nowrap;
+  gap: 10px;
+  position: relative;
+  border-radius: 0px 0px 0px 0px;
+}
+
+.album-info-card__icon {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--Creamy_White, #faf5ea);
+}
+
+.album-info-card__label.body-3 {
+  flex: 1;
+  min-width: 1px;
+  width: 1px;
+  height: auto;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  word-break: break-word;
+  color: var(--Creamy_White, #faf5ea);
+  line-height: 1.2;
+  position: relative;
+  margin: 0;
+  text-align: left;
+}
+
+.album-info-card__value.paragraph-s {
+  flex: 1;
+  min-width: 1px;
+  width: 1px;
+  height: auto;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  word-break: break-word;
+  color: var(--Creamy_White, #faf5ea);
+  text-align: right;
+  line-height: 1.2;
+  position: relative;
+  margin: 0;
+}

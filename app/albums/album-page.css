@@ -1,0 +1,468 @@
+@import "../videos/videos-page.css";
+
+.album-page__main {
+  width: 100%;
+  height: min-content;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  overflow: visible;
+  padding: 0px;
+  align-content: center;
+  flex-wrap: nowrap;
+  gap: 0px;
+  position: relative;
+  border-radius: 0px 0px 0px 0px;
+}
+
+/* Mobile (<810px): base */
+.album-page__hero {
+  box-sizing: border-box;
+  width: 100%;
+  height: min-content;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 80px 20px 20px 20px;
+  overflow: hidden;
+  z-index: 1;
+  align-content: center;
+  flex-wrap: nowrap;
+  gap: 20px;
+  position: relative;
+  border-radius: 0px 0px 0px 0px;
+}
+
+/* Tablet (810px–1199px) */
+@media (min-width: 810px) and (max-width: 1199px) {
+  .album-page__hero {
+    padding: 80px 50px 50px 50px;
+  }
+}
+
+/* Desktop (1200px+) */
+@media (min-width: 1200px) {
+  .album-page__hero {
+    padding: 80px 50px 80px 50px;
+  }
+}
+
+.album-page__hero-inner {
+  position: relative;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Positioning + horizontal center — outside Motion so `transform` is not replaced by the title animation. */
+.album-page__hero-title-anchor {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 400px;
+  z-index: 0;
+}
+
+/* Hero title — Heading 1 (mobile <810px) */
+.album-page__hero-title.heading-1 {
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 400px;
+  height: auto;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  word-break: break-word;
+  z-index: 0;
+  text-shadow: 1px 1px 52px rgba(0, 0, 0, 0.45);
+  color: var(--Creamy_White, #faf5ea);
+  text-align: center;
+  line-height: 0.8;
+  margin: 0;
+}
+
+@media (min-width: 810px) and (max-width: 1199px) {
+  .album-page__hero-title-anchor,
+  .album-page__hero-title.heading-1 {
+    max-width: 600px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .album-page__hero-title-anchor,
+  .album-page__hero-title.heading-1 {
+    max-width: 1120px;
+  }
+}
+
+/* Hero background — Image1 (mobile <810px) */
+.album-page__hero-image1 {
+  box-sizing: border-box;
+  width: 100%;
+  height: 277px;
+  display: block;
+  mix-blend-mode: lighten;
+  overflow: hidden;
+  z-index: 0;
+  background-image: var(--album-hero-image1, none);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  position: relative;
+  border-radius: 0px 0px 0px 0px;
+  flex-shrink: 0;
+}
+
+@media (min-width: 810px) and (max-width: 1199px) {
+  .album-page__hero-image1 {
+    width: 670px;
+    height: 339px;
+    aspect-ratio: 3.0088495575221237 / 1;
+  }
+}
+
+@media (min-width: 1200px) {
+  .album-page__hero-image1 {
+    width: 100%;
+    height: 339px;
+    aspect-ratio: 3.0088495575221237 / 1;
+  }
+}
+
+/* Overview — mobile (<810px) */
+.album-page__overview {
+  box-sizing: border-box;
+  width: 100%;
+  height: min-content;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 50px 20px 50px 20px;
+  background-color: #000000;
+  overflow: hidden;
+  z-index: 1;
+  align-content: center;
+  flex-wrap: nowrap;
+  gap: 62px;
+  position: relative;
+  border-radius: 0px 0px 0px 0px;
+}
+
+/* Overview copy — Paragraph L (mobile <810px, desktop 800px cap) */
+.album-page__overview-text.paragraph-l {
+  box-sizing: border-box;
+  width: 100%;
+  height: auto;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  word-break: break-word;
+  max-width: 800px;
+  color: var(--Creamy_White, #faf5ea);
+  text-align: center;
+  line-height: 1.2;
+  position: relative;
+  margin: 0;
+}
+
+.album-page__overview-wrapper {
+  box-sizing: border-box;
+  width: 100%;
+  height: min-content;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: stretch;
+  padding: 21px;
+  background-color: rgba(255, 255, 255, 0.05);
+  max-width: 600px;
+  overflow: visible;
+  align-content: center;
+  flex-wrap: nowrap;
+  gap: 26px;
+  position: relative;
+  border-radius: 0px 0px 0px 0px;
+}
+
+.album-page__overview-info {
+  box-sizing: border-box;
+  width: 100%;
+  height: min-content;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  padding: 0px;
+  align-content: center;
+  flex-wrap: nowrap;
+  gap: 10px;
+  position: relative;
+  border-radius: 0px 0px 0px 0px;
+}
+
+@media (min-width: 810px) and (max-width: 1199px) {
+  .album-page__overview-text.paragraph-l {
+    max-width: 600px;
+  }
+
+  .album-page__overview {
+    padding: 100px 40px 100px 40px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .album-page__overview {
+    padding: 120px 40px 120px 40px;
+  }
+}
+
+/* Gallery — mobile (<810px): outer gap 10px */
+.album-page__gallery {
+  box-sizing: border-box;
+  width: 100%;
+  height: min-content;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 0px 10px 10px 10px;
+  overflow: visible;
+  z-index: 1;
+  align-content: center;
+  flex-wrap: nowrap;
+  gap: 10px;
+  position: relative;
+  border-radius: 0px 0px 0px 0px;
+}
+
+.album-page__gallery-inner {
+  width: 100%;
+  height: min-content;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  max-width: 1900px;
+  overflow: visible;
+  z-index: 1;
+  padding: 0px;
+  align-content: flex-start;
+  flex-wrap: nowrap;
+  gap: 10px;
+  position: relative;
+  border-radius: 0px 0px 0px 0px;
+}
+
+.album-page__gallery-col {
+  width: 100%;
+  height: min-content;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  overflow: hidden;
+  z-index: 1;
+  padding: 0px;
+  align-content: center;
+  flex-wrap: nowrap;
+  gap: 10px;
+  position: relative;
+  border-radius: 0px 0px 0px 0px;
+}
+
+.album-page__gallery-img {
+  width: 100%;
+  height: auto;
+  display: block;
+  max-width: 100%;
+}
+
+@media (min-width: 810px) {
+  .album-page__gallery {
+    gap: 62px;
+  }
+
+  .album-page__gallery-inner {
+    flex-direction: row;
+  }
+
+  .album-page__gallery-col {
+    flex: 1;
+    min-width: 1px;
+    width: 1px;
+    position: sticky;
+    top: 10px;
+    align-self: flex-start;
+  }
+}
+
+/* Video — same layout all breakpoints */
+.album-page__video {
+  box-sizing: border-box;
+  width: 100%;
+  height: min-content;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 0px 10px 10px 10px;
+  overflow: hidden;
+  align-content: center;
+  flex-wrap: nowrap;
+  gap: 10px;
+  position: relative;
+  border-radius: 0px 0px 0px 0px;
+}
+
+/* Wraps WorkVideoEmbed (same 16:9 as /videos — see videos-page.css). */
+.album-page__video-player {
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+}
+
+/* More albums — mobile (<810px) */
+.album-page__more-albums {
+  box-sizing: border-box;
+  width: 100%;
+  height: min-content;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 30px 10px 60px 10px;
+  overflow: visible;
+  align-content: center;
+  flex-wrap: nowrap;
+  gap: 35px;
+  position: relative;
+  border-radius: 0px 0px 0px 0px;
+}
+
+.album-page__more-albums-title.heading-2-l {
+  box-sizing: border-box;
+  width: 100%;
+  height: auto;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  word-break: break-word;
+  color: var(--Creamy_White, #faf5ea);
+  line-height: 1.2;
+  position: relative;
+  margin: 0;
+  text-align: center;
+}
+
+/* Under “More Albums” title — spec used 1680%; interpreted as 1680px */
+.album-page__more-albums-ticker-wrap {
+  box-sizing: border-box;
+  width: 100%;
+  height: min-content;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  max-width: 1680px;
+  overflow: visible;
+  padding: 0px;
+  align-content: flex-start;
+  flex-wrap: nowrap;
+  gap: 40px;
+  position: relative;
+  border-radius: 0px 0px 0px 0px;
+}
+
+/* Padding ≥ hover corner reach (see album-corner.css: up to ~15px offset + 40px arms) so
+   overflow clipping stays past the L shapes; content still scrolls in the inner band. */
+.album-page__more-albums-ticker-viewport {
+  box-sizing: border-box;
+  width: 100%;
+  min-width: 0;
+  padding: 28px 44px;
+  overflow: hidden;
+  position: relative;
+}
+
+/* Linear loop duration — lower = faster (half of 45s ≈ 2× speed). */
+.album-page__more-albums-ticker-strip {
+  --album-more-ticker-duration: 22s;
+
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-items: stretch;
+  justify-content: flex-start;
+  gap: 10px;
+  width: max-content;
+  height: auto;
+  overflow: visible;
+  will-change: transform;
+  animation: album-page-more-albums-marquee var(--album-more-ticker-duration)
+    linear infinite;
+}
+
+.album-page__more-albums-ticker-strip .works__album-card-link {
+  box-sizing: border-box;
+  display: block;
+  flex: 0 0 auto;
+  width: min(360px, 85vw);
+  max-width: 360px;
+  padding: 10px;
+  overflow: visible;
+}
+
+.album-page__more-albums-ticker-strip .works__album-card.works__album-card--works {
+  width: 100%;
+  max-width: 100%;
+}
+
+@keyframes album-page-more-albums-marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.album-page__more-albums-ticker-strip--static {
+  animation: none;
+  flex-wrap: wrap;
+  justify-content: center;
+  width: 100%;
+  max-width: 100%;
+}
+
+.album-page__more-albums-ticker-strip--static .works__album-card-link {
+  width: min(360px, 100%);
+}
+
+.album-page__more-albums-cta {
+  box-sizing: border-box;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@media (min-width: 810px) and (max-width: 1199px) {
+  .album-page__more-albums {
+    padding: 100px 10px 100px 10px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .album-page__more-albums {
+    padding: 150px 10px 150px 10px;
+  }
+}

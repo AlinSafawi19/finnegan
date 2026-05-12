@@ -1,0 +1,191 @@
+/* Album corner — L shape (1px arms). Default: 40×40 · small: 9×8 (9px × arm h, 8px × arm v). */
+
+.works__album-card {
+  position: relative;
+}
+
+.works__album-corner {
+  --album-corner-arm: 40px;
+  --album-corner-arm-h: var(--album-corner-arm);
+  --album-corner-arm-v: var(--album-corner-arm);
+  position: absolute;
+  z-index: 1;
+  box-sizing: border-box;
+  width: var(--album-corner-arm-h);
+  height: var(--album-corner-arm-v);
+  pointer-events: none;
+  opacity: 0;
+  transition:
+    opacity 0.42s cubic-bezier(0.34, 1.15, 0.64, 1),
+    top 0.42s cubic-bezier(0.34, 1.15, 0.64, 1),
+    right 0.42s cubic-bezier(0.34, 1.15, 0.64, 1),
+    bottom 0.42s cubic-bezier(0.34, 1.15, 0.64, 1),
+    left 0.42s cubic-bezier(0.34, 1.15, 0.64, 1);
+}
+
+.works__album-corner--size-small {
+  --album-corner-arm-h: 9px;
+  --album-corner-arm-v: 8px;
+}
+
+/* Corners only while the tile is hovered or keyboard-focused (card preset only shows on hover) */
+.works__album-card-link:hover .works__album-corner,
+.works__album-card-link:focus-visible .works__album-corner {
+  opacity: 1;
+}
+
+/* Fixed-position accents: visible whenever parent shows them (no link hover gate) */
+.works__album-corner--accent {
+  opacity: 1;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .works__album-corner {
+    transition-duration: 0.12s;
+    transition-timing-function: ease-out;
+  }
+}
+
+/* Card quadrants — default (not hovered): resting offsets (corners on `.works__album-card` only) */
+.works__album-card .works__album-corner:not(.works__album-corner--accent).works__album-corner--tl {
+  top: -6px;
+  left: -5px;
+}
+
+.works__album-card .works__album-corner:not(.works__album-corner--accent).works__album-corner--tr {
+  top: -6px;
+  right: -6px;
+}
+
+.works__album-card .works__album-corner:not(.works__album-corner--accent).works__album-corner--bl {
+  bottom: -9px;
+  left: -5px;
+}
+
+.works__album-card .works__album-corner:not(.works__album-corner--accent).works__album-corner--br {
+  bottom: -9px;
+  right: -5px;
+}
+
+/* Hovered / focused: outer offsets (card corners only) */
+.works__album-card-link:hover
+  .works__album-card .works__album-corner:not(.works__album-corner--accent).works__album-corner--tl,
+.works__album-card-link:focus-visible
+  .works__album-card .works__album-corner:not(.works__album-corner--accent).works__album-corner--tl {
+  top: -15px;
+  left: -15px;
+}
+
+.works__album-card-link:hover
+  .works__album-card .works__album-corner:not(.works__album-corner--accent).works__album-corner--tr,
+.works__album-card-link:focus-visible
+  .works__album-card .works__album-corner:not(.works__album-corner--accent).works__album-corner--tr {
+  top: -15px;
+  right: -15px;
+}
+
+.works__album-card-link:hover
+  .works__album-card .works__album-corner:not(.works__album-corner--accent).works__album-corner--bl,
+.works__album-card-link:focus-visible
+  .works__album-card .works__album-corner:not(.works__album-corner--accent).works__album-corner--bl {
+  bottom: -9px;
+  left: -15px;
+}
+
+.works__album-card-link:hover
+  .works__album-card .works__album-corner:not(.works__album-corner--accent).works__album-corner--br,
+.works__album-card-link:focus-visible
+  .works__album-card .works__album-corner:not(.works__album-corner--accent).works__album-corner--br {
+  bottom: -9px;
+  right: -15px;
+}
+
+/* Fixed design positions (use with placement `tl`; parent must be `position: relative`) */
+.works__album-corner--preset-dark.works__album-corner--tl {
+  top: -7px;
+  left: 125px;
+  right: auto;
+  bottom: auto;
+}
+
+.works__album-corner--preset-small.works__album-corner--tl {
+  top: -7px;
+  left: 79px;
+  right: auto;
+  bottom: auto;
+}
+
+.works__album-corner__arm {
+  position: absolute;
+  display: block;
+  margin: 0;
+  padding: 0;
+  border: none;
+  border-radius: 0;
+}
+
+/* Horizontal arm */
+.works__album-corner__arm--h {
+  height: 1px;
+  width: var(--album-corner-arm-h);
+}
+
+/* Vertical arm */
+.works__album-corner__arm--v {
+  width: 1px;
+  height: var(--album-corner-arm-v);
+}
+
+/* Top-left: arms extend right and down from vertex */
+.works__album-corner--tl .works__album-corner__arm--h {
+  top: 0;
+  left: 0;
+}
+
+.works__album-corner--tl .works__album-corner__arm--v {
+  top: 0;
+  left: 0;
+}
+
+/* Top-right: horizontal left along top, vertical down along right */
+.works__album-corner--tr .works__album-corner__arm--h {
+  top: 0;
+  right: 0;
+}
+
+.works__album-corner--tr .works__album-corner__arm--v {
+  top: 0;
+  right: 0;
+}
+
+/* Bottom-left: horizontal right along bottom, vertical up along left */
+.works__album-corner--bl .works__album-corner__arm--h {
+  bottom: 0;
+  left: 0;
+}
+
+.works__album-corner--bl .works__album-corner__arm--v {
+  bottom: 0;
+  left: 0;
+}
+
+/* Bottom-right: horizontal left along bottom, vertical up along right */
+.works__album-corner--br .works__album-corner__arm--h {
+  bottom: 0;
+  right: 0;
+}
+
+.works__album-corner--br .works__album-corner__arm--v {
+  bottom: 0;
+  right: 0;
+}
+
+/* Light — creamy white */
+.works__album-corner--light .works__album-corner__arm {
+  background-color: var(--color-creamy-white);
+}
+
+/* Dark — black 100% */
+.works__album-corner--dark .works__album-corner__arm {
+  background-color: var(--color-black-100);
+}

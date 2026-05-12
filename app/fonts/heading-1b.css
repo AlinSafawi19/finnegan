@@ -1,0 +1,49 @@
+/**
+ * Heading 1b — Clash Display Regular, white, center-aligned.
+ * Breakpoints: phone (≤809px), tablet (810–1199px), desktop (≥1200px).
+ */
+.heading-1b {
+  font-family: var(--font-heading);
+  font-weight: 400;
+  color: var(--color-heading-1b);
+  text-transform: none;
+  text-align: center;
+  font-size: 30px;
+  letter-spacing: -0.04em;
+  line-height: 0.9;
+  margin: 0 0 var(--heading-1b-paragraph-spacing);
+}
+
+@media (min-width: 810px) and (not (min-width: 1200px)) {
+  .heading-1b {
+    font-size: 56px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .heading-1b {
+    font-size: 66px;
+  }
+}
+
+/* Size variants: default = large — full S → M → L scale. */
+
+/** Small — S tier at all viewports. */
+@media (min-width: 810px) and (not (min-width: 1200px)) {
+  .heading-1b.heading-1b--sm {
+    font-size: 30px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .heading-1b.heading-1b--sm {
+    font-size: 30px;
+  }
+}
+
+/** Medium — S → M, cap at M on large screens (no L step). */
+@media (min-width: 1200px) {
+  .heading-1b.heading-1b--md {
+    font-size: 56px;
+  }
+}

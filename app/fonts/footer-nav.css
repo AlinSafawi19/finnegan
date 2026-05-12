@@ -1,0 +1,21 @@
+/**
+ * Footer Nav — Clash Display Medium, Creamy White, capitalize, left-aligned.
+ * Single tier in design (min 0): 15px, 150% line-height.
+ */
+.footer-nav {
+  font-family: var(--font-heading);
+  font-weight: 500;
+  color: var(--color-footer-nav);
+  text-transform: capitalize;
+  text-align: left;
+  font-size: 15px;
+  letter-spacing: -0.02em;
+  line-height: 1.5;
+  margin: 0 0 var(--footer-nav-paragraph-spacing);
+  text-decoration: none;
+  display: inline-block;
+}
+
+.footer-nav:last-child {
+  margin-bottom: 0;
+}

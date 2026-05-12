@@ -1,0 +1,381 @@
+/* Footer — full-width column: orange CTA band, then dark nav (all breakpoints). */
+
+.site-footer {
+  /* Phone: shortest strip — nav padding + shell read this variable. */
+  --site-footer-nav-ticker-shell-height: 160px;
+
+  box-sizing: border-box;
+  position: relative;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  overflow: visible;
+  padding: 0;
+  gap: 0;
+}
+
+@media (min-width: 810px) and (not (min-width: 1200px)) {
+  .site-footer {
+    --site-footer-nav-ticker-shell-height: 200px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .site-footer {
+    --site-footer-nav-ticker-shell-height: 240px;
+  }
+}
+
+.site-footer__cta {
+  box-sizing: border-box;
+  width: 100%;
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: stretch;
+  overflow: visible;
+  flex-wrap: nowrap;
+  padding: 12px;
+  gap: 10px;
+}
+
+@media (min-width: 810px) {
+  .site-footer__cta {
+    padding: 0 40px;
+  }
+}
+
+/* In-flow flex so the aperture + mail + social stack grows the orange band (no overflow into nav). */
+.site-footer__cta-inner {
+  box-sizing: border-box;
+  width: 100%;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow: visible;
+  padding: 250px 0 150px;
+  background-color: var(--color-light-orange);
+  z-index: 0;
+}
+
+/* Footer CTA: same `AlbumCorner` dark L as elsewhere; inset 40px from each edge. */
+.site-footer__cta-inner .works__album-corner--preset-dark.works__album-corner--tl {
+  top: 40px;
+  left: 40px;
+  right: auto;
+  bottom: auto;
+}
+
+.site-footer__cta-inner .works__album-corner--preset-dark.works__album-corner--tr {
+  top: 40px;
+  right: 40px;
+  left: auto;
+  bottom: auto;
+}
+
+.site-footer__cta-inner .works__album-corner--preset-dark.works__album-corner--br {
+  bottom: 40px;
+  right: 40px;
+  left: auto;
+  top: auto;
+}
+
+.site-footer__cta-inner .works__album-corner--preset-dark.works__album-corner--bl {
+  bottom: 40px;
+  left: 40px;
+  top: auto;
+  right: auto;
+}
+
+.site-footer__cta-btn {
+  box-sizing: border-box;
+  width: 214px;
+  height: 214px;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 7px;
+  overflow: hidden;
+  align-content: center;
+  flex-wrap: nowrap;
+  gap: 10px;
+  position: relative;
+  margin-inline: auto;
+  border-radius: 330px;
+  border: 1px solid var(--color-white-50);
+  z-index: 2;
+}
+
+.site-footer__cta-btn .aperture-cta--v1 {
+  top: 7px;
+  left: 7px;
+}
+
+.site-footer__cta-links {
+  box-sizing: border-box;
+  width: 100%;
+  height: min-content;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 0 12px;
+  overflow: hidden;
+  align-content: center;
+  flex-wrap: nowrap;
+  gap: 33px;
+  position: relative;
+  margin-top: 33px;
+  border-radius: 0;
+  z-index: 2;
+}
+
+.site-footer__cta-links-email {
+  box-sizing: border-box;
+  width: 100%;
+  height: auto;
+  white-space: pre-wrap;
+  overflow-wrap: break-word;
+  word-break: break-word;
+  color: var(--color-matt-black);
+  text-align: center;
+  line-height: 1.2;
+  margin: 0;
+  text-transform: none;
+}
+
+.site-footer__cta-links .link-dark:hover {
+  color: var(--color-matt-black);
+  text-decoration: underline;
+}
+
+/* Social row: phone = vertical stack, 12×12 gap · tablet+ = horizontal, 33×33 gap. */
+.site-footer__cta-links-social {
+  box-sizing: border-box;
+  width: 100%;
+  height: min-content;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  padding: 0;
+  align-content: center;
+  column-gap: 12px;
+  row-gap: 12px;
+  position: relative;
+  border-radius: 0;
+}
+
+@media (min-width: 810px) {
+  .site-footer__cta-links-social {
+    flex-direction: row;
+    flex-wrap: wrap;
+    column-gap: 33px;
+    row-gap: 33px;
+  }
+}
+
+.site-footer__cta-social-link {
+  box-sizing: border-box;
+  width: min-content;
+  height: min-content;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  padding: 0;
+  align-content: center;
+  flex-wrap: nowrap;
+  gap: 4px;
+  position: relative;
+  border-radius: 0;
+  text-decoration: none;
+  color: var(--color-matt-black);
+  transition:
+    color 0.2s ease-in-out,
+    text-decoration-color 0.2s ease-in-out;
+}
+
+.site-footer__cta-social-link:hover,
+.site-footer__cta-social-link:focus-visible {
+  color: var(--color-creamy-white);
+}
+
+.site-footer__cta-social-link__icon {
+  display: flex;
+  flex-shrink: 0;
+  color: currentColor;
+}
+
+.site-footer__cta-social-link__label {
+  box-sizing: border-box;
+  width: auto;
+  height: auto;
+  white-space: pre;
+  margin: 0;
+  font-family: var(--font-heading);
+  font-weight: 500;
+  font-size: 15px;
+  letter-spacing: -0.02em;
+  text-transform: capitalize;
+  text-align: left;
+  line-height: 1.2;
+  color: currentColor;
+}
+
+.site-footer__nav {
+  box-sizing: border-box;
+  width: 100%;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  overflow: visible;
+  flex-wrap: nowrap;
+  /* Reserve ticker shell height (must match `.site-footer__nav-ticker-shell` height). */
+  padding: 60px 0 var(--site-footer-nav-ticker-shell-height) 0;
+  background-color: var(--color-matt-black);
+  gap: 0;
+  z-index: 0;
+}
+
+@media (min-width: 810px) {
+  .site-footer__nav {
+    padding: 100px 40px var(--site-footer-nav-ticker-shell-height);
+  }
+}
+
+/* In-flow stack (not `position: absolute`) so the nav grows with wrapped links. */
+.site-footer__nav-stack {
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 1680px;
+  height: min-content;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  padding: 0;
+  align-content: center;
+  flex-wrap: wrap;
+  row-gap: 1px;
+  column-gap: 21px;
+  position: relative;
+  z-index: 2;
+  border-radius: 0;
+}
+
+@media (min-width: 810px) {
+  .site-footer__nav-stack {
+    flex-direction: row;
+    align-items: flex-start;
+    align-content: flex-start;
+    row-gap: 36px;
+    column-gap: 36px;
+  }
+}
+
+/* Decorative name ticker — under nav links (Framer-style strip, no edge fade). */
+.site-footer__nav-ticker-shell {
+  box-sizing: border-box;
+  width: 100%;
+  height: var(--site-footer-nav-ticker-shell-height);
+  display: block;
+  overflow: hidden;
+  z-index: 1;
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: 0;
+}
+
+.site-footer__nav-ticker-viewport {
+  box-sizing: border-box;
+  position: absolute;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  bottom: -43px;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.site-footer__nav-ticker-track {
+  box-sizing: border-box;
+  width: 100%;
+  min-width: 0;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  overflow: hidden;
+}
+
+.site-footer__nav-ticker-strip {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 0;
+  width: max-content;
+  height: auto;
+  will-change: transform;
+  animation: site-footer-nav-ticker-marquee var(--site-footer-nav-ticker-duration, 40s)
+    linear infinite;
+}
+
+.site-footer__nav-ticker-pair {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 60px;
+  flex-shrink: 0;
+}
+
+.site-footer__nav-ticker-text {
+  box-sizing: border-box;
+  flex: 0 0 auto;
+  width: auto;
+  height: auto;
+  margin: 0;
+  white-space: nowrap;
+  color: var(--color-creamy-white);
+}
+
+.site-footer__nav-ticker-text.footer-text-xxl {
+  margin: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .site-footer__nav-ticker-strip {
+    animation: none;
+  }
+}
+
+@keyframes site-footer-nav-ticker-marquee {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+
+  to {
+    transform: translate3d(-50%, 0, 0);
+  }
+}

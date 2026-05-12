@@ -1,0 +1,620 @@
+/* Works — section under Brands */
+.works {
+  position: relative;
+  box-sizing: border-box;
+  width: 100%;
+  background-color: var(--color-surface-base);
+}
+
+.works__sticky {
+  position: sticky;
+  top: 0;
+  z-index: 2;
+  box-sizing: border-box;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  align-items: center;
+  justify-content: center;
+  gap: 30px;
+  padding: 0 40px 100px 40px;
+  background-color: var(--color-black-100);
+}
+
+.works__inner {
+  width: 100%;
+  min-width: 0;
+  max-width: 1680px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.works__heading {
+  width: 100%;
+  min-width: 0;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  perspective: 1200px;
+}
+
+/* Title stack */
+.works__title-layer {
+  position: relative;
+  display: inline-block;
+  width: max-content;
+  max-width: 100%;
+}
+
+/* Outer wrapper */
+.works__title-reveal {
+  position: relative;
+  display: inline-block;
+  vertical-align: bottom;
+}
+
+/*
+ * Top → bottom clip reveal + whole title slides up from below (`translateY` em-scaled).
+ * No overflow:hidden — avoids clipping blur + font overshoot. End: negative inset so blur halo fits.
+ * `em` is relative to this element’s font-size — match `.heading-2-l` tiers.
+ */
+.works__title-reveal-clip {
+  position: relative;
+  overflow: visible;
+  /* Mirrors app/fonts/heading-2-l.css — keeps clip-path em math aligned to the h2 */
+  font-size: 50px;
+  will-change: clip-path, transform;
+  -webkit-clip-path: inset(0 0 100% 0);
+  clip-path: inset(0 0 100% 0);
+  transform: translateY(0.4em);
+  animation: works-title-clip-reveal 5.2s cubic-bezier(0.16, 1, 0.28, 1) forwards;
+}
+
+@media (min-width: 810px) and (max-width: 1199px) {
+  .works__title-reveal-clip {
+    font-size: 90px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .works__title-reveal-clip {
+    font-size: 120px;
+  }
+}
+
+@keyframes works-title-clip-reveal {
+  to {
+    /* Extra top/bottom room for filter: blur(4px) halo */
+    -webkit-clip-path: inset(-1em -0.25em -1em -0.25em);
+    clip-path: inset(-1em -0.25em -1em -0.25em);
+    /* Whole word rises from below in sync with the clip reveal */
+    transform: translateY(0);
+  }
+}
+
+.works__title-reveal-inner {
+  position: relative;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .works__title-reveal-clip {
+    animation: none;
+    -webkit-clip-path: inset(-1em -0.25em -1em -0.25em);
+    clip-path: inset(-1em -0.25em -1em -0.25em);
+    transform: translateY(0);
+  }
+}
+
+.works__title {
+  margin: 0;
+  color: var(--color-deep-orange);
+}
+
+.works__title-layer .heading-2-l {
+  margin-bottom: 0;
+  line-height: 1.15;
+}
+
+@media (min-width: 810px) {
+  .works__title-layer .heading-2-l {
+    line-height: 1.1;
+  }
+}
+
+.works__title--base {
+  position: relative;
+  z-index: 0;
+  opacity: 1;
+  transition: opacity 200ms ease;
+}
+
+.works__title--blur {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+  width: 100%;
+  height: 100%;
+  filter: blur(4px);
+  opacity: 0;
+  transition: opacity 200ms ease;
+}
+
+.works[data-centered="true"] .works__title--base {
+  opacity: 0;
+}
+
+.works[data-centered="true"] .works__title--blur {
+  opacity: 1;
+}
+
+@media (max-width: 809px) {
+  .works__sticky {
+    position: relative;
+    top: auto;
+    height: auto;
+    min-height: 0;
+    padding: 30px 12px 30px 12px;
+  }
+
+  /* Keep the sharp title only — no blur swap when #works is centered in view */
+  .works[data-centered="true"] .works__title--base {
+    opacity: 1;
+  }
+
+  .works[data-centered="true"] .works__title--blur {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+  }
+}
+
+.works__projects {
+  position: relative;
+  z-index: 3;
+  box-sizing: border-box;
+  width: 100%;
+  overflow-x: clip;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  align-items: center;
+  justify-content: center;
+  gap: 174px;
+  padding: 0 0 200px 0;
+  background-color: transparent;
+}
+
+.works__projects-inner {
+  width: 100%;
+  min-width: 0;
+  max-width: 1400px;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  align-items: center;
+  justify-content: center;
+  gap: 174px;
+}
+
+/* Albums stack inside each scroll layer — vertical, start / start, gap 40 */
+.works__projects-albums {
+  box-sizing: border-box;
+  width: 100%;
+  min-width: 0;
+  flex: 1 1 auto;
+  align-self: stretch;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  align-items: flex-start;
+  justify-content: flex-start;
+  gap: 40px;
+}
+
+.works__projects-albums-label {
+  margin-bottom: 0;
+}
+
+/* Single-album rows: keep “Albums” label left; center the project card on X */
+.works__projects-albums--center-project .works__album-card-link {
+  align-self: center;
+  /* Drop horizontal nudge so the card is visually centered */
+  transform: translate(0, 13px);
+}
+
+/* Album tile — link wraps card; fixed design size with responsive cap */
+.works__album-card-link {
+  position: relative;
+  display: block;
+  max-width: 100%;
+  text-decoration: none;
+  color: inherit;
+  transform: translate(4px, 13px);
+  cursor: pointer;
+}
+
+/* Custom “VIEW” badge — absolute inside link, tracks pointer (clamped in JS) */
+.works__album-view-cursor {
+  position: absolute;
+  z-index: 10;
+  width: 58px;
+  height: 58px;
+  margin: 0;
+  padding: 0;
+  pointer-events: none;
+  box-sizing: border-box;
+  left: 0;
+  top: 0;
+  transform: scale(0.92);
+  opacity: 0;
+  will-change: transform, opacity, left, top;
+  /* Position follows the pointer via JS (rAF lerp); no transition on left/top */
+  transition:
+    opacity 0.5s cubic-bezier(0.34, 1.35, 0.64, 1),
+    transform 0.5s cubic-bezier(0.34, 1.35, 0.64, 1);
+}
+
+.works__album-view-cursor--visible {
+  opacity: 1;
+  transform: scale(1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .works__album-view-cursor {
+    transition: opacity 0.12s ease-out, transform 0.12s ease-out;
+  }
+}
+
+.works__album-view-cursor__frame {
+  position: relative;
+  box-sizing: border-box;
+  width: 100%;
+  height: 100%;
+}
+
+/* Small corners sit on the 58×58 frame (see album-corner.css — card rules scoped to `.works__album-card`) */
+.works__album-view-cursor__frame .works__album-corner--view-badge {
+  transition: none;
+  z-index: 1;
+}
+
+.works__album-view-cursor__frame .works__album-corner--view-badge.works__album-corner--tl {
+  top: 0;
+  left: 0;
+  right: auto;
+  bottom: auto;
+}
+
+.works__album-view-cursor__frame .works__album-corner--view-badge.works__album-corner--tr {
+  top: 0;
+  right: 0;
+  left: auto;
+  bottom: auto;
+}
+
+.works__album-view-cursor__frame .works__album-corner--view-badge.works__album-corner--bl {
+  bottom: 0;
+  left: 0;
+  top: auto;
+  right: auto;
+}
+
+.works__album-view-cursor__frame .works__album-corner--view-badge.works__album-corner--br {
+  bottom: 0;
+  right: 0;
+  top: auto;
+  left: auto;
+}
+
+.works__album-view-cursor__label {
+  position: absolute;
+  inset: 0;
+  box-sizing: border-box;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  font-family: var(--font-body), ui-sans-serif, system-ui, sans-serif;
+  font-weight: 400;
+  font-size: 12px;
+  letter-spacing: 0;
+  line-height: 1.2;
+  color: var(--color-creamy-white);
+  z-index: 0;
+}
+
+.works__album-card.works__album-card--works {
+  box-sizing: border-box;
+  width: 600px;
+  max-width: 100%;
+  height: 446px;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  align-items: flex-start;
+  justify-content: flex-start;
+  gap: 12px;
+  padding: 0;
+  overflow: visible;
+}
+
+/* Second Works row (Echoes of Dreams): design width 718px */
+.works__album-card.works__album-card--works.works__album-card--works-slot2 {
+  width: 718px;
+}
+
+/* Third row pair — Wings of Freedom (left) · Crafted Perfection (right) */
+.works__album-card.works__album-card--works.works__album-card--works-pair-left {
+  width: 451px;
+  height: 446px;
+}
+
+.works__album-card.works__album-card--works.works__album-card--works-pair-right {
+  width: 505px;
+  height: 716px;
+}
+
+/* Fifth Works row (Wild Wonders) */
+.works__album-card.works__album-card--works.works__album-card--works-slot5 {
+  width: 653px;
+}
+
+/* ——— Tablet & mobile: album rows 1, 2, 5 full width; pair layout below ——— */
+
+@media (max-width: 1199px) {
+  .works__album-card-link {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  /* Rows 1, 2, 5 (no pair modifiers): fill the scroll row */
+  .works__album-card.works__album-card--works {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .works__album-card.works__album-card--works.works__album-card--works-slot2,
+  .works__album-card.works__album-card--works.works__album-card--works-slot5 {
+    width: 100%;
+  }
+
+  .works__projects-albums--center-project .works__album-card-link {
+    align-self: stretch;
+    transform: translate(0, 13px);
+  }
+}
+
+.works__album-card__media {
+  position: relative;
+  z-index: 0;
+  width: 100%;
+  flex: 1 1 0;
+  min-height: 0;
+  overflow: hidden;
+}
+
+.works__album-card__image {
+  object-fit: cover;
+}
+
+.works__album-card__stack {
+  box-sizing: border-box;
+  width: 100%;
+  flex: 0 0 auto;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 5px;
+}
+
+.works__album-card__stack-row {
+  box-sizing: border-box;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-items: center;
+  min-width: 0;
+}
+
+.works__album-card__stack-row--pills {
+  justify-content: flex-start;
+  gap: 10px;
+}
+
+.works__album-card__pill {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  padding: 4px 8px;
+  border-radius: 20px;
+  background-color: color-mix(in srgb, var(--color-white) 10%, transparent);
+}
+
+.works__album-card__pill-text {
+  margin: 0 !important;
+  width: max-content;
+  max-width: 100%;
+  opacity: 0.8;
+}
+
+.works__album-card__stack-row--title {
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.works__album-card__title.heading-3 {
+  margin: 0;
+  flex: 1 1 auto;
+  min-width: 0;
+  position: relative;
+  z-index: 1;
+  color: var(--color-creamy-white);
+  mix-blend-mode: difference;
+}
+
+.works__album-card__icon {
+  flex: 0 0 auto;
+  color: var(--color-white-100);
+}
+
+/* Project row — always fully visible (no scroll-driven enter/exit animation) */
+.works__projects-scroll {
+  position: relative;
+  z-index: 1;
+  box-sizing: border-box;
+  width: 100%;
+  min-width: 0;
+  min-height: min(45vh, 520px);
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 0 110px;
+  opacity: 1;
+}
+
+/* One scroll layer for the “3 & 4” beat: inner pair lays out two albums space-between */
+.works__projects-scroll--between {
+  justify-content: center;
+}
+
+.works__projects-albums-pair {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 10px;
+  width: 100%;
+  min-width: 0;
+}
+
+.works__projects-albums-pair .works__projects-albums {
+  flex: 0 1 auto;
+  width: auto;
+  min-width: 0;
+  max-width: calc(50% - 5px);
+  align-self: flex-start;
+}
+
+/* Pair row — left column: stretch to row height, center the card on Y (vs. taller right card) */
+.works__projects-albums-pair .works__projects-albums:first-child {
+  align-self: stretch;
+  justify-content: center;
+}
+
+/* Fifth album row — center the card vertically inside the scroll wrapper min-height */
+.works__projects-albums--center-y {
+  justify-content: center;
+}
+
+@media (max-width: 809px) {
+  .works__projects {
+    padding: 30px 12px 30px 12px;
+    gap: 30px;
+  }
+
+  .works__projects-inner {
+    gap: 30px;
+  }
+
+  .works__projects-scroll {
+    min-height: 0;
+    padding: 0;
+  }
+
+  /* Pair row: cards stacked */
+  .works__projects-albums-pair {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    align-items: stretch;
+    justify-content: flex-start;
+    gap: 30px;
+  }
+
+  .works__projects-albums-pair .works__projects-albums {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .works__projects-albums-pair .works__projects-albums:first-child {
+    align-self: stretch;
+    justify-content: flex-start;
+  }
+
+  /* Same footprint as rows 1, 2 & 5 (full-width 446px-tall cards) */
+  .works__album-card.works__album-card--works.works__album-card--works-pair-left,
+  .works__album-card.works__album-card--works.works__album-card--works-pair-right {
+    width: 100%;
+    height: 446px;
+    min-height: 0;
+  }
+}
+
+@media (min-width: 810px) and (max-width: 1199px) {
+  .works__projects {
+    padding: 0 40px 200px 40px;
+    gap: 60px;
+  }
+
+  .works__projects-inner {
+    gap: 60px;
+  }
+
+  .works__projects-scroll {
+    padding: 0;
+  }
+
+  /*
+   * Pair row (3 & 4): must live *after* base `.works__projects-albums-pair` so
+   * `display: grid` / `gap: 60px` win over the desktop flex rules.
+   */
+  .works__projects-albums-pair {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: stretch;
+    gap: 60px;
+  }
+
+  .works__projects-albums-pair .works__projects-albums {
+    flex: none;
+    width: 100%;
+    min-width: 0;
+    max-width: none;
+  }
+
+  .works__projects-albums-pair .works__projects-albums:first-child {
+    justify-content: flex-start;
+  }
+
+  .works__album-card.works__album-card--works.works__album-card--works-pair-left,
+  .works__album-card.works__album-card--works.works__album-card--works-pair-right {
+    width: 100%;
+    height: 446px;
+  }
+}
+

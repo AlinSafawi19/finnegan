@@ -1,0 +1,15 @@
+/**
+ * Heading 4 — Clash Display Regular, Creamy White, left-aligned.
+ * Single tier in design (min 0): 20px, 120% line-height.
+ */
+.heading-4 {
+  font-family: var(--font-heading);
+  font-weight: 400;
+  color: var(--color-heading-4);
+  text-transform: none;
+  text-align: left;
+  font-size: 20px;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+  margin: 0 0 var(--heading-4-paragraph-spacing);
+}

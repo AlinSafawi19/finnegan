@@ -1,0 +1,73 @@
+.album-btn-link {
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 100%;
+  height: min-content;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 15px 20px 15px 20px;
+  overflow: hidden;
+  align-content: center;
+  flex-wrap: nowrap;
+  gap: 10px;
+  border-radius: 0px 0px 0px 0px;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  position: relative;
+  left: 0;
+  top: 0;
+  text-decoration: none;
+  cursor: pointer;
+  isolation: isolate;
+}
+
+.album-btn-link__row {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  box-sizing: border-box;
+  min-width: 0;
+  max-width: 100%;
+}
+
+.album-btn-link__frame {
+  position: absolute;
+  display: block;
+  background-color: var(--color-deep-orange);
+  overflow: visible;
+  z-index: 0;
+  aspect-ratio: 1 / 1;
+  border-radius: 600px;
+  pointer-events: none;
+  box-sizing: border-box;
+}
+
+.album-btn-link__label {
+  position: relative;
+  z-index: 1;
+  width: auto;
+  height: auto;
+  white-space: pre;
+  font-weight: 400;
+  font-style: normal;
+  font-family: var(--font-heading), "Clash Display", sans-serif;
+  color: var(--Creamy_White, #faf5ea);
+  font-size: 17px;
+  letter-spacing: 0em;
+  text-align: left;
+  line-height: 150%;
+  font-feature-settings: normal;
+}
+
+.album-btn-link__icon {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  color: var(--Creamy_White, #faf5ea);
+}

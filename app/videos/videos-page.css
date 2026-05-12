@@ -1,0 +1,100 @@
+/* YouTube tiles on `/videos` (see WorkVideoEmbed). */
+
+.albums-page__albums-inner.videos-page__albums-inner {
+  gap: 10px;
+}
+
+/* Tablet: single column (albums grid is 2-col here; videos stay one-up). */
+@media (min-width: 810px) and (not (min-width: 1200px)) {
+  .albums-page__albums-inner.videos-page__albums-inner {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+.videos-page__tile {
+  min-width: 0;
+}
+
+.videos-page__frame {
+  box-sizing: border-box;
+  width: 100%;
+  background-color: var(--color-white);
+  overflow: hidden;
+}
+
+.videos-page__aspect {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  background-color: var(--color-white);
+}
+
+.videos-page__iframe {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
+.videos-page__poster {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  margin: 0;
+  border: none;
+  cursor: pointer;
+  background-color: var(--color-black-100);
+}
+
+.videos-page__poster:focus-visible {
+  outline: 2px solid var(--color-creamy-white);
+  outline-offset: 2px;
+}
+
+.videos-page__thumb {
+  object-fit: cover;
+}
+
+/* Wrapper for official YouTube play SVG (68×48 viewBox). */
+.videos-page__play-btn {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1;
+  display: block;
+  width: clamp(44px, 11vmin, 68px);
+  pointer-events: none;
+}
+
+.videos-page__yt-play-svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.videos-page__yt-play-bg {
+  transition: fill-opacity 0.35s cubic-bezier(0.33, 1, 0.68, 1);
+}
+
+.videos-page__poster:hover .videos-page__yt-play-bg {
+  fill-opacity: 1;
+}
+
+/* Album (and anywhere `playHoverAccent="red"`): YouTube-style play → brand red on hover */
+.videos-page__tile--play-red .videos-page__poster:hover .videos-page__yt-play-bg {
+  fill: red;
+  fill-opacity: 1;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .videos-page__yt-play-bg {
+    transition-duration: 0.08s;
+    transition-timing-function: ease-out;
+  }
+}

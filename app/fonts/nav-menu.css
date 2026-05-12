@@ -1,0 +1,54 @@
+/**
+ * Nav Menu — Clash Display Regular, white, left-aligned.
+ * Breakpoints: phone (≤809px), tablet (810–1199px), desktop (≥1200px).
+ */
+.nav-menu {
+  font-family: var(--font-heading);
+  font-weight: 400;
+  color: var(--color-nav-menu);
+  text-transform: none;
+  text-align: left;
+  font-size: 40px;
+  letter-spacing: -0.04em;
+  line-height: 0.8em;
+  margin: 0 0 var(--nav-menu-paragraph-spacing);
+  text-decoration: none;
+  display: inline-block;
+}
+
+.nav-menu:last-child {
+  margin-bottom: 0;
+}
+
+@media (min-width: 810px) and (not (min-width: 1200px)) {
+  .nav-menu {
+    font-size: 80px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .nav-menu {
+    font-size: 96px;
+  }
+}
+
+/* Size variants: default = large — full S → M → L scale. */
+
+@media (min-width: 810px) and (not (min-width: 1200px)) {
+  .nav-menu.nav-menu--sm {
+    font-size: 40px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .nav-menu.nav-menu--sm {
+    font-size: 40px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .nav-menu.nav-menu--md {
+    font-size: 80px;
+    letter-spacing: -0.04em;
+  }
+}

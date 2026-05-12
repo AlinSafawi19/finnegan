@@ -1,0 +1,592 @@
+/* Reviews — outer / inner layout matches Framer “Reviews – Ticker” (flow uses `relative` instead of canvas `absolute`) */
+.reviews-ticker {
+  box-sizing: border-box;
+  width: 100%;
+  position: relative;
+  z-index: 1;
+}
+
+.reviews-ticker__outer {
+  box-sizing: border-box;
+  width: 100%;
+  height: min-content;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  /* Desktop ≥1200px — top / right / bottom / left */
+  padding: 150px 40px 150px 40px;
+  overflow: visible;
+  align-content: center;
+  flex-wrap: nowrap;
+  gap: 10px;
+  position: relative;
+  border-radius: 0;
+}
+
+/* Tablet 810px–1199px */
+@media (min-width: 810px) and (max-width: 1199px) {
+  .reviews-ticker__outer {
+    padding: 100px 40px 100px 40px;
+  }
+}
+
+.reviews-ticker__inner {
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 1680px;
+  height: min-content;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 58px 0 68px;
+  background-color: rgba(255, 255, 255, 0.05);
+  overflow: visible;
+  z-index: 2;
+  align-content: center;
+  flex-wrap: nowrap;
+  gap: 29px;
+  position: relative;
+  border-radius: 0;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Reserves vertical space when the heading wrapper is `position: absolute` */
+.reviews-ticker__heading-spacer {
+  flex-shrink: 0;
+  width: 100%;
+  height: clamp(140px, 22vw, 260px);
+  pointer-events: none;
+}
+
+/* Heading wrapper — matches Framer `position: absolute` over the spacer */
+.reviews-ticker__heading-wrap {
+  box-sizing: border-box;
+  width: 100%;
+  height: min-content;
+  min-height: clamp(140px, 22vw, 260px);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 0 40px;
+  overflow: visible;
+  align-content: center;
+  flex-wrap: nowrap;
+  gap: 0;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  border-radius: 0;
+}
+
+.reviews-ticker__headline {
+  position: relative;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.reviews-ticker__title-s.heading-2-s,
+.reviews-ticker__title-l.heading-2-l {
+  display: block;
+  width: 100%;
+  height: auto;
+  white-space: pre-wrap;
+  overflow-wrap: break-word;
+  word-break: break-word;
+  line-height: 1.2;
+  margin: 0;
+  text-align: center;
+}
+
+.reviews-ticker__title-s.heading-2-s {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 50%;
+  color: var(--color-creamy-white, #faf5ea);
+}
+
+.reviews-ticker__title-l.heading-2-l {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 50%;
+  transform: translateY(6px);
+  color: var(--color-deep-orange, #ff6017);
+}
+
+/* Ticker: 1fr width, fade edges, 50% base speed */
+.reviews-ticker__viewport {
+  --reviews-ticker-duration: 45s;
+
+  box-sizing: border-box;
+  width: 100%;
+  min-width: 0;
+  padding: 10px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: visible;
+}
+
+/* Fill CTA below marquee — above strip stacking */
+.reviews-ticker__cta {
+  position: relative;
+  z-index: 3;
+  box-sizing: border-box;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.reviews-ticker__cta .btn-fill {
+  cursor: pointer;
+}
+
+.reviews-ticker__strip-wrap {
+  box-sizing: border-box;
+  flex: 1 1 auto;
+  width: 100%;
+  min-width: 0;
+  min-height: 514px;
+  height: auto;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  overflow: hidden;
+  mask-image: linear-gradient(
+    to right,
+    transparent 0%,
+    #000 10%,
+    #000 90%,
+    transparent 100%
+  );
+  -webkit-mask-image: linear-gradient(
+    to right,
+    transparent 0%,
+    #000 10%,
+    #000 90%,
+    transparent 100%
+  );
+  mask-size: 100% 100%;
+  -webkit-mask-size: 100% 100%;
+  mask-repeat: no-repeat;
+  -webkit-mask-repeat: no-repeat;
+}
+
+.reviews-ticker__strip {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 10px;
+  width: max-content;
+  height: auto;
+  will-change: transform;
+  animation: reviews-ticker-marquee var(--reviews-ticker-duration) linear infinite;
+}
+
+/* —— Review card (variant 1: dark tint · variant 2: light tint) —— */
+.reviews-ticker__card {
+  box-sizing: border-box;
+  width: 350px;
+  height: min-content;
+  flex: 0 0 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 40px 20px;
+  /* Allow `AlbumCorner` arms to extend past the avatar (they overflow the 63×63 box) */
+  overflow: visible;
+  align-content: flex-start;
+  flex-wrap: nowrap;
+  gap: 0;
+  position: relative;
+  border-radius: 0;
+}
+
+.reviews-ticker__card--v1 {
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
+.reviews-ticker__card--v2 {
+  background-color: rgba(255, 255, 255, 0.05);
+}
+
+.reviews-ticker__stack {
+  box-sizing: border-box;
+  width: 100%;
+  height: min-content;
+  display: flex;
+  flex-direction: column;
+  align-content: flex-start;
+  flex-wrap: nowrap;
+  overflow: visible;
+  position: relative;
+  border-radius: 0;
+}
+
+.reviews-ticker__stack--1 {
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  padding: 0 0 20px 0;
+  gap: 20px;
+  row-gap: 20px;
+}
+
+.reviews-ticker__stack--2 {
+  justify-content: center;
+  align-items: flex-start;
+  padding: 16px 0 0 0;
+  gap: 3px;
+  /* Framer: White 10%, top edge only (T: 0.2 · R/B/L: 0) */
+  border: 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.reviews-ticker__avatar.works__album-card {
+  position: relative;
+  width: 63px;
+  height: 63px;
+  flex-shrink: 0;
+  overflow: visible;
+}
+
+/* Small corners from `album-corner.css` — default is 9×8 (unequal legs); reviews use equal arms */
+.reviews-ticker__avatar.works__album-card .works__album-corner {
+  --reviews-corner-pulse-duration: 6s;
+
+  z-index: 2;
+  opacity: 1;
+  /* `album-corner.css` opacity transitions would fight the pulse */
+  transition: none;
+  animation: reviews-ticker-corner-pulse var(--reviews-corner-pulse-duration) ease-in-out infinite;
+}
+
+.reviews-ticker__avatar.works__album-card .works__album-corner--size-small {
+  --album-corner-arm-h: 8px;
+  --album-corner-arm-v: 8px;
+}
+
+/* Softer white; same stroke weight on both legs — filled 1px H vs 1px V often renders uneven */
+.reviews-ticker__avatar.works__album-card
+  .works__album-corner--light
+  .works__album-corner__arm--h {
+  box-sizing: border-box;
+  width: var(--album-corner-arm-h);
+  height: 0;
+  background: none;
+  border: 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.55);
+}
+
+.reviews-ticker__avatar.works__album-card
+  .works__album-corner--light
+  .works__album-corner__arm--v {
+  box-sizing: border-box;
+  width: 0;
+  height: var(--album-corner-arm-v);
+  background: none;
+  border: 0;
+  border-left: 1px solid rgba(255, 255, 255, 0.55);
+}
+
+.reviews-ticker__avatar.works__album-card
+  .works__album-corner:not(.works__album-corner--accent).works__album-corner--tl {
+  top: -2px;
+  left: -2px;
+}
+
+.reviews-ticker__avatar.works__album-card
+  .works__album-corner:not(.works__album-corner--accent).works__album-corner--tr {
+  top: -2px;
+  right: -2px;
+}
+
+.reviews-ticker__avatar.works__album-card
+  .works__album-corner:not(.works__album-corner--accent).works__album-corner--bl {
+  bottom: -3px;
+  left: -2px;
+}
+
+.reviews-ticker__avatar.works__album-card
+  .works__album-corner:not(.works__album-corner--accent).works__album-corner--br {
+  bottom: -3px;
+  right: -2px;
+}
+
+.reviews-ticker__avatar-frame {
+  position: relative;
+  display: block;
+  width: 63px;
+  height: 63px;
+  overflow: hidden;
+  aspect-ratio: 1 / 1;
+  border-radius: 32px;
+}
+
+.reviews-ticker__avatar-img {
+  object-fit: cover;
+}
+
+.reviews-ticker__card-text.paragraph-s {
+  width: 100%;
+  margin: 0;
+  color: var(--color-creamy-white, #faf5ea);
+  line-height: 1.2;
+  white-space: pre-wrap;
+  overflow-wrap: break-word;
+  word-break: break-word;
+}
+
+/* Typographic double quotes — prefix / suffix */
+.reviews-ticker__card-text.paragraph-s::before {
+  content: "\201C";
+}
+
+.reviews-ticker__card-text.paragraph-s::after {
+  content: "\201D";
+}
+
+.reviews-ticker__card-name.body-3 {
+  width: 100%;
+  margin: 0;
+  color: var(--color-creamy-white, #faf5ea);
+  line-height: 1.2;
+  white-space: pre-wrap;
+  overflow-wrap: break-word;
+  word-break: break-word;
+}
+
+.reviews-ticker__card-details {
+  width: 100%;
+  margin: 0;
+  white-space: pre-wrap;
+  overflow-wrap: break-word;
+  word-break: break-word;
+  font-family: var(--font-paragraph);
+  font-weight: 300;
+  font-style: normal;
+  font-size: 13px;
+  letter-spacing: 0.02em;
+  text-align: left;
+  line-height: 150%;
+  font-feature-settings: normal;
+  color: var(--color-creamy-white, #faf5ea);
+}
+
+.reviews-ticker__stars {
+  box-sizing: border-box;
+  width: 133px;
+  height: 20px;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0;
+  color: var(--color-deep-orange, #ff6017);
+}
+
+.reviews-ticker__star-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 auto;
+  width: 22px;
+  height: 20px;
+}
+
+/* Phosphor `Star` fill weight — solid deep orange */
+.reviews-ticker__star-icon {
+  display: block;
+  width: 22px;
+  height: 20px;
+  flex-shrink: 0;
+  color: var(--color-deep-orange, #ff6017);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reviews-ticker__viewport {
+    height: auto;
+    min-height: 0;
+  }
+
+  .reviews-ticker__strip-wrap {
+    mask: none;
+    -webkit-mask: none;
+    overflow: visible;
+  }
+
+  .reviews-ticker__strip {
+    animation: none;
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 100%;
+    max-width: 100%;
+    gap: 10px;
+  }
+
+  .reviews-ticker__card {
+    width: min(350px, 100%);
+  }
+
+  .reviews-ticker__avatar.works__album-card .works__album-corner {
+    animation: none;
+    opacity: 1;
+  }
+
+  @media (max-width: 809px) {
+    .reviews-ticker__strip {
+      flex-direction: column;
+      flex-wrap: nowrap;
+      align-items: stretch;
+    }
+
+    .reviews-ticker__card {
+      width: 100%;
+      max-width: 100%;
+    }
+  }
+}
+
+@keyframes reviews-ticker-corner-pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0.4;
+  }
+}
+
+@keyframes reviews-ticker-marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+/* Mobile: column marquee — content moves upward (toward top) */
+@keyframes reviews-ticker-marquee-y {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(-50%);
+  }
+}
+
+@media (max-width: 809px) {
+  .reviews-ticker__outer {
+    padding: 60px 12px 30px 12px;
+  }
+
+  .reviews-ticker__inner {
+    padding: 40px 0 48px;
+    gap: 40px;
+    border: 0;
+  }
+
+  /*
+   * Mobile: drop spacer + absolute heading — they reserved ~200px while titles sat mid-band,
+   * leaving a huge empty strip before the ticker. Flow the heading normally instead.
+   */
+  .reviews-ticker__heading-spacer {
+    display: none;
+  }
+
+  .reviews-ticker__heading-wrap {
+    position: relative;
+    top: auto;
+    left: auto;
+    right: auto;
+    min-height: 0;
+    padding: 0 16px;
+    width: 100%;
+  }
+
+  .reviews-ticker__headline {
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0;
+  }
+
+  .reviews-ticker__title-s.heading-2-s,
+  .reviews-ticker__title-l.heading-2-l {
+    position: relative;
+    top: auto;
+    left: auto;
+    right: auto;
+    transform: none;
+  }
+
+  .reviews-ticker__viewport {
+    flex-direction: column;
+    align-items: stretch;
+    padding: 0 10px;
+  }
+
+  .reviews-ticker__strip-wrap {
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: flex-start;
+    width: 100%;
+    height: 841px;
+    min-height: 841px;
+    padding: 0 12px;
+    box-sizing: border-box;
+    mask-image: linear-gradient(
+      to bottom,
+      transparent 0%,
+      #000 10%,
+      #000 90%,
+      transparent 100%
+    );
+    -webkit-mask-image: linear-gradient(
+      to bottom,
+      transparent 0%,
+      #000 10%,
+      #000 90%,
+      transparent 100%
+    );
+  }
+
+  .reviews-ticker__strip {
+    flex-direction: column;
+    flex-wrap: nowrap;
+    align-items: stretch;
+    justify-content: flex-start;
+    width: 100%;
+    max-width: 100%;
+    height: max-content;
+    animation-name: reviews-ticker-marquee-y;
+  }
+
+  .reviews-ticker__card {
+    width: 100%;
+    max-width: 100%;
+    align-self: stretch;
+  }
+}

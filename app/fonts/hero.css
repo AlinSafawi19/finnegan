@@ -1,0 +1,771 @@
+/**
+ * Page `<main>` — wraps the hero; vertical stack, centered, height fits content.
+ */
+.page-main {
+  position: relative;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+  width: 100%;
+  height: fit-content;
+  padding: 0;
+  margin: 0;
+  overflow: visible;
+  opacity: 1;
+  visibility: visible;
+}
+
+.page-main > .hero {
+  align-self: stretch;
+  width: 100%;
+}
+
+/**
+ * Hero — outer `<section>`: Black fill, min-height for scroll track.
+ * `hero__stage` holds: sticky video + scrim (z-1), heading (z-2), `#about` (z-3) in flow so
+ * the video pins while about scrolls over it (Figma: sticky viewport-height frame).
+ */
+.hero {
+  position: relative;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 0;
+  width: 100%;
+  height: fit-content;
+  padding: 0;
+  overflow: visible;
+  border-radius: 0;
+  opacity: 1;
+  visibility: visible;
+  background-color: var(--color-black-100);
+}
+
+/* In-page anchors — vertical scroll offsets (tokens in globals.css) */
+#quote {
+  scroll-margin-top: var(--scroll-section-quote-offset-y);
+}
+
+#heading {
+  scroll-margin-top: var(--scroll-section-heading-offset-y);
+}
+
+/* Tall track so the sticky video can pin while scrolling */
+.hero__stage {
+  position: relative;
+  align-self: stretch;
+  width: 100%;
+  min-height: 100vh;
+}
+
+.hero__video-wrap {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
+  height: 100vh;
+  min-height: 100vh;
+  padding: 0;
+  overflow: hidden;
+  opacity: 1;
+  visibility: visible;
+}
+
+.hero__video-inner {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  filter: contrast(1.16) grayscale(100%);
+  opacity: 1;
+  visibility: visible;
+  transform: rotate(0deg);
+  will-change: transform;
+}
+
+/* Scroll-driven darkening — `Hero.tsx` opacity 0→1; pure #000 at 100% (not matt black). */
+.hero__video-scrim {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  box-sizing: border-box;
+  pointer-events: none;
+  margin: 0;
+  padding: 0;
+  background-color: var(--color-black-100);
+  opacity: 0;
+  visibility: visible;
+}
+
+/* Video layer — fills inner track, black behind video (`#000` / poster) */
+.hero__video-layer {
+  position: absolute;
+  inset: 0;
+  box-sizing: border-box;
+  width: 100%;
+  height: 100%;
+  background-color: var(--color-black);
+  opacity: 1;
+  visibility: visible;
+}
+
+.hero__video-media {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  pointer-events: none;
+  opacity: 1;
+  visibility: visible;
+}
+
+.hero__video-placeholder {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  min-height: 100%;
+  background-color: var(--color-matt-black);
+  background-image: radial-gradient(
+    circle at 50% 40%,
+    rgba(250, 245, 234, 0.12) 0%,
+    transparent 55%
+  );
+}
+
+/* L0 R0 T0 B177 → first viewport only (parent is tall; use explicit height) */
+.hero__heading {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  z-index: 2;
+  box-sizing: border-box;
+  width: 100%;
+  height: calc(100vh - 177px);
+  padding: 0;
+  overflow: visible;
+  opacity: 1;
+  visibility: visible;
+  mix-blend-mode: exclusion;
+  transform: rotate(0deg);
+  pointer-events: none;
+}
+
+/* Header inside hero — padding T130 R40 B50 L40 */
+.hero__header {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  align-items: stretch;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 0;
+  width: 100%;
+  min-height: 100vh;
+  padding: 130px 40px 50px 40px;
+  margin: 0;
+  overflow: visible;
+  opacity: 1;
+  visibility: visible;
+  transform: rotate(0deg);
+  pointer-events: auto;
+}
+
+.hero__header > * {
+  pointer-events: auto;
+}
+
+@media (max-width: 809px) {
+  /**
+   * `100dvh` tracks the dynamic viewport; `100vh` can jump when `overflow: hidden` is toggled
+   * on the root (nav overlay), which shifted the headline (e.g. second line “Best”).
+   * Keep `100vh` as fallback for older engines.
+   */
+  .hero__video-wrap {
+    height: 100vh;
+    min-height: 100vh;
+    height: 100dvh;
+    min-height: 100dvh;
+  }
+
+  .hero__heading {
+    height: calc(100vh - 177px);
+    height: calc(100dvh - 177px);
+  }
+
+  .hero__header {
+    min-height: 100vh;
+    min-height: 100dvh;
+    padding: 100px 12px 100px 12px;
+    /* Descriptive first in DOM → bottom; headline second → top */
+    flex-direction: column-reverse;
+  }
+}
+
+/* Layer 1 — descriptive text & button */
+.hero__heading-descriptive {
+  position: relative;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  align-items: flex-end;
+  justify-content: center;
+  gap: 20px;
+  width: 100%;
+  max-width: 400px;
+  min-height: 172px;
+  height: fit-content;
+  align-self: flex-end;
+  padding: 0;
+  overflow: visible;
+  border-radius: 0;
+  opacity: 1;
+  visibility: visible;
+}
+
+/* Descriptive · text — Paragraph S, White 100%, right-aligned `<p>` */
+.hero__heading-descriptive-text {
+  position: relative;
+  flex: 1 1 auto;
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 400px;
+  min-height: 102px;
+  height: fit-content;
+  opacity: 1;
+  visibility: visible;
+}
+
+.hero__heading-descriptive-text .paragraph-s {
+  color: var(--color-white-100);
+  text-align: right;
+  margin-bottom: 0;
+}
+
+/* Descriptive · stroke button */
+.hero__heading-descriptive-cta {
+  position: relative;
+  flex-shrink: 0;
+  box-sizing: border-box;
+  width: fit-content;
+  min-width: 197px;
+  min-height: 50px;
+  height: fit-content;
+  align-self: flex-end;
+  opacity: 1;
+  visibility: visible;
+  transform: rotate(0deg);
+}
+
+/* Layer 2 — main heading (stack: title + other row) */
+.hero__heading-headline {
+  position: relative;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  align-items: flex-start;
+  justify-content: flex-start;
+  gap: 33px;
+  width: 100%;
+  min-height: 279px;
+  height: fit-content;
+  padding: 0;
+  overflow: visible;
+  border-radius: 0;
+  opacity: 1;
+  visibility: visible;
+}
+
+/* Headline · H1 — Heading 1 Large, scroll anchor `#heading` */
+.hero__heading-headline-title {
+  position: relative;
+  flex: 1 1 auto;
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 1680px;
+  height: fit-content;
+  opacity: 1;
+  visibility: visible;
+}
+
+.hero__heading-headline-title .heading-1 {
+  margin-bottom: 0;
+}
+
+/* Headline · secondary row — 3 layers: label | stack | link (scroll-driven hook) */
+.hero__heading-headline-other {
+  position: relative;
+  box-sizing: border-box;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  width: 100%;
+  min-height: 28px;
+  height: fit-content;
+  padding: 0 0 10px 0;
+  margin: 0;
+  overflow: visible;
+  border-bottom: 1px solid var(--color-white-50);
+  opacity: 1;
+  visibility: visible;
+  transform: rotate(0deg);
+  will-change: transform, opacity;
+}
+
+@media (max-width: 809px) {
+  .hero__heading-headline-other {
+    display: none;
+  }
+}
+
+/* Body 1, White 100% — left label + right link */
+.hero__heading-headline-other-label {
+  position: relative;
+  justify-self: start;
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 400px;
+  min-height: 18px;
+  height: fit-content;
+  flex: 1 1 auto;
+  opacity: 1;
+  visibility: visible;
+}
+
+.hero__heading-headline-other-label .body-1 {
+  color: var(--color-white-100);
+  margin-bottom: 0;
+}
+
+/* Horizontal stack (center) — Phosphor + label, 134px wide, gap 3px */
+.hero__heading-headline-other-stack {
+  position: relative;
+  justify-self: center;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-items: center;
+  justify-content: center;
+  gap: 3px;
+  width: 134px;
+  min-height: 18px;
+  height: fit-content;
+  flex-shrink: 0;
+  padding: 0;
+  margin: 0;
+  overflow: visible;
+  border-radius: 0;
+  opacity: 1;
+  visibility: visible;
+}
+
+/* Stack · ArrowDown — 12×12, Creamy White bold; bounce moves *up* only so it never sits under the label */
+.hero__heading-headline-stack-icon {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 12px;
+  height: 12px;
+  flex-shrink: 0;
+  align-self: center;
+  color: var(--color-creamy-white);
+  transform: translate(-2px, 0);
+}
+
+.hero__heading-headline-stack-icon svg {
+  display: block;
+  animation: hero-stack-arrow-bounce 4s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+  will-change: transform;
+}
+
+@keyframes hero-stack-arrow-bounce {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  40% {
+    transform: translateY(-5px);
+  }
+  55% {
+    transform: translateY(-2px);
+  }
+  70% {
+    transform: translateY(-4px);
+  }
+}
+
+/* Stack · caption — Body 1, White 100%, centered; width hugs copy, max 119px */
+.hero__heading-headline-stack-text {
+  position: relative;
+  box-sizing: border-box;
+  width: fit-content;
+  max-width: 119px;
+  min-width: 0;
+  min-height: 18px;
+  height: fit-content;
+  flex: 0 0 auto;
+  opacity: 1;
+  visibility: visible;
+}
+
+.hero__heading-headline-stack-text .body-1 {
+  color: var(--color-white-100);
+  text-align: center;
+  margin-bottom: 0;
+  white-space: nowrap;
+}
+
+/* Body 1 + link-light, White 100%, right-aligned */
+.hero__heading-headline-other-cta {
+  position: relative;
+  justify-self: end;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  width: 100%;
+  max-width: 400px;
+  min-height: 18px;
+  height: fit-content;
+  flex: 1 1 auto;
+  opacity: 1;
+  visibility: visible;
+}
+
+.hero__heading-headline-other-link.body-1 {
+  color: var(--color-white-100);
+  margin-bottom: 0;
+  text-align: right;
+}
+
+.hero__about {
+  position: relative;
+  align-self: stretch;
+  z-index: 3;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  align-items: center;
+  justify-content: center;
+  gap: 33px;
+  width: 100%;
+  min-height: 312px;
+  height: fit-content;
+  padding: 500px 40px 150px 40px;
+  overflow: hidden;
+  border-radius: 0;
+  opacity: 1;
+  visibility: visible;
+  background-color: transparent;
+}
+
+@media (max-width: 809px) {
+  .hero__about {
+    padding: 500px 12px 30px 12px;
+  }
+}
+
+/* #about — 1fr column, max 1680px shell */
+.hero__about-inner {
+  box-sizing: border-box;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  justify-items: stretch;
+  width: 100%;
+  max-width: 1680px;
+  margin: 0 auto;
+  padding: 0;
+}
+
+/* Statistics — Row 1 + Row 2, vertical gap 10, rows centered with gap 10 inside */
+.hero__about-statistics {
+  box-sizing: border-box;
+  grid-column: 1;
+  width: 100%;
+  max-width: 1680px;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  align-items: stretch;
+  justify-content: center;
+  gap: 10px;
+  padding: 10px;
+  margin: 0;
+  border: 1px solid color-mix(in srgb, var(--color-white) 10%, transparent);
+  border-radius: 0;
+  opacity: 1;
+  visibility: visible;
+}
+
+.hero__about-statistics-row {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
+  min-width: 0;
+  min-height: 0;
+  margin: 0;
+  padding: 0;
+}
+
+/* Stat · Variant 1 */
+.hero__stat--v1 {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  align-items: stretch;
+  justify-content: flex-start;
+  gap: 0;
+  flex: 1 1 0;
+  width: auto;
+  min-width: 0;
+  max-width: 100%;
+  padding: 40px;
+  margin: 0;
+  background-color: color-mix(in srgb, var(--color-white) 10%, transparent);
+  border-radius: 0;
+  transition:
+    background-color 0.5s cubic-bezier(0.34, 1.2, 0.64, 1),
+    transform 0.5s cubic-bezier(0.34, 1.2, 0.64, 1);
+}
+
+.hero__stat--grow-1-5 {
+  flex: 1.5 1 0;
+}
+
+.hero__stat--grow-1 {
+  flex: 1 1 0;
+}
+
+/* Stat · Variant 2 — tablet + phone: same chrome as v1; layout differs by breakpoint only. */
+
+/* Tablet (810–1199px): same row + grow ratios as desktop (≥1200). */
+@media (min-width: 810px) and (max-width: 1199px) {
+  .hero__about-statistics-row {
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .hero__about-statistics-row .hero__stat--v2 {
+    flex: 1 1 0;
+    width: auto;
+    min-width: 0;
+    max-width: 100%;
+    margin-left: 0;
+    margin-right: 0;
+  }
+
+  .hero__about-statistics-row .hero__stat--v2.hero__stat--grow-1-5 {
+    flex: 1.5 1 0;
+  }
+
+  .hero__about-statistics-row .hero__stat--v2.hero__stat--grow-1 {
+    flex: 1 1 0;
+  }
+}
+
+/* Phone (≤809px): variant 2 cards stacked, each full width (1fr). */
+@media (max-width: 809px) {
+  .hero__about-statistics {
+    padding: 0;
+  }
+
+  .hero__about-statistics-row {
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: flex-start;
+  }
+
+  .hero__about-statistics-row .hero__stat--v2 {
+    flex: 0 0 auto;
+    width: 100%;
+    max-width: 100%;
+    margin-left: 0;
+    margin-right: 0;
+  }
+}
+
+.hero__stat-v1-stack {
+  box-sizing: border-box;
+  width: 100%;
+  min-width: 0;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-items: center;
+  justify-content: flex-start;
+  margin: 0;
+  padding: 0;
+}
+
+.hero__stat-v1-stack--1 {
+  gap: 10px;
+  padding: 0 0 10px 0;
+  border-bottom: 1px solid color-mix(in srgb, var(--color-white) 10%, transparent);
+}
+
+.hero__stat-v1-label.paragraph-s {
+  flex: 1 1 auto;
+  width: 100%;
+  min-width: 0;
+  margin: 0;
+  padding: 0;
+  color: var(--color-creamy-white);
+  text-align: left;
+  text-transform: none;
+}
+
+.hero__stat-v1-stack--2 {
+  gap: 0;
+  align-items: center;
+  justify-content: flex-start;
+  margin-top: 0;
+}
+
+.hero__stat-v1-value {
+  flex: 0 0 auto;
+  width: max-content;
+  font-family: var(--font-heading);
+  font-weight: 400;
+  font-style: normal;
+  font-size: 133px;
+  line-height: 1;
+  letter-spacing: 0;
+  color: var(--color-creamy-white);
+  text-align: left;
+  font-variant-numeric: tabular-nums;
+}
+
+.hero__stat-v1-suffix {
+  flex: 0 0 auto;
+  width: auto;
+  margin: 0;
+  padding: 0;
+  font-family: var(--font-heading);
+  font-weight: 500;
+  font-style: normal;
+  font-size: 100px;
+  line-height: 1em;
+  letter-spacing: -0.04em;
+  color: var(--color-deep-orange);
+  text-align: left;
+}
+
+/* Variant 2 — smaller counter type on tablet & phone (desktop stays 133 / 100). */
+@media (max-width: 1199px) {
+  .hero__stat--v2 .hero__stat-v1-value {
+    font-size: 96px;
+  }
+
+  .hero__stat--v2 .hero__stat-v1-suffix {
+    font-size: 84px;
+  }
+}
+
+/* About Me — scroll target `#about-me`, sits above statistics in stacking when overlapping */
+.hero__about-me {
+  position: relative;
+  z-index: 2;
+  box-sizing: border-box;
+  grid-column: 1;
+  width: 100%;
+  max-width: 1680px;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  align-items: stretch;
+  justify-content: flex-start;
+  gap: 40px;
+  padding: 100px 0 0 0;
+  margin: 0;
+  opacity: 1;
+  visibility: visible;
+}
+
+.hero__about-me-title.heading-2-l {
+  position: relative;
+  z-index: 1;
+  box-sizing: border-box;
+  align-self: flex-start;
+  width: auto;
+  max-width: 100%;
+  min-width: 0;
+  margin: 0;
+  padding: 0;
+  color: var(--color-deep-orange);
+  text-align: start;
+}
+
+.hero__about-me-content {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 43px;
+  align-self: flex-end;
+  width: min(100%, 700px);
+  min-width: 0;
+}
+
+@media (max-width: 809px) {
+  .hero__about-me-content {
+    align-self: center;
+    align-items: center;
+    width: 100%;
+    max-width: 100%;
+  }
+}
+
+.hero__about-me-body.paragraph-l {
+  box-sizing: border-box;
+  width: 100%;
+  max-width: none;
+  height: auto;
+  min-height: 0;
+  margin: 0;
+  padding: 0;
+  color: var(--color-creamy-white);
+  white-space: pre-wrap;
+}
+
+.hero__about-me-accent {
+  color: var(--color-deep-orange);
+}

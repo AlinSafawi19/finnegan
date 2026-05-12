@@ -1,0 +1,58 @@
+/**
+ * Heading 2 - L — Clash Display Regular, white, center-aligned.
+ * Breakpoints: phone (≤809px), tablet (810–1199px), desktop (≥1200px).
+ * S uses 100% line-height; M/L use 80%.
+ */
+.heading-2-l {
+  font-family: var(--font-heading);
+  font-weight: 400;
+  color: var(--color-heading-2-l);
+  text-transform: none;
+  text-align: center;
+  font-size: 50px;
+  letter-spacing: -0.04em;
+  line-height: 1;
+  margin: 0 0 var(--heading-2-l-paragraph-spacing);
+}
+
+@media (min-width: 810px) and (not (min-width: 1200px)) {
+  .heading-2-l {
+    font-size: 90px;
+    line-height: 0.8;
+  }
+}
+
+@media (min-width: 1200px) {
+  .heading-2-l {
+    font-size: 120px;
+    line-height: 0.8;
+  }
+}
+
+/* Size variants: default = large — full S → M → L scale. */
+
+/** Small — S tier at all viewports. */
+@media (min-width: 810px) and (not (min-width: 1200px)) {
+  .heading-2-l.heading-2-l--sm {
+    font-size: 50px;
+    line-height: 1;
+    letter-spacing: -0.04em;
+  }
+}
+
+@media (min-width: 1200px) {
+  .heading-2-l.heading-2-l--sm {
+    font-size: 50px;
+    line-height: 1;
+    letter-spacing: -0.04em;
+  }
+}
+
+/** Medium — S → M, cap at M on large screens (no L step). */
+@media (min-width: 1200px) {
+  .heading-2-l.heading-2-l--md {
+    font-size: 90px;
+    line-height: 0.8;
+    letter-spacing: -0.04em;
+  }
+}

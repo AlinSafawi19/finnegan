@@ -1,0 +1,392 @@
+/* FAQ — layout aligned with Framer “FAQ” block (flow uses `relative` instead of canvas `absolute`) */
+.faq {
+  /* Framer spring ~ stiffness 400, damping 40, mass 1 — approximated in CSS (no motion lib). */
+  --faq-spring-duration: 0.52s;
+  --faq-spring-ease: cubic-bezier(0.28, 1.12, 0.32, 1);
+
+  box-sizing: border-box;
+  width: 100%;
+  height: min-content;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  /* Desktop ≥1200px */
+  padding: 150px 40px 150px 40px;
+  overflow: visible;
+  align-content: center;
+  flex-wrap: nowrap;
+  gap: 64px;
+  position: relative;
+  border-radius: 0;
+}
+
+/* Tablet 810px–1199px */
+@media (min-width: 810px) and (max-width: 1199px) {
+  .faq {
+    padding: 100px 40px 100px 40px;
+  }
+}
+
+/* Phone ≤809px */
+@media (max-width: 809px) {
+  .faq {
+    padding: 30px 12px 60px 12px;
+  }
+}
+
+/* Inner row (Framer used `absolute`; `relative` keeps height in document flow) */
+.faq__container {
+  box-sizing: border-box;
+  width: 100%;
+  height: min-content;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: flex-start;
+  max-width: 1680px;
+  overflow: visible;
+  padding: 0;
+  align-content: flex-start;
+  flex-wrap: nowrap;
+  gap: 94px;
+  position: relative;
+  border-radius: 0;
+}
+
+@media (min-width: 810px) and (max-width: 1199px) {
+  .faq__container {
+    gap: 20px;
+  }
+}
+
+@media (max-width: 809px) {
+  .faq__container {
+    flex-direction: column;
+    gap: 40px;
+  }
+}
+
+/* Reserves height when `.faq__heading-wrap` is `position: absolute` (mobile only). */
+.faq__heading-spacer {
+  display: none;
+}
+
+/*
+ * Framer’s `width: 1px` + `overflow: hidden` clips real text to a hairline in browsers.
+ * Use `flex: 1 1 0%` + `min-width: 0` so the column shares row space and can shrink without clipping.
+ */
+.faq__heading-wrap {
+  box-sizing: border-box;
+  flex: 1 1 0%;
+  min-width: 0;
+  height: min-content;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  overflow: visible;
+  z-index: 1;
+  padding: 0;
+  align-content: flex-start;
+  flex-wrap: nowrap;
+  gap: 0;
+  position: relative;
+  border-radius: 0;
+}
+
+/* Desktop + tablet: pin heading while scrolling the FAQ list (mobile stays in-flow / absolute band below). */
+@media (min-width: 810px) {
+  .faq__heading-wrap {
+    position: sticky;
+    top: 100px;
+    align-self: flex-start;
+  }
+}
+
+/* FAQ wrapper — same flex share as `.faq__heading-wrap` (no max-width so columns stay equal). */
+.faq__wrapper {
+  box-sizing: border-box;
+  width: 100%;
+  height: min-content;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: stretch;
+  overflow: visible;
+  padding: 0;
+  align-content: center;
+  flex-wrap: nowrap;
+  gap: 0;
+  position: relative;
+  border-radius: 0;
+  flex: 1 1 0%;
+  min-width: 0;
+}
+
+@media (max-width: 809px) {
+  /* In-flow heading so height follows copy (no absolute band + fixed spacer min-height). */
+  .faq__heading-spacer {
+    display: none;
+  }
+
+  .faq__heading-wrap {
+    position: relative;
+    left: auto;
+    right: auto;
+    top: auto;
+    width: 100%;
+    flex: none;
+    min-width: 0;
+    min-height: 0;
+    height: auto;
+    align-items: center;
+    align-content: center;
+    justify-content: center;
+  }
+
+  .faq__wrapper {
+    flex: none;
+    width: 100%;
+    max-width: none;
+    min-width: 0;
+    align-items: stretch;
+  }
+}
+
+/* ——— Accordion item (whole row + answer area toggles open/close) ——— */
+.faq__single {
+  box-sizing: border-box;
+  width: 100%;
+  height: min-content;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: stretch;
+  padding: 20px;
+  overflow: visible;
+  align-content: center;
+  flex-wrap: nowrap;
+  gap: 0;
+  position: relative;
+  border-radius: 0;
+  margin: 0;
+  cursor: pointer;
+  color: var(--color-creamy-white, #faf5ea);
+  text-align: left;
+  font: inherit;
+  background: transparent;
+  border: none;
+  -webkit-tap-highlight-color: transparent;
+  transition: color 0.25s ease;
+}
+
+/* Hairline under the block (below answer when open; below question when closed — not inside 0fr body). */
+.faq__single::after {
+  content: "";
+  flex-shrink: 0;
+  width: 100%;
+  height: 1px;
+  margin: 20px auto 0;
+  background: var(--color-white-30, color-mix(in srgb, var(--color-white) 30%, transparent));
+}
+
+.faq__single:not(.faq__single--open):hover,
+.faq__single:not(.faq__single--open):focus-visible {
+  color: var(--color-light-orange, #ff7738);
+}
+
+.faq__single:focus {
+  outline: none;
+}
+
+.faq__single:focus-visible {
+  outline: 2px solid var(--color-deep-orange, #ff6017);
+  outline-offset: 4px;
+}
+
+/* 1st stack — question row */
+.faq__stack--header {
+  box-sizing: border-box;
+  width: 100%;
+  height: min-content;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  /* Center with the question block so the icon isn’t optically above the first line (flex-start + short icon). */
+  align-items: center;
+  overflow: hidden;
+  z-index: 4;
+  padding: 0;
+  align-content: center;
+  flex-wrap: nowrap;
+  position: relative;
+  border-radius: 0;
+  gap: 12px;
+}
+
+.faq__q.body-3 {
+  flex: 1 1 90%;
+  max-width: 90%;
+  min-width: 0;
+  width: auto;
+  height: auto;
+  white-space: pre-wrap;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  word-break: break-word;
+  line-height: 1.2;
+  margin: 0;
+  color: inherit;
+  text-align: left;
+  position: relative;
+  transition: color 0.25s ease;
+}
+
+.faq__icon-shell {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 14px;
+  height: 14px;
+  position: relative;
+}
+
+.faq__icon {
+  display: block;
+  flex-shrink: 0;
+  rotate: 135deg;
+  transition: rotate var(--faq-spring-duration) var(--faq-spring-ease);
+}
+
+.faq__single--open .faq__icon {
+  rotate: 180deg;
+}
+
+/* Expand/collapse — spring-like easing on reveal */
+.faq__single-body {
+  box-sizing: border-box;
+  width: 100%;
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows var(--faq-spring-duration) var(--faq-spring-ease);
+}
+
+.faq__single-body[data-open="true"] {
+  grid-template-rows: 1fr;
+}
+
+.faq__single-body-inner {
+  min-height: 0;
+  overflow: hidden;
+}
+
+/* 2nd stack — answer */
+.faq__stack--answer {
+  box-sizing: border-box;
+  width: 100%;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+  overflow: hidden;
+  padding: 0;
+  align-content: center;
+  flex-wrap: nowrap;
+  gap: 10px;
+  position: relative;
+  border-radius: 0;
+  padding-top: 10px;
+}
+
+.faq__a.paragraph-s {
+  width: 100%;
+  height: auto;
+  white-space: pre-wrap;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  word-break: break-word;
+  opacity: 0;
+  color: var(--color-creamy-white, #faf5ea);
+  line-height: 1.2;
+  margin: 0;
+  text-align: left;
+  position: relative;
+  transition: opacity var(--faq-spring-duration) var(--faq-spring-ease);
+}
+
+.faq__single-body[data-open="true"] .faq__a.paragraph-s {
+  opacity: 0.8;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .faq__icon {
+    transition-duration: 0.15s;
+  }
+
+  .faq__single-body {
+    transition-duration: 0.15s;
+  }
+
+  .faq__a.paragraph-s {
+    transition-duration: 0.15s;
+  }
+}
+
+/*
+ * Stack in normal flow (no absolute). Fixed `top` assumed one line of orange copy; when
+ * “FAQ Frenzy:” wraps to multiple lines, the subtitle was drawn between those lines.
+ */
+.faq__headline {
+  position: relative;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  gap: 0;
+}
+
+.faq__title-l.heading-2-l,
+.faq__title-s.heading-2-s {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+  white-space: pre-wrap;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  word-break: break-word;
+  margin: 0;
+  text-align: left;
+  position: relative;
+  left: auto;
+}
+
+/* Keep Heading 2 — L line-height from `heading-2-l.css` (1 phone, 0.8 tablet/desktop). A shared 1.2 override made wrapped lines huge. */
+.faq__title-l.heading-2-l {
+  color: var(--color-deep-orange, #ff6017);
+}
+
+/* Subtitle: design already uses ~1.2 on `.heading-2-s`; set explicitly for parity with FAQ spec */
+.faq__title-s.heading-2-s {
+  line-height: 1.2;
+  color: var(--color-creamy-white, #faf5ea);
+}
+
+/* Mobile heading centering — must follow base `.faq__headline` / title rules or `text-align: left` wins. */
+@media (max-width: 809px) {
+  .faq__headline {
+    align-items: center;
+  }
+
+  .faq__title-l.heading-2-l,
+  .faq__title-s.heading-2-s {
+    text-align: center;
+  }
+}

@@ -1,0 +1,52 @@
+/**
+ * Body 3 — Clash Display Regular, white, left-aligned.
+ * Breakpoints: phone (≤809px), tablet (810–1199px), desktop (≥1200px).
+ * M is smaller than S in the design (18 vs 20px).
+ */
+.body-3 {
+  font-family: var(--font-heading);
+  font-weight: 400;
+  color: var(--color-body-3);
+  text-transform: none;
+  text-align: left;
+  font-size: 20px;
+  letter-spacing: 0.01em;
+  line-height: 1.5;
+  margin: 0 0 var(--body-3-paragraph-spacing);
+}
+
+.body-3:last-child {
+  margin-bottom: 0;
+}
+
+@media (min-width: 810px) and (not (min-width: 1200px)) {
+  .body-3 {
+    font-size: 18px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .body-3 {
+    font-size: 22px;
+  }
+}
+
+/* Size variants: default = large — full S → M → L scale. */
+
+@media (min-width: 810px) and (not (min-width: 1200px)) {
+  .body-3.body-3--sm {
+    font-size: 20px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .body-3.body-3--sm {
+    font-size: 20px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .body-3.body-3--md {
+    font-size: 18px;
+  }
+}

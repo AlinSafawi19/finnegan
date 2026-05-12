@@ -1,0 +1,51 @@
+/**
+ * Heading 2 - S — Clash Display Regular, white, center-aligned.
+ * Breakpoints: phone (≤809px), tablet (810–1199px), desktop (≥1200px).
+ * M and L share the same size (26px) in the design.
+ */
+.heading-2-s {
+  font-family: var(--font-heading);
+  font-weight: 400;
+  color: var(--color-heading-2-s);
+  text-transform: none;
+  text-align: center;
+  font-size: 19px;
+  letter-spacing: 0;
+  line-height: 1.2em;
+  margin: 0 0 var(--heading-2-s-paragraph-spacing);
+}
+
+@media (min-width: 810px) and (not (min-width: 1200px)) {
+  .heading-2-s {
+    font-size: 26px;
+  }
+}
+
+/* M and L tiers match (26px); no extra step at 1200px. */
+
+/* Size variants: default = large — full S → M scale (L equals M for this style). */
+
+/** Small — S tier (19px) at all viewports. */
+@media (min-width: 810px) and (not (min-width: 1200px)) {
+  .heading-2-s.heading-2-s--sm {
+    font-size: 19px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .heading-2-s.heading-2-s--sm {
+    font-size: 19px;
+  }
+}
+
+/**
+ * Medium — same as default here (M and L are both 26px).
+ * Kept for API parity with other heading components.
+ */
+@media (min-width: 1200px) {
+  .heading-2-s.heading-2-s--md {
+    font-size: 26px;
+    letter-spacing: 0;
+    line-height: 1.2em;
+  }
+}

@@ -1,0 +1,7 @@
+/**
+ * Font stacks — load Clash Display & Satoshi via layout <link>; names match Fontshare CSS.
+ */
+:root {
+  --font-heading: "Clash Display", ui-sans-serif, system-ui, sans-serif;
+  --font-paragraph: "Satoshi", ui-sans-serif, system-ui, sans-serif;
+}

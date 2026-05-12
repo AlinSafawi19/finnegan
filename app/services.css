@@ -1,0 +1,482 @@
+/* Services — `.services__details` stacks above sticky so “More services” slides over the pinned viewport; variant bands use `pointer-events: none` so the cube stays usable */
+.services {
+  box-sizing: border-box;
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr;
+  padding: 0;
+}
+
+.services__inner {
+  box-sizing: border-box;
+  width: 100%;
+  min-width: 0;
+  display: grid;
+  grid-template-columns: 1fr;
+  padding: 0;
+}
+
+/* Sticky: 1fr × 100vh; full-bleed image + stacked heading (padding on stack only); below `.services__details` so scroll content can cover it */
+.services__sticky {
+  position: sticky;
+  top: 0;
+  z-index: 2;
+  box-sizing: border-box;
+  width: 100%;
+  min-height: 100vh;
+  height: 100vh;
+  display: grid;
+  grid-template-columns: 1fr;
+  padding: 0;
+  overflow: hidden;
+}
+
+/* Service image: absolute 100% × 100%, z-index -1; scale 0.7→1.2 driven by `#services` scroll (JS) */
+.services__image-layer {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.services__service-image-scale {
+  position: absolute;
+  inset: 0;
+  transform-origin: center center;
+  will-change: transform;
+}
+
+/* Variant 1: brightness 65%; spring on crossfade (slides), not on scroll scale */
+.services__service-image-scale--v1 {
+  filter: brightness(0.65);
+}
+
+.services__service-image-slide {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  will-change: opacity;
+  transition: opacity 1.25s cubic-bezier(0.45, 0.05, 0.55, 0.95);
+}
+
+.services__service-image-slide--active {
+  z-index: 1;
+  opacity: 1;
+}
+
+.services__service-image-img {
+  object-fit: cover;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .services__service-image-slide {
+    transition-duration: 0.2s;
+  }
+}
+
+/* Sticky stack: start from top padding (not vertically centered in viewport) so title + cube sit higher */
+.services__sticky-stack {
+  position: relative;
+  z-index: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 30px;
+  padding: 60px 40px 100px 40px;
+  box-sizing: border-box;
+  width: 100%;
+  min-height: 0;
+  flex: 1;
+  align-self: stretch;
+}
+
+/* Heading wrapper: positioning context for the absolutely placed title (`bottom: -45px` is relative to this box) */
+.services__heading-wrap {
+  position: relative;
+  box-sizing: border-box;
+  width: 100%;
+  min-height: clamp(100px, 22vw, 180px);
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  padding: 0;
+}
+
+/* 3D Service Cube — same column as heading; desktop nudge pairs with absolutely offset title */
+.services__cube-area {
+  position: relative;
+  z-index: 1;
+  box-sizing: border-box;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  min-height: 0;
+  margin-top: 0;
+  padding-bottom: 0;
+}
+
+@media (min-width: 810px) {
+  .services__cube-area {
+    margin-top: -25px;
+  }
+}
+
+/* Title: `position: absolute` → offset from nearest positioned ancestor, i.e. `.services__heading-wrap` (relative) */
+.services__heading-wrap .services__heading-title.heading-2-l {
+  position: absolute;
+  bottom: -45px;
+  left: 0;
+  right: 0;
+  width: 100%;
+  height: auto;
+  margin: 0;
+  white-space: pre-wrap;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  word-break: break-word;
+  z-index: -1;
+  color: var(--color-deep-orange, #ff6017);
+  line-height: 1.2;
+  text-align: center;
+}
+
+/* Triggers & more: variant bands + “More services” — paints above `.services__sticky` so the orange panel slides over it */
+.services__details {
+  position: relative;
+  z-index: 5;
+  box-sizing: border-box;
+  width: 100%;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 74px;
+  padding: 0;
+  min-height: 100vh;
+  overflow: hidden;
+  /* Let clicks reach the sticky cube under transparent scroll bands; re-enable on “More” below. */
+  pointer-events: none;
+}
+
+.services__variant-section {
+  width: 100%;
+  min-height: 110vh;
+  flex-shrink: 0;
+  align-self: stretch;
+  /* Transparent scroll bands sit above sticky in z-order; let pointer events reach the cube */
+  pointer-events: none;
+}
+
+/* —— More services (orange panel + 2×2 grid) —— */
+.services__more-triggers {
+  box-sizing: border-box;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+  flex-wrap: nowrap;
+  gap: 74px;
+  padding: 0;
+  position: relative;
+  pointer-events: auto;
+}
+
+.services__more-services {
+  box-sizing: border-box;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+  flex-wrap: nowrap;
+  gap: 10px;
+  padding: 0;
+  position: relative;
+  overflow: hidden;
+}
+
+.services__more-container {
+  box-sizing: border-box;
+  flex: 1 1 auto;
+  width: 100%;
+  min-width: 0;
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+  flex-wrap: nowrap;
+  gap: 30px;
+  padding: 100px 40px;
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.25);
+  background-color: var(--color-light-orange, #ff7738);
+  transform-style: preserve-3d;
+  overflow: visible;
+  position: relative;
+}
+
+.services__more-content {
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 1680px;
+  display: grid;
+  grid-template-columns: minmax(0, 0.8fr) minmax(0, 0.2fr);
+  grid-template-rows: auto auto;
+  align-items: start;
+  gap: 40px;
+  padding: 0;
+  position: relative;
+  overflow: hidden;
+}
+
+.services__more-content .services__more-heading.heading-2-l {
+  grid-column: 1;
+  grid-row: 1;
+  width: 100%;
+  min-width: 0;
+  margin: 0;
+  white-space: pre-wrap;
+  overflow-wrap: break-word;
+  word-break: break-word;
+  color: var(--color-matt-black, #141414);
+  text-align: left;
+  line-height: auto !important;
+}
+
+.services__more-cards-wrap {
+  grid-column: 1 / -1;
+  grid-row: 2;
+  box-sizing: border-box;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+  flex-wrap: nowrap;
+  gap: 10px;
+  padding: 0;
+  position: relative;
+  overflow: hidden;
+}
+
+.services__more-grid {
+  flex: 1 1 auto;
+  width: 100%;
+  min-width: 0;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(200px, 1fr));
+  grid-template-rows: repeat(2, min-content);
+  grid-auto-rows: min-content;
+  justify-content: center;
+  gap: 10px;
+  padding: 0;
+  position: relative;
+  overflow: hidden;
+}
+
+.services__more-card {
+  box-sizing: border-box;
+  width: 100%;
+  max-width: none;
+  min-height: 346px;
+  margin: 0;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: stretch;
+  align-content: stretch;
+  flex-wrap: nowrap;
+  gap: 10px;
+  padding: 30px;
+  background-color: var(--color-matt-black, #141414);
+  overflow: visible;
+  position: relative;
+}
+
+.services__more-card-title {
+  flex: 1 1 0;
+  min-width: 0;
+  margin: 0;
+  align-self: flex-start;
+  font-family: var(--font-heading);
+  font-weight: 400;
+  font-size: clamp(22px, 2.5vw, 32px);
+  letter-spacing: -0.02em;
+  white-space: pre-line;
+  overflow-wrap: break-word;
+  word-break: break-word;
+  color: var(--color-creamy-white, #faf5ea);
+  line-height: 1.2;
+}
+
+.services__more-card-desc {
+  flex: 1 1 0;
+  min-width: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: flex-start;
+  font-family: var(--font-body);
+  font-size: clamp(14px, 1.25vw, 18px);
+  font-weight: 400;
+  white-space: pre-wrap;
+  overflow-wrap: break-word;
+  word-break: break-word;
+  opacity: 0.7;
+  color: var(--color-creamy-white, #faf5ea);
+  line-height: 1.2;
+}
+
+/* Tablet: single full-width column — match phone (desktop keeps 0.8/0.2 + 2×2 cards) */
+@media (min-width: 810px) and (not (min-width: 1200px)) {
+  .services__more-container {
+    align-items: stretch;
+  }
+
+  .services__more-content {
+    grid-template-columns: 1fr;
+  }
+
+  .services__more-content .services__more-heading.heading-2-l {
+    grid-column: 1 / -1;
+  }
+
+  .services__more-cards-wrap {
+    align-self: stretch;
+  }
+
+  .services__more-grid {
+    grid-template-columns: 1fr;
+    grid-template-rows: none;
+    width: 100%;
+  }
+
+  .services__more-card {
+    max-width: none;
+    margin-left: 0;
+    margin-right: 0;
+  }
+}
+
+@media (max-width: 809px) {
+  .services__more-container {
+    padding: 60px 12px 30px 12px;
+    gap: 30px;
+  }
+
+  .services__more-content {
+    grid-template-columns: 1fr;
+  }
+
+  .services__more-content .services__more-heading.heading-2-l {
+    grid-column: 1 / -1;
+  }
+
+  .services__more-grid {
+    grid-template-columns: 1fr;
+    grid-template-rows: none;
+  }
+
+  .services__more-card {
+    min-height: 280px;
+    max-width: none;
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: flex-start;
+    gap: 0;
+  }
+
+  .services__more-card-title {
+    width: 100%;
+    flex: 0 0 auto;
+  }
+
+  .services__more-card-desc {
+    width: 100%;
+    flex: 0 0 auto;
+    margin-top: auto;
+    min-height: 0;
+    justify-content: flex-end;
+    align-items: flex-start;
+  }
+}
+
+/* Phone: no pinned viewport band, no full-bleed service photos — solid bg + content height */
+@media (max-width: 809px) {
+  .services__sticky {
+    position: relative;
+    top: auto;
+    z-index: 0;
+    min-height: 0;
+    height: auto;
+    overflow: visible;
+    background-color: var(--color-black-100, #000000);
+  }
+
+  .services__image-layer {
+    display: none;
+  }
+
+  .services__heading-wrap {
+    min-height: 0;
+  }
+
+  .services__heading-wrap .services__heading-title.heading-2-l {
+    position: relative;
+    bottom: auto;
+    left: auto;
+    right: auto;
+    z-index: 0;
+  }
+
+  .services__sticky-stack {
+    align-items: stretch;
+    gap: 40px;
+    padding: 90px 12px 30px 12px;
+  }
+
+  .services__cube-area {
+    flex: 0 0 auto;
+    align-self: stretch;
+    box-sizing: border-box;
+    width: 100%;
+    max-width: none;
+    min-width: 0;
+    margin-left: 0;
+    margin-right: 0;
+  }
+
+  .services__details {
+    gap: 0;
+    min-height: 0;
+  }
+
+  .services__variant-section {
+    min-height: 0;
+    height: 0;
+    overflow: hidden;
+    margin: 0;
+    padding: 0;
+  }
+
+  .services__more-triggers {
+    gap: 0;
+  }
+}

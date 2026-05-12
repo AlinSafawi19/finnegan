@@ -1,0 +1,519 @@
+/**
+ * Single blog post (`/blog/[slug]`).
+ */
+
+.blog-post__post {
+  box-sizing: border-box;
+  width: 100%;
+  height: min-content;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  /* `.site-nav-shell` is `position: fixed; height: 80px` — without this, stack 1 sits under the bar. */
+  padding: 80px 0 0;
+  align-content: center;
+  flex-wrap: nowrap;
+  gap: 0;
+  position: relative;
+  border-radius: 0;
+}
+
+.blog-post__stack1 {
+  box-sizing: border-box;
+  width: 100%;
+  height: min-content;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  padding: 0;
+  align-content: center;
+  flex-wrap: nowrap;
+  gap: 31px;
+  position: relative;
+  border-radius: 0;
+}
+
+.blog-post__stack1-inner {
+  box-sizing: border-box;
+  width: 100%;
+  height: min-content;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 0 20px;
+  max-width: 1200px;
+  overflow: hidden;
+  align-content: center;
+  flex-wrap: nowrap;
+  gap: 20px;
+  position: relative;
+  border-radius: 0;
+}
+
+@media (min-width: 810px) {
+  .blog-post__stack1-inner {
+    padding: 0 50px;
+  }
+}
+
+/* Heading 1b + blog hero title (creamy white, wrap, line-height 1.2). */
+.blog-post__title.heading-1b {
+  box-sizing: border-box;
+  width: 100%;
+  height: auto;
+  max-width: 800px;
+  margin: 0;
+  white-space: pre-wrap;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  word-break: break-word;
+  color: var(--color-creamy-white);
+  line-height: 0.9;
+  position: relative;
+}
+
+/* Row under title (date / tags / etc.). `height: 46px` + `padding: 20px` can’t both fit in border-box — use min-height 46px so content isn’t clipped. */
+.blog-post__title-row {
+  box-sizing: border-box;
+  width: min-content;
+  min-height: 46px;
+  height: auto;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  overflow: hidden;
+  align-content: center;
+  flex-wrap: nowrap;
+  gap: 23px;
+  position: relative;
+  border-radius: 0;
+}
+
+@media (max-width: 809px) {
+  .blog-post__title-row {
+    width: 100%;
+  }
+}
+
+.blog-post__category-stack {
+  box-sizing: border-box;
+  width: min-content;
+  height: 18px;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  overflow: hidden;
+  padding: 0;
+  align-content: center;
+  flex-wrap: nowrap;
+  gap: 5px;
+  position: relative;
+  border-radius: 0;
+}
+
+.blog-post__category-label.body-1,
+.blog-post__category-name.body-1,
+.blog-post__title-date.body-1 {
+  margin: 0;
+  width: auto;
+  height: auto;
+  white-space: pre;
+  line-height: 1.2;
+  position: relative;
+  text-align: left;
+}
+
+.blog-post__category-label.body-1 {
+  color: var(--color-creamy-white);
+  text-transform: uppercase;
+}
+
+.blog-post__category-name.body-1 {
+  color: var(--color-light-orange);
+  text-transform: none;
+}
+
+.blog-post__title-date.body-1 {
+  color: var(--color-body-1);
+}
+
+.blog-post__banner {
+  width: 100%;
+  height: 600px;
+  display: block;
+  max-width: 800px;
+  aspect-ratio: 2 / 1;
+  position: relative;
+  overflow: hidden;
+  border-radius: 0;
+}
+
+.blog-post__banner-img {
+  object-fit: cover;
+  object-position: center;
+}
+
+/* Tablet: full width within inner stack (no 800px cap). */
+@media (min-width: 810px) and (not (min-width: 1200px)) {
+  .blog-post__banner {
+    max-width: none;
+  }
+}
+
+.blog-post__other-posts {
+  box-sizing: border-box;
+  width: 100%;
+  height: min-content;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 30px 12px;
+  background-color: rgba(255, 255, 255, 0.05);
+  overflow: visible;
+  align-content: center;
+  flex-wrap: nowrap;
+  gap: 40px;
+  position: relative;
+  border-radius: 0;
+}
+
+@media (min-width: 810px) {
+  .blog-post__other-posts {
+    padding: 100px 40px;
+  }
+}
+
+.blog-post__other-posts-stack {
+  box-sizing: border-box;
+  width: 100%;
+  height: min-content;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  max-width: 1680px;
+  overflow: hidden;
+  padding: 0;
+  align-content: center;
+  flex-wrap: nowrap;
+  gap: 40px;
+  position: relative;
+  border-radius: 0;
+}
+
+@media (min-width: 810px) {
+  .blog-post__other-posts-stack {
+    gap: 36px;
+  }
+}
+
+.blog-post__other-posts-stack .blog-post__other-posts-heading {
+  box-sizing: border-box;
+  width: 100%;
+  height: auto;
+  white-space: pre-wrap;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  word-break: break-word;
+  color: var(--color-creamy-white, #faf5ea);
+  text-align: center;
+  line-height: 1.2;
+  position: relative;
+  margin: 0;
+}
+
+@media (min-width: 810px) {
+  .blog-post__other-posts-stack .blog-post__other-posts-heading {
+    text-align: left;
+  }
+}
+
+.blog-post__other-posts-cards {
+  box-sizing: border-box;
+  width: 100%;
+  height: min-content;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  overflow: visible;
+  padding: 0;
+  align-content: center;
+  flex-wrap: nowrap;
+  gap: 30px;
+  position: relative;
+  border-radius: 0;
+}
+
+.blog-post__other-posts-cards-grid {
+  box-sizing: border-box;
+  flex: 1;
+  width: 1px;
+  height: min-content;
+  display: grid;
+  grid-template-columns: repeat(1, minmax(200px, 1fr));
+  justify-content: center;
+  grid-auto-rows: minmax(0, 1fr);
+  padding: 0;
+  gap: 10px;
+  position: relative;
+  border-radius: 0;
+}
+
+@media (min-width: 810px) and (not (min-width: 1200px)) {
+  .blog-post__other-posts-cards-grid {
+    grid-template-columns: repeat(2, minmax(200px, 1fr));
+  }
+}
+
+@media (min-width: 1200px) {
+  .blog-post__other-posts-cards-grid {
+    grid-template-columns: repeat(3, minmax(200px, 1fr));
+  }
+}
+
+.blog-post__other-posts-card-cell {
+  min-width: 0;
+  width: 100%;
+}
+
+.blog-post__stack2 {
+  box-sizing: border-box;
+  width: 100%;
+  height: min-content;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 30px 20px;
+  overflow: hidden;
+  align-content: center;
+  flex-wrap: nowrap;
+  gap: 10px;
+  position: relative;
+  border-radius: 0;
+}
+
+@media (min-width: 810px) {
+  .blog-post__stack2 {
+    padding: 100px 20px;
+  }
+}
+
+.blog-post__stack2-content {
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 800px;
+  min-width: 0;
+  margin-inline: auto;
+
+  /* Base typography for API-provided HTML (matches Satoshi paragraph). */
+  font-family: var(--font-paragraph);
+  font-weight: 300;
+  font-size: 17px;
+  letter-spacing: -0.01em;
+  line-height: 1.6;
+  color: var(--color-creamy-white);
+}
+
+@media (min-width: 810px) {
+  .blog-post__stack2-content {
+    font-size: 19px;
+  }
+}
+
+/**
+ * Rich-text styling for the HTML returned by the public CMS API.
+ *
+ * The API HTML contains `<p>`, `<h3>`/`<h4>`, `<strong>`, `<a>`, `<img>`,
+ * `<ul>`/`<ol>`/`<li>` (often with a nested `<p>` per item), and inline Framer
+ * style/`data-preset-tag` hints we ignore. All rules are scoped to
+ * `.blog-post__stack2-content` so they only affect the rendered post body.
+ */
+
+/* Paragraphs inherit base typography; spacing comes from `em` so it scales. */
+.blog-post__stack2-content p {
+  margin: 0 0 1.2em;
+  color: inherit;
+  font: inherit;
+  letter-spacing: inherit;
+  line-height: inherit;
+}
+
+.blog-post__stack2-content > *:last-child {
+  margin-bottom: 0;
+}
+
+/* Headings — Clash Display, creamy white, tighter line-height. */
+.blog-post__stack2-content h1,
+.blog-post__stack2-content h2,
+.blog-post__stack2-content h3,
+.blog-post__stack2-content h4,
+.blog-post__stack2-content h5,
+.blog-post__stack2-content h6 {
+  font-family: var(--font-heading);
+  font-weight: 400;
+  color: var(--color-creamy-white);
+  letter-spacing: -0.01em;
+  line-height: 1.2;
+  margin: 1.6em 0 0.6em;
+}
+
+.blog-post__stack2-content > h1:first-child,
+.blog-post__stack2-content > h2:first-child,
+.blog-post__stack2-content > h3:first-child,
+.blog-post__stack2-content > h4:first-child,
+.blog-post__stack2-content > h5:first-child,
+.blog-post__stack2-content > h6:first-child {
+  margin-top: 0;
+}
+
+.blog-post__stack2-content h1 { font-size: 30px; }
+.blog-post__stack2-content h2 { font-size: 26px; }
+.blog-post__stack2-content h3 { font-size: 22px; }
+.blog-post__stack2-content h4 { font-size: 19px; }
+.blog-post__stack2-content h5 { font-size: 17px; }
+.blog-post__stack2-content h6 { font-size: 15px; text-transform: uppercase; letter-spacing: 0.04em; }
+
+@media (min-width: 810px) {
+  .blog-post__stack2-content h1 { font-size: 38px; }
+  .blog-post__stack2-content h2 { font-size: 32px; }
+  .blog-post__stack2-content h3 { font-size: 26px; }
+  .blog-post__stack2-content h4 { font-size: 21px; }
+  .blog-post__stack2-content h5 { font-size: 19px; }
+}
+
+.blog-post__stack2-content strong,
+.blog-post__stack2-content b {
+  font-weight: 600;
+  color: var(--color-creamy-white);
+}
+
+.blog-post__stack2-content em,
+.blog-post__stack2-content i {
+  font-style: italic;
+}
+
+/* Links — orange accent, subtle underline that pops on hover. */
+.blog-post__stack2-content a {
+  color: var(--color-light-orange);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+  transition: color 0.15s ease;
+}
+
+.blog-post__stack2-content a:hover,
+.blog-post__stack2-content a:focus-visible {
+  color: var(--color-deep-orange);
+}
+
+/* Lists — orange markers, paragraph-aware item spacing. */
+.blog-post__stack2-content ul,
+.blog-post__stack2-content ol {
+  margin: 0 0 1.2em;
+  padding-left: 1.4em;
+  color: inherit;
+  font: inherit;
+  letter-spacing: inherit;
+  line-height: inherit;
+}
+
+.blog-post__stack2-content ul { list-style: disc; }
+.blog-post__stack2-content ol { list-style: decimal; }
+
+.blog-post__stack2-content li {
+  margin: 0 0 0.5em;
+  color: inherit;
+  padding-left: 0.25em;
+}
+
+/* CMS wraps each list item's text in a `<p>` — flatten the spacing. */
+.blog-post__stack2-content li > p {
+  margin: 0;
+}
+
+.blog-post__stack2-content li > p + p {
+  margin-top: 0.5em;
+}
+
+/* Nested lists sit inside an outer item — keep them compact. */
+.blog-post__stack2-content li > ul,
+.blog-post__stack2-content li > ol {
+  margin: 0.5em 0 0.75em;
+}
+
+/* Images — span the column width, never overflow. */
+.blog-post__stack2-content img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  margin: 1.5em 0;
+}
+
+.blog-post__stack2-content li img {
+  margin: 1em 0;
+}
+
+.blog-post__stack2-content blockquote {
+  margin: 1.5em 0;
+  padding: 0.25em 0 0.25em 1.25em;
+  border-left: 3px solid var(--color-light-orange);
+  color: var(--color-creamy-white);
+  font-style: italic;
+}
+
+.blog-post__stack2-content code {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 0.9em;
+  background: rgba(255, 255, 255, 0.08);
+  padding: 0.15em 0.4em;
+  border-radius: 4px;
+}
+
+.blog-post__stack2-content pre {
+  margin: 1.5em 0;
+  padding: 1em;
+  background: rgba(255, 255, 255, 0.05);
+  overflow: auto;
+  border-radius: 4px;
+}
+
+.blog-post__stack2-content pre code {
+  background: transparent;
+  padding: 0;
+  border-radius: 0;
+}
+
+.blog-post__stack2-content hr {
+  margin: 2em 0;
+  border: 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+/* Tables (defensive — CMS may emit them in future posts). */
+.blog-post__stack2-content table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1.5em 0;
+}
+
+.blog-post__stack2-content th,
+.blog-post__stack2-content td {
+  text-align: left;
+  padding: 0.6em 0.8em;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.blog-post__stack2-content th {
+  font-weight: 600;
+  color: var(--color-creamy-white);
+}

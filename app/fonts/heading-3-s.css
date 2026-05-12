@@ -1,0 +1,15 @@
+/**
+ * Heading 3 - S — Clash Display Regular, Creamy White, left-aligned.
+ * Single breakpoint in design (min 0): 20px, 1.3em line-height.
+ */
+.heading-3-s {
+  font-family: var(--font-heading);
+  font-weight: 400;
+  color: var(--color-heading-3-s);
+  text-transform: none;
+  text-align: left;
+  font-size: 20px;
+  letter-spacing: -0.01em;
+  line-height: 1.3em;
+  margin: 0 0 var(--heading-3-s-paragraph-spacing);
+}

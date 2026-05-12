@@ -1,0 +1,342 @@
+/**
+ * Stroke button — transparent fill, 1px Creamy White border, sharp corners.
+ * Horizontal stack: gap 10px, padding 10px, min-height 50px, content centered.
+ */
+.btn-stroke {
+  box-sizing: border-box;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  min-height: 50px;
+  padding: 10px;
+  border: 1px solid var(--color-creamy-white);
+  border-style: solid;
+  border-radius: 0;
+  background: transparent;
+  color: var(--color-creamy-white);
+  font-family: var(--font-heading);
+  font-weight: 400;
+  font-size: 15px;
+  line-height: 1.2;
+  text-decoration: none;
+  cursor: pointer;
+  vertical-align: middle;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.btn-stroke svg {
+  flex-shrink: 0;
+  color: currentColor;
+}
+
+.btn-stroke:focus-visible {
+  outline: 2px solid var(--color-creamy-white);
+  outline-offset: 2px;
+}
+
+.btn-stroke:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/**
+ * Split layout — label on the left, icon in its own box on the right (vertical divider).
+ */
+.btn-stroke--split {
+  padding: 0;
+  gap: 0;
+  align-items: stretch;
+  justify-content: flex-start;
+}
+
+/* Split label — Satoshi Medium, 15px, Creamy White, uppercase (use <p> inside Link; use StrokeSplitLabelSpan inside <button>) */
+.btn-stroke__label {
+  position: relative;
+  box-sizing: border-box;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+  padding: 10px 16px;
+  width: fit-content;
+  flex: 1 1 auto;
+  min-width: 0;
+  min-height: 18px;
+  height: fit-content;
+  font-family: var(--font-paragraph);
+  font-weight: 500;
+  font-size: 15px;
+  letter-spacing: 0;
+  line-height: 1.2em;
+  text-transform: uppercase;
+  text-align: center;
+  color: var(--color-creamy-white);
+}
+
+.btn-stroke--split .btn-stroke__label {
+  min-height: 50px;
+}
+
+.btn-stroke--split.btn-stroke--primary .btn-stroke__label {
+  color: var(--color-link-current);
+}
+
+.btn-stroke__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  width: 50px;
+  min-width: 50px;
+  flex-shrink: 0;
+  align-self: stretch;
+  border-left: 1px solid var(--color-creamy-white);
+  background-color: transparent;
+  transition: background-color 0.2s ease;
+}
+
+.btn-stroke--split:hover .btn-stroke__icon {
+  background-color: var(--color-creamy-white);
+}
+
+/* Icon glyph — relative box, 20×22, 45° 2D rotate, Phosphor ArrowUpRight + Creamy White */
+.btn-stroke__icon-inner {
+  position: relative;
+  box-sizing: border-box;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 22px;
+  flex-shrink: 0;
+  opacity: 1;
+  visibility: visible;
+  transform: rotate(45deg);
+  color: var(--color-creamy-white);
+  transition:
+    transform 0.2s ease,
+    color 0.2s ease;
+}
+
+.btn-stroke:hover .btn-stroke__icon-inner {
+  transform: rotate(0deg);
+  color: var(--color-matt-black);
+}
+
+/* Primary split: base icon color is #111 — ensure hover still unrotates + Matt Black */
+.btn-stroke--split.btn-stroke--primary:hover .btn-stroke__icon-inner {
+  transform: rotate(0deg);
+  color: var(--color-matt-black);
+}
+
+.btn-stroke__icon-inner svg {
+  width: 20px;
+  height: 22px;
+  flex-shrink: 0;
+  color: currentColor;
+}
+
+/* Stroke · Primary — Creamy White fill, dark label + icon (e.g. on light gray page) */
+.btn-stroke--split.btn-stroke--primary {
+  background: var(--color-creamy-white);
+  color: var(--color-link-current);
+  border-color: #e8e0d8;
+}
+
+.btn-stroke--split.btn-stroke--primary .btn-stroke__icon {
+  border-left-color: color-mix(in srgb, var(--color-matt-black) 15%, transparent);
+}
+
+.btn-stroke--split.btn-stroke--primary .btn-stroke__icon-inner {
+  color: var(--color-link-current);
+}
+
+/**
+ * Fill button — Matt Black fill, 1px Creamy White border, sharp corners.
+ * Same layout and hover as stroke: split icon column creams on hover; icon unrotates to Matt Black.
+ */
+.btn-fill {
+  box-sizing: border-box;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  min-height: 50px;
+  padding: 10px;
+  border: 1px solid var(--color-creamy-white);
+  border-style: solid;
+  border-radius: 0;
+  background: var(--color-matt-black);
+  color: var(--color-creamy-white);
+  font-family: var(--font-heading);
+  font-weight: 400;
+  font-size: 15px;
+  line-height: 1.2;
+  text-decoration: none;
+  cursor: pointer;
+  vertical-align: middle;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.btn-fill svg {
+  flex-shrink: 0;
+  color: currentColor;
+}
+
+.btn-fill:focus-visible {
+  outline: 2px solid var(--color-creamy-white);
+  outline-offset: 2px;
+}
+
+.btn-fill:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.btn-fill--split {
+  padding: 0;
+  gap: 0;
+  align-items: stretch;
+  justify-content: flex-start;
+}
+
+.btn-fill__label {
+  position: relative;
+  box-sizing: border-box;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+  padding: 10px 16px;
+  width: fit-content;
+  flex: 1 1 auto;
+  min-width: 0;
+  min-height: 18px;
+  height: fit-content;
+  font-family: var(--font-paragraph);
+  font-weight: 500;
+  font-size: 15px;
+  letter-spacing: 0;
+  line-height: 1.2em;
+  text-transform: uppercase;
+  text-align: center;
+  color: var(--color-creamy-white);
+  background-color: var(--color-matt-black);
+}
+
+.btn-fill--split .btn-fill__label {
+  min-height: 50px;
+}
+
+.btn-fill__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  width: 50px;
+  min-width: 50px;
+  flex-shrink: 0;
+  align-self: stretch;
+  border-left: 1px solid var(--color-creamy-white);
+  background-color: var(--color-matt-black);
+  transition: background-color 0.2s ease;
+}
+
+.btn-fill--split:hover .btn-fill__icon {
+  background-color: var(--color-creamy-white);
+}
+
+.btn-fill__icon-inner {
+  position: relative;
+  box-sizing: border-box;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 22px;
+  flex-shrink: 0;
+  opacity: 1;
+  visibility: visible;
+  transform: rotate(45deg);
+  color: var(--color-creamy-white);
+  transition:
+    transform 0.2s ease,
+    color 0.2s ease;
+}
+
+.btn-fill:hover .btn-fill__icon-inner {
+  transform: rotate(0deg);
+  color: var(--color-matt-black);
+}
+
+.btn-fill__icon-inner svg {
+  width: 20px;
+  height: 22px;
+  flex-shrink: 0;
+  color: currentColor;
+}
+
+/**
+ * Link styles — radius 0, squircle 0, padding 0, ease-in-out color/decoration.
+ * Current page: `aria-current="page"` on the anchor.
+ */
+
+.link-light {
+  color: var(--color-creamy-white);
+  text-decoration: none;
+  border-radius: 0;
+  padding: 0;
+  transition:
+    color 0.2s ease-in-out,
+    text-decoration-color 0.2s ease-in-out;
+}
+
+.link-light:hover {
+  color: var(--color-deep-orange);
+  text-decoration: underline;
+}
+
+.link-light[aria-current="page"] {
+  color: var(--color-deep-orange);
+  text-decoration: none;
+}
+
+.link-dark {
+  color: var(--color-matt-black);
+  text-decoration: none;
+  border-radius: 0;
+  padding: 0;
+  transition:
+    color 0.2s ease-in-out,
+    text-decoration-color 0.2s ease-in-out;
+}
+
+.link-dark:hover {
+  color: var(--color-matt-black);
+  text-decoration: underline;
+}
+
+.link-dark[aria-current="page"] {
+  text-decoration: underline;
+}
+
+.link {
+  color: var(--color-deep-orange);
+  text-decoration: none;
+  border-radius: 0;
+  padding: 0;
+  transition:
+    color 0.2s ease-in-out,
+    text-decoration-color 0.2s ease-in-out;
+}
+
+.link:hover {
+  color: var(--color-creamy-white);
+  text-decoration: underline;
+}
+
+.link[aria-current="page"] {
+  color: var(--color-link-current);
+  text-decoration: underline;
+}

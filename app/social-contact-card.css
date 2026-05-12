@@ -1,0 +1,51 @@
+/**
+ * Social contact card — variant 1 (absolute positioning; parent should be `position: relative`).
+ * Hover motion (spring) and border are driven by `motion` in `SocialContactCard.tsx`.
+ */
+
+.social-contact-card.social-contact-card--v1 {
+  box-sizing: border-box;
+  width: 170px;
+  height: 118px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+  flex-wrap: nowrap;
+  gap: 10px;
+  padding: 10px;
+  overflow: hidden;
+  position: absolute;
+  left: 0;
+  top: 0;
+  border-radius: 0;
+  background-color: color-mix(in srgb, var(--color-white) 10%, transparent);
+  text-decoration: none;
+  color: inherit;
+  border: 1px solid transparent;
+  will-change: transform;
+}
+
+.social-contact-card.social-contact-card--v1:focus-visible {
+  outline: 2px solid var(--color-deep-orange);
+  outline-offset: 3px;
+}
+
+.social-contact-card__icon {
+  display: inline-flex;
+  line-height: 0;
+  color: var(--color-creamy-white);
+  transition: color 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.social-contact-card.social-contact-card--v1:hover .social-contact-card__icon,
+.social-contact-card.social-contact-card--v1:focus-visible .social-contact-card__icon {
+  color: var(--color-deep-orange);
+}
+
+.social-contact-card__label.body-1 {
+  text-align: center;
+  text-transform: uppercase;
+  margin: 0;
+}

@@ -1,0 +1,508 @@
+/* 3D Service Cube — desktop variants + phone stack */
+
+.service-cube {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  max-width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* ——— Desktop: inner block is only as wide as the 3D viewport → centers under heading; dots don’t shift it ——— */
+.service-cube__variant--desktop {
+  position: relative;
+  width: 100%;
+  max-width: 100%;
+  height: 300px;
+  margin: 0;
+  padding: 0;
+  overflow: visible;
+  border-radius: 0;
+  transition: transform 0.9s cubic-bezier(0.34, 1.35, 0.64, 1);
+}
+
+/* Same width as the cube; margin auto centers this block with `.services__heading-wrap` */
+.service-cube__desktop-center {
+  position: relative;
+  width: min(600px, 100%);
+  max-width: 100%;
+  height: 300px;
+  margin-left: auto;
+  margin-right: auto;
+  box-sizing: border-box;
+}
+
+.service-cube__desktop-shell {
+  position: relative;
+  box-sizing: border-box;
+  width: 100%;
+  height: 100%;
+  border-radius: 0;
+  /* 3D faces project past this box; they were winning hit-tests over the variant dots beside it. */
+  pointer-events: none;
+}
+
+.service-cube__desktop-shell * {
+  pointer-events: none;
+}
+
+.service-cube__stack {
+  position: absolute;
+  z-index: 20;
+  top: 50%;
+  left: calc(100% + 16px);
+  pointer-events: auto;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: nowrap;
+  gap: 0;
+  width: min-content;
+  /* Pre-rotation: vertical padding becomes screen-space width after `rotate(90deg)` — widens hit column beyond ~5px. */
+  min-height: 5px;
+  padding: 14px 0;
+  overflow: visible;
+  transform: translateY(-50%) rotate(90deg);
+  transform-origin: center center;
+  border-radius: 0;
+}
+
+.service-cube__stack-inner {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 0;
+}
+
+/* Padding replaces the old 10px flex gap: adjacent 5px + 5px = same gap between dashes, now inside the hit target. */
+button.service-cube__stack-hit {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  margin: 0;
+  padding: 0 5px;
+  border: none;
+  cursor: pointer;
+  font: inherit;
+  color: inherit;
+  background: transparent;
+  -webkit-appearance: none;
+  appearance: none;
+  pointer-events: auto;
+  /* Extra row-axis slop before rotation → taller hit strip after rotation (dash visuals unchanged). */
+  min-height: 32px;
+}
+
+button.service-cube__stack-hit:focus {
+  outline: none;
+}
+
+button.service-cube__stack-hit:focus-visible {
+  outline: 2px solid var(--color-deep-orange, #ff6017);
+  outline-offset: 2px;
+}
+
+.service-cube__stack-dash {
+  display: block;
+  width: 5px;
+  height: 5px;
+  flex-shrink: 0;
+  border-radius: 1px;
+  background-color: var(--color-creamy-white, #faf5ea);
+  overflow: hidden;
+}
+
+.service-cube__stack-dash--long {
+  width: 19px;
+  background-color: var(--color-deep-orange, #ff6017);
+}
+
+.service-cube__perspective {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  perspective: 2404px;
+  perspective-origin: 50% 50%;
+}
+
+.service-cube__frame-rotator {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  border-radius: 0;
+  transition: transform 0.9s cubic-bezier(0.34, 1.35, 0.64, 1);
+}
+
+.service-cube__frame-rotator[data-cube-rx="0"] {
+  transform: rotateX(0deg);
+}
+
+.service-cube__frame-rotator[data-cube-rx="90"] {
+  transform: rotateX(90deg);
+}
+
+.service-cube__frame-rotator[data-cube-rx="180"] {
+  transform: rotateX(180deg);
+}
+
+.service-cube__frame-rotator[data-cube-rx="270"] {
+  transform: rotateX(270deg);
+}
+
+/* Cuboid 600×300×300 — matches outer 600px frame (was 400px wide so faces sat inside the shell) */
+.service-cube__cube {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 600px;
+  height: 300px;
+  margin-left: -300px;
+  margin-top: -150px;
+  transform-style: preserve-3d;
+}
+
+/* Faces — geometry: 600×300×300 box */
+.service-cube__face {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  box-sizing: border-box;
+  transform-style: preserve-3d;
+  backface-visibility: visible;
+  border-radius: 0;
+}
+
+.service-cube__face--front {
+  width: 600px;
+  height: 300px;
+  margin-left: -300px;
+  margin-top: -150px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 40px;
+  gap: 10px;
+  background-color: rgba(0, 0, 0, 0.84);
+  overflow: visible;
+  transform: rotateY(0deg) translateZ(150px);
+}
+
+.service-cube__face--back {
+  width: 600px;
+  height: 300px;
+  margin-left: -300px;
+  margin-top: -150px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 40px;
+  gap: 10px;
+  background-color: rgba(0, 0, 0, 0.84);
+  overflow: visible;
+  transform: rotateY(180deg) translateZ(150px);
+}
+
+/*
+  Back face uses rotateY(180deg) so it sits at -Z. With the frame rotator at rotateX(180deg),
+  that face comes forward but the card reads mirrored and upside down. Rolling the card 180°
+  in its own plane fixes orientation (same idea as an inner rotateY(180) on many CSS cubes).
+*/
+.service-cube__frame-rotator[data-cube-rx="180"] .service-cube__face--back .service-cube-card {
+  transform: rotateZ(180deg);
+  transform-style: preserve-3d;
+}
+
+.service-cube__face--right {
+  width: 300px;
+  height: 300px;
+  margin-left: -150px;
+  margin-top: -150px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 40px;
+  gap: 10px;
+  background-color: rgba(255, 96, 23, 0.75);
+  overflow: visible;
+  opacity: 0.75;
+  transform: rotateY(90deg) translateZ(300px);
+}
+
+.service-cube__face--left {
+  width: 300px;
+  height: 300px;
+  margin-left: -150px;
+  margin-top: -150px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 40px;
+  gap: 10px;
+  background-color: rgba(255, 96, 23, 0.75);
+  overflow: visible;
+  opacity: 0.75;
+  transform: rotateY(-90deg) translateZ(300px);
+}
+
+.service-cube__face--bottom {
+  width: 600px;
+  height: 300px;
+  margin-left: -300px;
+  margin-top: -150px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 40px;
+  gap: 10px;
+  background-color: var(--color-light-orange, #ff7738);
+  overflow: visible;
+  transform: rotateX(-90deg) translateZ(150px);
+}
+
+/* Top = full 600×300 in XZ (same as bottom) */
+.service-cube__face--top {
+  width: 600px;
+  height: 300px;
+  margin-left: -300px;
+  margin-top: -150px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 40px;
+  gap: 10px;
+  background-color: var(--color-light-orange, #ff7738);
+  overflow: hidden;
+  transform: rotateX(90deg) translateZ(150px);
+}
+
+/* ——— Service cards (desktop) ——— */
+.service-cube-card {
+  position: relative;
+  box-sizing: border-box;
+  width: 100%;
+  min-width: 0;
+  max-width: 100%;
+  height: 260px;
+  max-height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  align-content: flex-start;
+  flex-wrap: nowrap;
+  gap: 10px;
+  padding: 0;
+  overflow: hidden;
+  border-radius: 0;
+}
+
+.service-cube-card__title-abs {
+  position: relative;
+  flex-shrink: 0;
+  width: 100%;
+  height: auto;
+  margin: 0 !important;
+  white-space: pre-wrap;
+  overflow-wrap: break-word;
+  word-break: break-word;
+  line-height: 1.2;
+  text-align: left;
+}
+
+.service-cube-card__desc-abs {
+  position: relative;
+  flex: 0 1 auto;
+  width: 80%;
+  max-width: 80%;
+  margin: 0 !important;
+  margin-left: auto !important;
+  margin-top: auto !important;
+  min-height: 0;
+  align-self: flex-end;
+  white-space: pre-wrap;
+  overflow-wrap: break-word;
+  word-break: break-word;
+  line-height: 1.2;
+  text-align: left;
+}
+
+.service-cube-card--desktop-light .heading-3.service-cube-card__title-abs {
+  color: var(--color-creamy-white, #faf5ea);
+}
+
+.service-cube-card--desktop-light .paragraph-s.service-cube-card__desc-abs {
+  color: var(--color-creamy-white, #faf5ea);
+}
+
+.service-cube-card--desktop-light .service-cube-card__desc--light {
+  opacity: 0.8;
+}
+
+.service-cube-card--desktop-dark .heading-3.service-cube-card__title-abs,
+.service-cube-card--desktop-dark .paragraph-s.service-cube-card__desc-abs {
+  color: var(--color-black-100, #000000);
+}
+
+/* ——— Phone ——— */
+.service-cube__variant--phone {
+  display: none;
+  position: relative;
+  width: 600px;
+  max-width: 100%;
+  height: min-content;
+  min-height: 0;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: nowrap;
+  gap: 10px;
+  padding: 0;
+  margin-left: auto;
+  margin-right: auto;
+  overflow: visible;
+  border-radius: 0;
+  transition: transform 0.9s cubic-bezier(0.34, 1.35, 0.64, 1);
+}
+
+.service-cube-phone__stack {
+  flex: 1;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  min-width: 0;
+  height: min-content;
+  padding: 0;
+  overflow: visible;
+  border-radius: 0;
+}
+
+.service-cube-phone__panel {
+  box-sizing: border-box;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 300px;
+  padding: 20px;
+  gap: 10px;
+  overflow: visible;
+  border-radius: 0;
+}
+
+.service-cube-phone__panel--top {
+  background-color: var(--color-light-orange, #ff7738);
+}
+
+.service-cube-phone__panel--back {
+  background-color: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.service-cube-phone__panel--bottom {
+  flex-direction: row;
+  background-color: var(--color-light-orange, #ff7738);
+}
+
+.service-cube-phone__panel--front {
+  background-color: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  z-index: 1;
+}
+
+.service-cube-card--phone-light .heading-3.service-cube-card__title-abs {
+  color: var(--color-creamy-white, #faf5ea);
+}
+
+.service-cube-card--phone-light .paragraph-s.service-cube-card__desc-abs {
+  color: var(--color-creamy-white, #faf5ea);
+}
+
+.service-cube-card--phone-light .service-cube-card__desc--light {
+  opacity: 0.8;
+}
+
+.service-cube-card--phone-dark .heading-3.service-cube-card__title-abs,
+.service-cube-card--phone-dark .paragraph-s.service-cube-card__desc-abs {
+  color: var(--color-black-100, #000000);
+}
+
+.service-cube-card--phone-light .service-cube-card__desc-abs,
+.service-cube-card--phone-dark .service-cube-card__desc-abs {
+  width: 100%;
+  max-width: 100%;
+  margin-left: 0 !important;
+  margin-top: auto !important;
+  align-self: stretch;
+  text-align: left;
+}
+
+@media (max-width: 809px) {
+  .service-cube__variant--desktop {
+    display: none;
+  }
+
+  /* Parent `.service-cube` uses `align-items: center` — phone panels stay narrow unless we stretch */
+  .service-cube {
+    align-items: stretch;
+    max-width: none;
+  }
+
+  .service-cube__variant--phone {
+    display: flex;
+    width: 100%;
+    max-width: none;
+    margin-left: 0;
+    margin-right: 0;
+  }
+
+  .service-cube-phone__stack {
+    align-items: stretch;
+  }
+
+  /*
+    Horizontal inset comes from `.services__sticky-stack` (12px). Panel padding was adding a second
+    inset so white/body copy sat inside the guides — vertical padding only here.
+  */
+  .service-cube-phone__panel {
+    align-items: stretch;
+    align-self: stretch;
+    padding: 20px 0;
+  }
+}
+
+@media (min-width: 810px) {
+  .service-cube__variant--desktop {
+    display: flex;
+  }
+
+  .service-cube__variant--phone {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .service-cube__variant--desktop,
+  .service-cube__variant--phone,
+  .service-cube__frame-rotator {
+    transition-duration: 0.2s;
+  }
+}

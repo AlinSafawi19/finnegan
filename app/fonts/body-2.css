@@ -1,0 +1,51 @@
+/**
+ * Body 2 — Clash Display Semibold, grey, lowercase, left-aligned.
+ * Breakpoints: phone (≤809px), tablet (810–1199px), desktop (≥1200px).
+ */
+.body-2 {
+  font-family: var(--font-heading);
+  font-weight: 600;
+  color: var(--color-body-2);
+  text-transform: lowercase;
+  text-align: left;
+  font-size: 24px;
+  letter-spacing: 0;
+  line-height: 1.5;
+  margin: 0 0 var(--body-2-paragraph-spacing);
+}
+
+.body-2:last-child {
+  margin-bottom: 0;
+}
+
+@media (min-width: 810px) and (not (min-width: 1200px)) {
+  .body-2 {
+    font-size: 30px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .body-2 {
+    font-size: 40px;
+  }
+}
+
+/* Size variants: default = large — full S → M → L scale. */
+
+@media (min-width: 810px) and (not (min-width: 1200px)) {
+  .body-2.body-2--sm {
+    font-size: 24px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .body-2.body-2--sm {
+    font-size: 24px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .body-2.body-2--md {
+    font-size: 30px;
+  }
+}

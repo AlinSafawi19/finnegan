@@ -1,0 +1,19 @@
+/**
+ * Paragraph - S — Satoshi Regular, grey, left-aligned.
+ * Single tier in design (min 0): 17px, 150% line-height.
+ */
+.paragraph-s {
+  font-family: var(--font-paragraph);
+  font-weight: 400;
+  color: var(--color-paragraph-s);
+  text-transform: none;
+  text-align: left;
+  font-size: 17px;
+  letter-spacing: 0;
+  line-height: 1.5;
+  margin: 0 0 var(--paragraph-s-paragraph-spacing);
+}
+
+.paragraph-s:last-child {
+  margin-bottom: 0;
+}

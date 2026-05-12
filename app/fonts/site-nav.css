@@ -1,0 +1,571 @@
+/**
+ * Site navigation — fixed top bar (exclusion blend), inner bar max 1200px.
+ * Breakpoints: phone (≤809px), tablet (810–1199px), desktop (≥1200px).
+ */
+
+/*
+ * Scroll lock when the full-screen menu is open.
+ * `globals.css` sets `scrollbar-gutter: stable` — combined with hiding overflow, that can leave a
+ * gutter that paints oddly. Release the gutter (`scrollbar-gutter: auto`) while locked.
+ * Do not use `transparent` on html/body: that reveals the UA canvas (white) behind the page and
+ * flashes during overlay fade in/out; match `body` in globals.css instead.
+ */
+html.site-nav-scroll-locked {
+  overflow: hidden;
+  overflow-x: hidden;
+  scrollbar-gutter: auto;
+  background-color: var(--color-black-100);
+}
+
+html.site-nav-scroll-locked body.site-nav-scroll-locked {
+  background-color: var(--color-black-100);
+}
+
+.site-nav-shell {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 10;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 80px;
+  padding: 0;
+  margin: 0;
+  opacity: 1;
+  visibility: visible;
+  mix-blend-mode: exclusion;
+  transform: rotate(0deg);
+  pointer-events: none;
+}
+
+.site-nav-shell > * {
+  pointer-events: auto;
+}
+
+/* Nav variant 1 — horizontal bar (full row width so logo / menu sit at opposite ends) */
+.site-nav.site-nav--v1 {
+  position: relative;
+  box-sizing: border-box;
+  align-self: stretch;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  height: 80px;
+  padding: 0 40px;
+  margin-left: auto;
+  margin-right: auto;
+  overflow: hidden;
+  border-radius: 0;
+  opacity: 1;
+  visibility: visible;
+  color: var(--color-creamy-white);
+  transform: rotate(0deg);
+  transition: opacity 0.4s cubic-bezier(0.34, 1.2, 0.64, 1);
+}
+
+/* Stack — home link + logo */
+.site-nav__brand {
+  position: relative;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: 97px;
+  height: 25px;
+  padding: 0;
+  margin: 0;
+  opacity: 1;
+  visibility: visible;
+  border-radius: 0;
+  text-decoration: none;
+  color: inherit;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.site-nav__brand:focus-visible {
+  outline: none;
+}
+
+.site-nav__brand-icon {
+  position: relative;
+  width: 97px;
+  height: 25px;
+  flex-shrink: 0;
+  opacity: 1;
+  visibility: visible;
+  overflow: visible;
+  border-radius: 0;
+}
+
+.site-nav__brand-icon img {
+  display: block;
+  width: 97px;
+  height: 25px;
+  object-fit: contain;
+}
+
+/* Menu — variant 1: 40×40 hit area */
+.site-nav__menu {
+  position: relative;
+  z-index: 0;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  flex-shrink: 0;
+  padding: 0;
+  margin: 0;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  opacity: 1;
+  visibility: visible;
+  border-radius: 0;
+  color: inherit;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.site-nav__menu:focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 2px;
+}
+
+/* Manual icon — two dashes (40×2), absolute; top 15px, bottom 15px */
+.site-nav__menu-icon {
+  position: relative;
+  width: 40px;
+  height: 40px;
+  overflow: hidden;
+  border-radius: 0;
+  opacity: 1;
+  visibility: visible;
+  transform: rotate(0deg);
+}
+
+.site-nav__menu-dashes {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  box-sizing: border-box;
+  width: 100%;
+  height: 17px;
+  opacity: 1;
+  visibility: visible;
+  overflow: visible;
+  border-radius: 0;
+}
+
+.site-nav__menu-dash {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background-color: var(--color-white-100);
+  opacity: 1;
+  visibility: visible;
+  overflow: hidden;
+  border-radius: 0;
+  transform: rotate(0deg);
+  transform-origin: center;
+  transition:
+    top 0.45s cubic-bezier(0.34, 1.2, 0.64, 1),
+    bottom 0.45s cubic-bezier(0.34, 1.2, 0.64, 1),
+    transform 0.45s cubic-bezier(0.34, 1.2, 0.64, 1);
+}
+
+.site-nav__menu-dash--top {
+  top: 0;
+}
+
+.site-nav__menu-dash--bottom {
+  bottom: 0;
+}
+
+/* Open state — convert the two dashes into an X (±45°) */
+.site-nav__menu-icon[data-open="true"] .site-nav__menu-dash--top {
+  top: 50%;
+  bottom: auto;
+  transform: translateY(-50%) rotate(45deg);
+}
+
+.site-nav__menu-icon[data-open="true"] .site-nav__menu-dash--bottom {
+  bottom: 50%;
+  top: auto;
+  transform: translateY(50%) rotate(-45deg);
+}
+
+/* Hover colors:
+   - Hamburger (closed) → Creamy White
+   - X (open) → Deep Orange */
+.site-nav__menu:hover .site-nav__menu-icon[data-open="false"] .site-nav__menu-dash,
+.site-nav__menu:hover .site-nav__menu-icon[data-open="0"] .site-nav__menu-dash {
+  background-color: var(--color-creamy-white);
+}
+
+.site-nav__menu:hover .site-nav__menu-icon[data-open="true"] .site-nav__menu-dash,
+.site-nav__menu:hover .site-nav__menu-icon[data-open="1"] .site-nav__menu-dash {
+  background-color: var(--color-deep-orange);
+}
+
+/* Keep the bar above the full-screen overlay (overlay z-index 9). */
+.site-nav.site-nav--v1 {
+  position: relative;
+  z-index: 11;
+}
+
+/* Nav variant 2 — phone only: logo and menu share the same 12px side inset (space-between, no flush-right absolute). */
+@media (max-width: 809px) {
+  .site-nav.site-nav--v1.site-nav--v2 {
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 12px;
+  }
+
+  .site-nav.site-nav--v1.site-nav--v2 .site-nav__menu {
+    position: relative;
+    left: auto;
+    right: auto;
+    top: auto;
+    margin: 0;
+    height: 40px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+/**
+ * Full-screen menu overlay — black fill, dismissible (empty area / Escape), scroll lock in TS.
+ * Rendered via a portal to `document.body` so it is not under `.site-nav-shell`’s
+ * `mix-blend-mode: exclusion` (which would prevent an opaque #000 layer).
+ */
+.site-nav-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  min-width: 100%;
+  max-width: none;
+  height: 100%;
+  min-height: 100vh;
+  min-height: 100dvh;
+  z-index: 9;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  background-color: #000000;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  isolation: isolate;
+  mix-blend-mode: normal;
+  transition:
+    opacity 0.3s cubic-bezier(0.12, 0.23, 0.5, 1),
+    visibility 0s linear 0.3s;
+}
+
+.site-nav-overlay.site-nav-overlay--shown {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  transition:
+    opacity 0.3s cubic-bezier(0.5, 0, 0.88, 0.77),
+    visibility 0s linear 0s;
+}
+
+.site-nav-overlay__menu {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100vh;
+  min-height: 100%;
+  box-sizing: border-box;
+  opacity: 1;
+  visibility: visible;
+  transform: rotate(0deg);
+  pointer-events: none;
+}
+
+.site-nav-overlay__menu a,
+.site-nav-overlay__menu button {
+  pointer-events: auto;
+}
+
+/* Tablet (810–1199px) & desktop (1200px+): wide overlay, 40px padding, spring enter */
+.site-nav-overlay__desktop,
+.site-nav-overlay__tablet {
+  display: none;
+  box-sizing: border-box;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: flex-start;
+  width: 100%;
+  height: 100vh;
+  min-height: 0;
+  padding: 40px;
+  opacity: 0;
+  transform: translateY(-716px);
+}
+
+@media (min-width: 1200px) {
+  .site-nav-overlay__desktop {
+    display: flex;
+  }
+}
+
+/* Use `not (min-width: 1200px)` instead of max-width: 1199px so viewports between
+   1199px and 1200px (subpixel / zoom) still get a panel — avoids a dead zone. */
+@media (min-width: 810px) and (not (min-width: 1200px)) {
+  .site-nav-overlay__tablet {
+    display: flex;
+  }
+}
+
+.site-nav-overlay--shown .site-nav-overlay__desktop,
+.site-nav-overlay--shown .site-nav-overlay__tablet {
+  animation: site-nav-overlay-desktop-in 0.85s cubic-bezier(0.34, 1.2, 0.64, 1) forwards;
+}
+
+@keyframes site-nav-overlay-desktop-in {
+  from {
+    opacity: 0;
+    transform: translateY(-716px) scale(1) rotate(0deg) skew(0deg);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1) rotate(0deg) skew(0deg);
+  }
+}
+
+.site-nav-overlay__stack--links {
+  display: flex;
+  flex: 1 1 auto;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 6px;
+  width: 100%;
+  min-height: 0;
+  padding: 0;
+  margin: 0;
+}
+
+.site-nav-overlay__stack--links .nav-menu {
+  margin-bottom: 0;
+}
+
+.site-nav-overlay__link {
+  color: var(--color-creamy-white);
+  text-transform: uppercase;
+  opacity: 0;
+  transform: translateX(150px) scale(1);
+  width: 100%;
+  transition: color 0.2s ease;
+}
+
+.site-nav-overlay__link:hover {
+  color: var(--color-white-30);
+}
+
+/* Higher specificity than `.nav-menu` so active color always wins */
+.site-nav-overlay__stack--links .site-nav-overlay__link.site-nav-overlay__link--active,
+.site-nav-overlay__stack--links .site-nav-overlay__link.site-nav-overlay__link--active:hover {
+  color: var(--color-deep-orange);
+}
+
+.site-nav-overlay--shown .site-nav-overlay__stack--links .site-nav-overlay__link {
+  animation: site-nav-overlay-link-in 0.75s cubic-bezier(0.34, 1.2, 0.64, 1) forwards;
+}
+
+.site-nav-overlay__stack--links .site-nav-overlay__link:nth-child(1) {
+  animation-delay: 0.04s;
+}
+
+.site-nav-overlay__stack--links .site-nav-overlay__link:nth-child(2) {
+  animation-delay: 0.08s;
+}
+
+.site-nav-overlay__stack--links .site-nav-overlay__link:nth-child(3) {
+  animation-delay: 0.12s;
+}
+
+.site-nav-overlay__stack--links .site-nav-overlay__link:nth-child(4) {
+  animation-delay: 0.16s;
+}
+
+.site-nav-overlay__stack--links .site-nav-overlay__link:nth-child(5) {
+  animation-delay: 0.2s;
+}
+
+.site-nav-overlay__stack--links .site-nav-overlay__link:nth-child(6) {
+  animation-delay: 0.24s;
+}
+
+@keyframes site-nav-overlay-link-in {
+  from {
+    opacity: 0;
+    transform: translateX(150px) scale(1);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0) scale(1);
+  }
+}
+
+.site-nav-overlay__stack--social {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-items: stretch;
+  align-self: stretch;
+  width: 100%;
+  height: 45px;
+  padding: 0;
+  margin: 0;
+  margin-top: auto;
+  box-sizing: border-box;
+  border: 1px solid var(--color-white-100);
+  border-radius: 0;
+  transition:
+    opacity 0.45s cubic-bezier(0.34, 1.2, 0.64, 1),
+    transform 0.45s cubic-bezier(0.34, 1.2, 0.64, 1),
+    border-color 0.45s cubic-bezier(0.34, 1.2, 0.64, 1);
+}
+
+/**
+ * Overlay social row — Inter (body) Light; line-height matches 45px-tall wrapper.
+ * Hover is per link (cell), not the whole row.
+ */
+.site-nav-overlay__social-link {
+  box-sizing: border-box;
+  display: flex;
+  flex: 1 1 0;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  min-width: 0;
+  min-height: 0;
+  height: 100%;
+  padding: 0;
+  margin: 0;
+  font-family: var(--font-body), ui-sans-serif, system-ui, sans-serif;
+  font-size: 15px;
+  font-weight: 300;
+  font-style: normal;
+  letter-spacing: -0.03em;
+  line-height: 45px;
+  text-transform: none;
+  text-decoration: none;
+  text-align: center;
+  color: var(--color-white-100);
+  background-color: transparent;
+  transition:
+    color 0.45s cubic-bezier(0.34, 1.2, 0.64, 1),
+    background-color 0.45s cubic-bezier(0.34, 1.2, 0.64, 1);
+  -webkit-tap-highlight-color: transparent;
+}
+
+.site-nav-overlay__social-link:hover {
+  background-color: color-mix(in srgb, var(--color-white) 10%, transparent);
+}
+
+.site-nav-overlay__social-link__label {
+  min-width: 0;
+  transition: color 0.45s cubic-bezier(0.34, 1.2, 0.64, 1);
+}
+
+.site-nav-overlay__social-link__icon {
+  display: flex;
+  flex-shrink: 0;
+  width: 23px;
+  height: 23px;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-white-100);
+  transition: transform 0.45s cubic-bezier(0.34, 1.2, 0.64, 1);
+}
+
+.site-nav-overlay__social-link__icon svg {
+  display: block;
+  width: 23px;
+  height: 23px;
+}
+
+.site-nav-overlay__social-link:hover .site-nav-overlay__social-link__label {
+  color: var(--color-deep-orange);
+}
+
+.site-nav-overlay__social-link:hover .site-nav-overlay__social-link__icon {
+  color: var(--color-white-100);
+  transform: rotate(45deg);
+}
+
+.site-nav-overlay__social-link:focus-visible {
+  outline: 2px solid var(--color-creamy-white);
+  outline-offset: -2px;
+}
+
+.site-nav-overlay__social-rule {
+  flex-shrink: 0;
+  width: 1px;
+  height: 26px;
+  align-self: center;
+  margin: 0;
+  padding: 0;
+  background-color: var(--color-white-100);
+  border: none;
+}
+
+/* Phone (≤809px): padding top 40, sides 12, bottom 100 */
+.site-nav-overlay__phone {
+  display: flex;
+  box-sizing: border-box;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: flex-start;
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+  padding: 40px 12px 100px 12px;
+  opacity: 0;
+  transform: translateY(-716px);
+}
+
+@media (min-width: 810px) {
+  .site-nav-overlay__phone {
+    display: none;
+  }
+}
+
+.site-nav-overlay--shown .site-nav-overlay__phone {
+  animation: site-nav-overlay-desktop-in 0.85s cubic-bezier(0.34, 1.2, 0.64, 1) forwards;
+}
+
+@media (max-width: 809px) {
+  .site-nav-overlay__stack--social {
+    overflow-x: auto;
+    overscroll-behavior-x: contain;
+  }
+}

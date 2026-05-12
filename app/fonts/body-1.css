@@ -1,0 +1,19 @@
+/**
+ * Body 1 — Inter Regular, Creamy White, uppercase, left-aligned.
+ * Single tier: 12px, 150% line-height, 20px paragraph spacing.
+ */
+.body-1 {
+  font-family: var(--font-body), ui-sans-serif, system-ui, sans-serif;
+  font-weight: 400;
+  color: var(--color-body-1);
+  text-transform: uppercase;
+  text-align: left;
+  font-size: 12px;
+  letter-spacing: -0.02em;
+  line-height: 1.5;
+  margin: 0 0 var(--body-1-paragraph-spacing);
+}
+
+.body-1:last-child {
+  margin-bottom: 0;
+}

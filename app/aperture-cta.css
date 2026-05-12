@@ -1,0 +1,119 @@
+/* Aperture CTA — variant 1 (200×200 circle, six blades, centered copy). */
+
+.aperture-cta {
+  box-sizing: border-box;
+  cursor: pointer;
+  text-decoration: none;
+  color: inherit;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.aperture-cta:focus-visible {
+  outline: 2px solid var(--color-creamy-white);
+  outline-offset: 4px;
+}
+
+.aperture-cta--v1 {
+  width: 200px;
+  height: 200px;
+  display: block;
+  overflow: hidden;
+  position: absolute;
+  border-radius: 300px;
+  border: 3px solid var(--color-creamy-white);
+}
+
+.aperture-cta__frame {
+  box-sizing: border-box;
+  width: 140px;
+  height: 140px;
+  display: block;
+  overflow: visible;
+  z-index: -1;
+  aspect-ratio: 1 / 1;
+  position: absolute;
+  top: 30px;
+  left: 30px;
+  border-radius: 193px;
+}
+
+.aperture-cta__stack {
+  box-sizing: border-box;
+  width: 160px;
+  height: 160px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(250, 245, 235, 0);
+  overflow: visible;
+  padding: 0;
+  align-content: center;
+  flex-wrap: nowrap;
+  gap: 10px;
+  aspect-ratio: 1 / 1;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  translate: -50% -50%;
+  border-radius: 210px;
+}
+
+.aperture-cta__text {
+  box-sizing: border-box;
+  width: auto;
+  height: auto;
+  white-space: pre;
+  z-index: 1;
+  position: relative;
+  transform: translateX(-3px);
+  font-weight: 500;
+  font-style: normal;
+  font-family: var(--font-heading);
+  color: var(--color-black-100);
+  font-size: 18px;
+  letter-spacing: 0;
+  text-align: left;
+  line-height: 150%;
+  font-feature-settings: normal;
+}
+
+.aperture-cta__blade {
+  box-sizing: border-box;
+  width: 118px;
+  height: 103px;
+  position: absolute;
+  pointer-events: none;
+}
+
+.aperture-cta__blade-svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+/* Rotations only — inset + z-index + stack fill animated via Motion (spring: k=170, c=47, m=4.5). */
+.aperture-cta__blade--1 {
+  transform: rotate(-300deg);
+}
+
+.aperture-cta__blade--2 {
+  transform: rotate(-240deg);
+}
+
+.aperture-cta__blade--3 {
+  transform: rotate(-180deg);
+}
+
+.aperture-cta__blade--4 {
+  transform: rotate(-120deg);
+}
+
+.aperture-cta__blade--5 {
+  transform: rotate(-60deg);
+}
+
+.aperture-cta__blade--6 {
+  transform: rotate(0deg);
+}

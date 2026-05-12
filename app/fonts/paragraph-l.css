@@ -1,0 +1,52 @@
+/**
+ * Paragraph - L — Satoshi Light, white, left-aligned.
+ * Breakpoints: phone (≤809px), tablet (810–1199px), desktop (≥1200px).
+ */
+.paragraph-l {
+  font-family: var(--font-paragraph);
+  font-weight: 300;
+  color: var(--color-paragraph-l);
+  text-transform: none;
+  text-align: left;
+  font-size: 28px;
+  letter-spacing: -0.03em;
+  line-height: 1.2em;
+  margin: 0 0 var(--paragraph-l-paragraph-spacing);
+}
+
+.paragraph-l:last-child {
+  margin-bottom: 0;
+}
+
+@media (min-width: 810px) and (not (min-width: 1200px)) {
+  .paragraph-l {
+    font-size: 32px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .paragraph-l {
+    font-size: 38px;
+  }
+}
+
+/* Size variants: default = large — full S → M → L scale. */
+
+@media (min-width: 810px) and (not (min-width: 1200px)) {
+  .paragraph-l.paragraph-l--sm {
+    font-size: 28px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .paragraph-l.paragraph-l--sm {
+    font-size: 28px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .paragraph-l.paragraph-l--md {
+    font-size: 32px;
+    letter-spacing: -0.03em;
+  }
+}

@@ -1,0 +1,113 @@
+/* Brands — section under Hero (separate from hero.css for maintainability) */
+.brands {
+  position: relative;
+  box-sizing: border-box;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 0;
+  padding: 150px 40px 150px 40px;
+  opacity: 1;
+  visibility: visible;
+  background-color: var(--color-black-100);
+  transform: translateY(170px);
+  will-change: transform;
+  transition: transform 650ms cubic-bezier(0.34, 1.2, 0.64, 1);
+}
+
+.brands[data-inview="true"] {
+  transform: translateY(0);
+}
+
+@media (max-width: 809px) {
+  .brands {
+    padding: 30px 12px 30px 12px;
+    /* IO can still toggle data-inview; keep final layout stable (no translate flicker) */
+    transition: none;
+    will-change: auto;
+  }
+
+  .brands[data-inview="false"] {
+    transform: translateY(0);
+  }
+}
+
+.brands__inner {
+  width: 100%;
+  min-width: 0;
+  max-width: 1680px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: flex-start;
+  gap: 60px;
+}
+
+.brands__heading {
+  width: 100%;
+  min-width: 0;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.brands__title {
+  width: 100%;
+  min-width: 0;
+  margin: 0;
+  color: var(--color-creamy-white);
+}
+
+.brands__logos {
+  width: 100%;
+  min-width: 200px;
+  height: fit-content;
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  grid-auto-rows: 132px;
+  column-gap: 10px;
+  row-gap: 10px;
+  align-items: center;
+  justify-content: stretch;
+}
+
+.brands__brand {
+  box-sizing: border-box;
+  width: 100%;
+  height: 100%;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 3px;
+  border-radius: 0;
+  background: color-mix(in srgb, var(--color-white) 5%, transparent);
+  transform: translateZ(0);
+}
+
+.brands__brand-logo {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+@media (min-width: 810px) and (max-width: 1199px) {
+  .brands__logos {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 809px) {
+  .brands__logos {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    justify-items: center;
+  }
+}
+

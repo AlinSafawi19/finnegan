@@ -1,0 +1,52 @@
+/**
+ * Footer Text - XXL — Clash Display Medium, black, left-aligned.
+ * Breakpoints: phone (≤809px), tablet (810–1199px), desktop (≥1200px).
+ */
+.footer-text-xxl {
+  font-family: var(--font-heading);
+  font-weight: 500;
+  color: var(--color-footer-text-xxl);
+  text-transform: none;
+  text-align: left;
+  font-size: 164px;
+  letter-spacing: -0.04em;
+  line-height: 1em;
+  margin: 0 0 var(--footer-text-xxl-paragraph-spacing);
+}
+
+.footer-text-xxl:last-child {
+  margin-bottom: 0;
+}
+
+@media (min-width: 810px) and (not (min-width: 1200px)) {
+  .footer-text-xxl {
+    font-size: 202px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .footer-text-xxl {
+    font-size: 240px;
+  }
+}
+
+/* Size variants: default = large — full S → M → L scale. */
+
+@media (min-width: 810px) and (not (min-width: 1200px)) {
+  .footer-text-xxl.footer-text-xxl--sm {
+    font-size: 164px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .footer-text-xxl.footer-text-xxl--sm {
+    font-size: 164px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .footer-text-xxl.footer-text-xxl--md {
+    font-size: 202px;
+    letter-spacing: -0.04em;
+  }
+}
