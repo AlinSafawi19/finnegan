@@ -1,7 +1,7 @@
 import { cache } from "react";
 
 const DEFAULT_BLOGS_API_URL =
-  "http://localhost:5173/api/public/v1/projects/finnegan/categories/blog-posts";
+  "http://localhost:5173/api/public/v1/projects/p-mp36lhoa-1/categories/cat-mp36lhof-a";
 
 export type Blog = {
   id: string;
