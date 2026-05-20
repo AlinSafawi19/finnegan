@@ -140,14 +140,27 @@ function mapEntryToAlbum(entry: ApiEntry, slotKeys: SlotKeys[]): Album {
 
 async function fetchAlbums(): Promise<Album[]> {
   const url = albumsApiUrl();
-  const res = await fetch(url, { next: { revalidate: 60 } });
-  if (!res.ok) {
-    throw new Error(`Albums API ${res.status}: ${url}`);
+
+  try {
+    const res = await fetch(url, { next: { revalidate: 60 } });
+
+    if (!res.ok) {
+      console.warn(`Albums API failed (${res.status}). Returning empty array.`);
+      return [];
+    }
+
+    const data = (await res.json()) as ApiResponse;
+
+    const slotKeys = slotKeysFromCategoryFields(data.category?.fields);
+    const entries = data.category?.entries ?? [];
+
+    return entries
+      .map((e) => mapEntryToAlbum(e, slotKeys))
+      .filter((a) => a.slug !== "");
+  } catch (error) {
+    console.warn("Albums API unreachable. Returning empty array.", error);
+    return [];
   }
-  const data = (await res.json()) as ApiResponse;
-  const slotKeys = slotKeysFromCategoryFields(data.category?.fields);
-  const entries = data.category?.entries ?? [];
-  return entries.map((e) => mapEntryToAlbum(e, slotKeys)).filter((a) => a.slug !== "");
 }
 
 /** One fetch per request / static render pass (shared by layouts, pages, `generateStaticParams`). */

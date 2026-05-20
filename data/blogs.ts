@@ -94,16 +94,26 @@ function mapEntryToBlog(entry: ApiEntry): Blog {
 
 async function fetchBlogs(): Promise<Blog[]> {
   const url = blogsApiUrl();
-  const res = await fetch(url, { next: { revalidate: 60 } });
-  if (!res.ok) {
-    throw new Error(`Blogs API ${res.status}: ${url}`);
-  }
+  if (!url) return [];
 
-  const data = (await res.json()) as ApiResponse;
-  const entries = data.category?.entries ?? [];
-  return entries
-    .map(mapEntryToBlog)
-    .filter((blog) => blog.slug !== "" && blog.title !== "");
+  try {
+    const res = await fetch(url, { next: { revalidate: 60 } });
+
+    if (!res.ok) {
+      console.warn(`Blogs API failed (${res.status}). Returning empty array.`);
+      return [];
+    }
+
+    const data = (await res.json()) as ApiResponse;
+    const entries = data.category?.entries ?? [];
+
+    return entries
+      .map(mapEntryToBlog)
+      .filter((blog) => blog.slug !== "" && blog.title !== "");
+  } catch (error) {
+    console.warn("Blogs API unreachable. Returning empty array.", error);
+    return [];
+  }
 }
 
 export const getBlogs = cache(fetchBlogs);
