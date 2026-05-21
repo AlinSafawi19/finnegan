@@ -478,14 +478,10 @@ button.service-cube__stack-hit:focus-visible {
     align-items: stretch;
   }
 
-  /*
-    Horizontal inset comes from `.services__sticky-stack` (12px). Panel padding was adding a second
-    inset so white/body copy sat inside the guides — vertical padding only here.
-  */
   .service-cube-phone__panel {
     align-items: stretch;
     align-self: stretch;
-    padding: 20px 0;
+    padding: 20px;
   }
 }
 

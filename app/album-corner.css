@@ -100,6 +100,45 @@
   right: -15px;
 }
 
+@media (max-width: 809px) {
+  .works__album-card-link:hover .works__album-corner,
+  .works__album-card-link:focus-visible .works__album-corner {
+    opacity: 0;
+  }
+
+  .works__album-card-link:hover
+    .works__album-card .works__album-corner:not(.works__album-corner--accent).works__album-corner--tl,
+  .works__album-card-link:focus-visible
+    .works__album-card .works__album-corner:not(.works__album-corner--accent).works__album-corner--tl {
+    top: -6px;
+    left: -5px;
+  }
+
+  .works__album-card-link:hover
+    .works__album-card .works__album-corner:not(.works__album-corner--accent).works__album-corner--tr,
+  .works__album-card-link:focus-visible
+    .works__album-card .works__album-corner:not(.works__album-corner--accent).works__album-corner--tr {
+    top: -6px;
+    right: -6px;
+  }
+
+  .works__album-card-link:hover
+    .works__album-card .works__album-corner:not(.works__album-corner--accent).works__album-corner--bl,
+  .works__album-card-link:focus-visible
+    .works__album-card .works__album-corner:not(.works__album-corner--accent).works__album-corner--bl {
+    bottom: -9px;
+    left: -5px;
+  }
+
+  .works__album-card-link:hover
+    .works__album-card .works__album-corner:not(.works__album-corner--accent).works__album-corner--br,
+  .works__album-card-link:focus-visible
+    .works__album-card .works__album-corner:not(.works__album-corner--accent).works__album-corner--br {
+    bottom: -9px;
+    right: -5px;
+  }
+}
+
 /* Fixed design positions (use with placement `tl`; parent must be `position: relative`) */
 .works__album-corner--preset-dark.works__album-corner--tl {
   top: -7px;

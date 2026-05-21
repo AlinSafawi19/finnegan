@@ -274,6 +274,14 @@
   }
 }
 
+@media (max-width: 809px) {
+  .works__album-view-cursor,
+  .works__album-view-cursor--visible {
+    opacity: 0 !important;
+    pointer-events: none;
+  }
+}
+
 .works__album-view-cursor__frame {
   position: relative;
   box-sizing: border-box;
