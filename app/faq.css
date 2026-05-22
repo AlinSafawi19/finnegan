@@ -1,6 +1,6 @@
-/* FAQ — layout aligned with Framer “FAQ” block (flow uses `relative` instead of canvas `absolute`) */
+/* FAQ — layout uses `relative` instead of canvas `absolute` */
 .faq {
-  /* Framer spring ~ stiffness 400, damping 40, mass 1 — approximated in CSS (no motion lib). */
+  /* Spring ~ stiffness 400, damping 40, mass 1 — approximated in CSS (no motion lib). */
   --faq-spring-duration: 0.52s;
   --faq-spring-ease: cubic-bezier(0.28, 1.12, 0.32, 1);
 
@@ -35,7 +35,7 @@
   }
 }
 
-/* Inner row (Framer used `absolute`; `relative` keeps height in document flow) */
+/* Inner row — `relative` keeps height in document flow */
 .faq__container {
   box-sizing: border-box;
   width: 100%;
@@ -73,7 +73,7 @@
 }
 
 /*
- * Framer’s `width: 1px` + `overflow: hidden` clips real text to a hairline in browsers.
+ * `width: 1px` + `overflow: hidden` clips real text to a hairline in browsers.
  * Use `flex: 1 1 0%` + `min-width: 0` so the column shares row space and can shrink without clipping.
  */
 .faq__heading-wrap {

@@ -285,7 +285,7 @@
   }
 }
 
-/* Decorative name ticker — under nav links (Framer-style strip, no edge fade). */
+/* Decorative name ticker — under nav links (no edge fade). */
 .site-footer__nav-ticker-shell {
   box-sizing: border-box;
   width: 100%;

@@ -334,7 +334,7 @@
  * Rich-text styling for the HTML returned by the public CMS API.
  *
  * The API HTML contains `<p>`, `<h3>`/`<h4>`, `<strong>`, `<a>`, `<img>`,
- * `<ul>`/`<ol>`/`<li>` (often with a nested `<p>` per item), and inline Framer
+ * `<ul>`/`<ol>`/`<li>` (often with a nested `<p>` per item), and inline
  * style/`data-preset-tag` hints we ignore. All rules are scoped to
  * `.blog-post__stack2-content` so they only affect the rendered post body.
  */

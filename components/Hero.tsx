@@ -6,7 +6,6 @@ import { useCallback, useEffect, useRef } from "react";
 const ABOUT_ME_ID = "about-me";
 const HEADING_ID = "heading";
 
-/** Default hero background (Framer Photographer template asset). */
 export const HERO_DEFAULT_VIDEO_SRC =
   "https://framerusercontent.com/assets/tNiKvAWEjMnsRZpXzJEPoMkDX28.mp4";
 

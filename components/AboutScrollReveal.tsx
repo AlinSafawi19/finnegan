@@ -17,10 +17,7 @@ type AboutScrollRevealProps = {
   className?: string;
 };
 
-/**
- * Layer in view: from Y 170 → 0, opacity 1, spring above; replay off (`viewport.once`).
- * Matches Framer “Enter” (offset Y 170) + start when layer enters viewport.
- */
+/** Layer in view: from Y 170 → 0, opacity 1, spring above; replay off (`viewport.once`). */
 export function AboutScrollReveal({ children, className }: AboutScrollRevealProps) {
   const reduceMotion = useReducedMotion();
 

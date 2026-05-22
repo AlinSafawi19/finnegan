@@ -9,7 +9,7 @@ import {
 } from "motion/react";
 import { useRef } from "react";
 
-/** Framer scroll-transform spring (all value rows). */
+/** Scroll-transform spring (all value rows). */
 const VALUE_SCROLL_SPRING = {
   stiffness: 232,
   damping: 60,
@@ -30,10 +30,9 @@ const VALUES: { key: string; label: string }[] = [
 ];
 
 /**
- * Framer “Section in View” + viewport center: progress 0 when section start
- * hits viewport center, 1 when section end hits viewport center.
- * From rotate 0 → To rotate `rotateToDeg`; target angle is reached by
- * `VALUE_ROTATE_PROGRESS_AT_FULL` of section progress (then held).
+ * Section in view + viewport center: progress 0 when section start hits viewport center,
+ * 1 when section end hits viewport center. From rotate 0 → To rotate `rotateToDeg`;
+ * target angle is reached by `VALUE_ROTATE_PROGRESS_AT_FULL` of section progress (then held).
  */
 function AboutValueScrollRow({
   sectionId,

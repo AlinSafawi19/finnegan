@@ -26,13 +26,6 @@ export function Footer() {
           <FooterNavLink href="/reviews">Reviews</FooterNavLink>
           <FooterNavLink href="/blog">Blogs</FooterNavLink>
           <FooterNavLink href="/contact">Contact</FooterNavLink>
-          <FooterNavLink
-            href="https://framer.link/XzKISjl"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            More Templates
-          </FooterNavLink>
         </div>
         <div className="site-footer__nav-ticker-shell" aria-hidden>
           <div className="site-footer__nav-ticker-viewport">

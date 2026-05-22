@@ -1,5 +1,4 @@
-const GEAR_AFFILIATE_LINK =
-  "https://www.framer.com/marketplace/creator/real-mehedi?via=realmehedi1";
+const GEAR_AFFILIATE_LINK = "#";
 
 export type GearIconKind = "camera" | "aperture" | "asterisk" | "laptop";
 

@@ -77,11 +77,11 @@ function slotKeysFromCategoryFields(
 }
 
 /**
- * Bare `framerusercontent.com/images/…` URLs often point at full-resolution
- * masters (10k+ px, tens of MB). Next.js `<Image>` optimization then fails or
- * times out. Append Framer’s resize hint when the API omits query params.
+ * Bare CDN image URLs often point at full-resolution masters (10k+ px, tens of MB).
+ * Next.js `<Image>` optimization then fails or times out.
+ * Append the resize hint when the API omits query params.
  */
-function normalizeFramerCdnUrl(url: string): string {
+function normalizeCdnUrl(url: string): string {
   const u = url.trim();
   if (!u || u.includes("?")) return u;
   if (!u.includes("framerusercontent.com/images/")) return u;
@@ -94,7 +94,7 @@ function slotImage(
 ): AlbumImageSlot {
   const raw = values[imageKey];
   if (typeof raw !== "string" || raw.trim() === "") return null;
-  return normalizeFramerCdnUrl(raw);
+  return normalizeCdnUrl(raw);
 }
 
 function slotAlt(

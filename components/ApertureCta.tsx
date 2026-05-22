@@ -29,7 +29,7 @@ function ApertureBladeSvg() {
   );
 }
 
-/** Framer / Motion spring — Transition panel: stiffness 170, damping 47, mass 4.5, delay 0s. */
+/** Spring transition: stiffness 170, damping 47, mass 4.5, delay 0. */
 function useApertureSpring() {
   const reduce = useReducedMotion();
   return useMemo(

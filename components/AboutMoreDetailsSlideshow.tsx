@@ -29,16 +29,16 @@ const scrollSpringConfig = {
   mass: 1,
 };
 
-const FRAMER_IMAGES = [
+const SLIDESHOW_IMAGES = [
   "https://framerusercontent.com/images/VnwD1MTZjQzM6ulzcuSc4Mp68tM.jpg?scale-down-to=1024",
   "https://framerusercontent.com/images/4iUrWWv7CAxK6Uy73hlsQp7OA.jpg?scale-down-to=1024",
   "https://framerusercontent.com/images/ZrFf4uKrKE1wIU6EOdvaWrU.jpg?scale-down-to=1024",
 ] as const;
 
 const VARIANT_IMAGES: [string, string, string][] = [
-  [FRAMER_IMAGES[0], FRAMER_IMAGES[1], FRAMER_IMAGES[2]],
-  [FRAMER_IMAGES[1], FRAMER_IMAGES[2], FRAMER_IMAGES[0]],
-  [FRAMER_IMAGES[2], FRAMER_IMAGES[0], FRAMER_IMAGES[1]],
+  [SLIDESHOW_IMAGES[0], SLIDESHOW_IMAGES[1], SLIDESHOW_IMAGES[2]],
+  [SLIDESHOW_IMAGES[1], SLIDESHOW_IMAGES[2], SLIDESHOW_IMAGES[0]],
+  [SLIDESHOW_IMAGES[2], SLIDESHOW_IMAGES[0], SLIDESHOW_IMAGES[1]],
 ];
 
 type VariantStackProps = {

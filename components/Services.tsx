@@ -8,19 +8,19 @@ import { ServiceCube } from "@/components/ServiceCube";
 const SERVICE_IMAGES = [
   {
     src: "https://framerusercontent.com/images/QYuVqRAxUi0MftDQcaQd3I9e76E.jpg?scale-down-to=1024&width=6720&height=4480",
-    alt: "Service Photo Real Mehedi Free Framer Template Photography",
+    alt: "Documentary photography service",
   },
   {
     src: "https://framerusercontent.com/images/aiel3WtTgXPAKPqTLdFFaO8JNEA.jpg?scale-down-to=1024&width=6749&height=5203",
-    alt: "Service Photo Real Mehedi Free Framer Template Photography",
+    alt: "Landscape photography service",
   },
   {
     src: "https://framerusercontent.com/images/MJs0yMA8eL0lMKdn787qmQJy8.jpg?scale-down-to=1024&width=5436&height=3840",
-    alt: "Service Photo Real Mehedi Free Framer Template Photography",
+    alt: "Product photography service",
   },
   {
     src: "https://framerusercontent.com/images/9V3jYmjzIjUhJVkMIMsNC9zBIc.jpg?scale-down-to=1024&width=4032&height=3024",
-    alt: "Service Photo Real Mehedi Free Framer Template Photography",
+    alt: "Real estate photography service",
   },
 ] as const;
 

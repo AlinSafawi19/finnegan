@@ -1,4 +1,4 @@
-/* Reviews — outer / inner layout matches Framer “Reviews – Ticker” (flow uses `relative` instead of canvas `absolute`) */
+/* Reviews — outer / inner layout uses `relative` instead of canvas `absolute` */
 .reviews-ticker {
   box-sizing: border-box;
   width: 100%;
@@ -60,7 +60,7 @@
   pointer-events: none;
 }
 
-/* Heading wrapper — matches Framer `position: absolute` over the spacer */
+/* Heading wrapper — `position: absolute` over the spacer */
 .reviews-ticker__heading-wrap {
   box-sizing: border-box;
   width: 100%;
@@ -254,7 +254,7 @@
   align-items: flex-start;
   padding: 16px 0 0 0;
   gap: 3px;
-  /* Framer: White 10%, top edge only (T: 0.2 · R/B/L: 0) */
+  /* White 10%, top edge only (T: 0.2 · R/B/L: 0) */
   border: 0;
   border-top: 1px solid rgba(255, 255, 255, 0.1);
 }

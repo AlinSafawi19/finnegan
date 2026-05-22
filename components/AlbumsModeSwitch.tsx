@@ -5,7 +5,7 @@ import { usePathname } from "next/navigation";
 import { motion, useReducedMotion } from "motion/react";
 import { Icon, type PhosphorIconName } from "@/components/phosphor_1";
 
-/** Framer-style spring from design: Physics, stiffness 500, damping 60, mass 1, delay 0. */
+/** Spring transition: stiffness 500, damping 60, mass 1, delay 0. */
 export const albumsToggleHoverSpring = {
   type: "spring" as const,
   stiffness: 500,

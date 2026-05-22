@@ -1,4 +1,4 @@
-/** Framer album page sections: enter from Y 170, spring (stiffness 362, damping 100, mass 1). */
+/** Album page sections: enter from Y 170, spring (stiffness 362, damping 100, mass 1). */
 export const albumPageSectionEnterSpring = {
   type: "spring" as const,
   stiffness: 362,

@@ -22,7 +22,7 @@ type WorkVideoEmbedProps = {
   disableScrollAnimation?: boolean;
 };
 
-/** Framer scroll “Enter”: spring physics (stiffness 400, damping 80, mass 1, delay 0.1s). */
+/** Scroll enter: spring physics (stiffness 400, damping 80, mass 1, delay 0.1s). */
 const videoScrollSpring = {
   type: "spring" as const,
   stiffness: 400,

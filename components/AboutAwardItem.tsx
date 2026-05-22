@@ -8,7 +8,7 @@ import {
   type KeyboardEvent,
 } from "react";
 
-/** Framer Transition panel: Spring, Physics — stiffness 500, damping 60, mass 1, delay 0. */
+/** Spring transition: stiffness 500, damping 60, mass 1, delay 0. */
 const AWARD_ITEM_SPRING = {
   type: "spring" as const,
   stiffness: 500,

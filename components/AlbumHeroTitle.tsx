@@ -3,7 +3,7 @@
 import type { ReactNode } from "react";
 import { motion, useReducedMotion } from "motion/react";
 
-/** Framer Appear → Enter: offset Y −150, spring physics */
+/** Enter animation: offset Y −150, spring physics */
 const APPEAR_SPRING = {
   type: "spring" as const,
   stiffness: 59,

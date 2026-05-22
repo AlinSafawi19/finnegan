@@ -7,7 +7,7 @@ import { useCallback, useLayoutEffect, useMemo, useRef, useState } from "react";
 import { motion, useReducedMotion, type Transition } from "motion/react";
 import "./album-button-link.css";
 
-/** Framer Transition: Spring, Physics — stiffness 500, damping 60, mass 1, delay 0. */
+/** Spring transition: stiffness 500, damping 60, mass 1, delay 0. */
 const HOVER_SPRING = {
   type: "spring" as const,
   stiffness: 500,

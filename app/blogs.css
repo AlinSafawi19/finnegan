@@ -1,4 +1,4 @@
-/* Blogs — layout aligned with Framer “Blogs” block (flow uses `relative` instead of canvas `absolute`) */
+/* Blogs — layout uses `relative` instead of canvas `absolute` */
 .blogs {
   box-sizing: border-box;
   width: 100%;
@@ -95,7 +95,7 @@
   text-align: right;
 }
 
-/* Row shell — Framer used `position: absolute`; `relative` keeps layout in document flow */
+/* Row shell — `relative` keeps layout in document flow */
 .blogs__wrap {
   box-sizing: border-box;
   width: 100%;
@@ -380,7 +380,7 @@
   line-height: 1.2;
 }
 
-/* —— Blog card (horizontal) — Framer export used `absolute`; flow uses `relative` + flex like vertical —— */
+/* —— Blog card (horizontal) — flow uses `relative` + flex like vertical —— */
 .blogs__card-horizontal {
   box-sizing: border-box;
   width: 100%;
@@ -639,7 +639,7 @@
 
   /*
    * Mobile: keep heading in normal flow (no absolute overlay).
-   * The old Framer-style absolute band + short spacer made the orange line taller than the
+   * The old absolute band + short spacer made the orange line taller than the
    * reserved box, so it painted over `.blogs__wrap` (images) below.
    */
   .blogs__heading-spacer {

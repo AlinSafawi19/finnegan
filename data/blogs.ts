@@ -49,7 +49,7 @@ function parseTags(value: string | undefined): string[] {
     .filter(Boolean);
 }
 
-function normalizeFramerCdnUrl(url: string): string {
+function normalizeCdnUrl(url: string): string {
   const u = url.trim();
   if (!u || u.includes("?")) return u;
   if (!u.includes("framerusercontent.com/images/")) return u;
@@ -62,11 +62,11 @@ function parseImage(value: string | undefined): ParsedImage {
   try {
     const parsed = JSON.parse(value) as Partial<ParsedImage>;
     return {
-      url: typeof parsed.url === "string" ? normalizeFramerCdnUrl(parsed.url) : "",
+      url: typeof parsed.url === "string" ? normalizeCdnUrl(parsed.url) : "",
       alt: typeof parsed.alt === "string" ? parsed.alt : undefined,
     };
   } catch {
-    return { url: normalizeFramerCdnUrl(value) };
+    return { url: normalizeCdnUrl(value) };
   }
 }
 

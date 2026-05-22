@@ -11,7 +11,7 @@ import { motion, useReducedMotion } from "motion/react";
 import { useState, type ComponentType } from "react";
 import type { GearIconKind } from "@/data/about-gears";
 
-/** Framer Transition: Spring, Physics — stiffness 500, damping 60, mass 1, delay 0. */
+/** Spring transition: stiffness 500, damping 60, mass 1, delay 0. */
 const GEAR_LINK_HOVER_SPRING = {
   type: "spring" as const,
   stiffness: 500,

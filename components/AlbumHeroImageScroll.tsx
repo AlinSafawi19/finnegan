@@ -3,10 +3,7 @@
 import type { CSSProperties } from "react";
 import { motion, useReducedMotion, useScroll, useTransform } from "motion/react";
 
-/**
- * Matches Framer “Scroll” → Speed 60%: layer tracks vertical scroll at 60% rate
- * (parallax factor = 1 − 0.6 on translateY).
- */
+/** Layer tracks vertical scroll at 60% rate (parallax factor = 1 − 0.6 on translateY). */
 const SCROLL_SPEED = 0.6;
 const PARALLAX_Y_FACTOR = 1 - SCROLL_SPEED;
 

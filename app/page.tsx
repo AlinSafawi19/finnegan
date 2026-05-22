@@ -39,13 +39,11 @@ export default async function Home() {
               </div>
               <div className="hero__heading-descriptive-cta">
                 <StrokeButton
-                  href="https://framer.link/LvEWI8I"
-                  target="_blank"
-                  rel="noopener noreferrer"
+                  href="/contact"
                   variant="split"
                   tone="outline"
                 >
-                  <StrokeSplitLabel>Get Template</StrokeSplitLabel>
+                  <StrokeSplitLabel>Book a Session</StrokeSplitLabel>
                   <span className="btn-stroke__icon">
                     <StrokeSplitIconInner>
                       <Icon

@@ -114,7 +114,7 @@
   --scroll-section-services-offset-y: 0;
 
   /**
-   * Smooth scroll “intensity” (Framer-style scale). Lenis `lerp` = intensity ÷ 100 (clamped 0.01–1).
+   * Smooth scroll “intensity” scale. Lenis `lerp` = intensity ÷ 100 (clamped 0.01–1).
    */
   --scroll-smooth-intensity: 12;
 }

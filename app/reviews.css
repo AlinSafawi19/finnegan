@@ -1,4 +1,4 @@
-/* Reviews page — layout aligned to Framer stack; flow uses `relative` (not canvas `absolute`). */
+/* Reviews page — flow uses `relative` (not canvas `absolute`). */
 
 .reviews-page {
   box-sizing: border-box;

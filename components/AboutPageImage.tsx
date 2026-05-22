@@ -7,9 +7,6 @@ function readScrollY(): number {
   return window.scrollY || document.documentElement.scrollTop || 0;
 }
 
-/**
- * Scroll speed 90% → layer lags page scroll by 10% (Framer-style parallax).
- */
 export function AboutPageImage() {
   const parallaxRef = useRef<HTMLDivElement>(null);
 

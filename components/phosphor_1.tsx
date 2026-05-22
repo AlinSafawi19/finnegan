@@ -1,7 +1,7 @@
 "use client";
 
 /**
- * Next.js Phosphor icon wrapper (replaces Framer’s remote `phosphor-icons` modules).
+ * Next.js Phosphor icon wrapper.
  * Extend `icons` with more imports from `@phosphor-icons/react` as needed.
  */
 
