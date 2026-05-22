@@ -2,7 +2,7 @@ import { cache } from "react";
 import type { Album, AlbumImageAltSlot, AlbumImageSlot } from "@/data/albums";
 
 const DEFAULT_ALBUMS_API_URL =
-  "https://cms-api-production-e357.up.railway.app/api/public/v1/projects/prj-mpf7ktu8-1z/categories/cat-mpf8p22j-7";
+  "https://cms-api-production-e357.up.railway.app/api/public/v1/projects/prj-mpgoaaki-42/categories/cat-mpgoaakh-3k";
 
 const SLOT_COUNT = 20;
 
