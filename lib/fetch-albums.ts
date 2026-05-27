@@ -88,22 +88,45 @@ function normalizeCdnUrl(url: string): string {
   return `${u}?scale-down-to=2048`;
 }
 
+function parseJsonImageField(raw: string): { url?: string; alt?: string } | null {
+  try {
+    const parsed = JSON.parse(raw) as unknown;
+    if (parsed && typeof parsed === "object" && !Array.isArray(parsed)) {
+      return parsed as { url?: string; alt?: string };
+    }
+  } catch {
+    // not JSON
+  }
+  return null;
+}
+
 function slotImage(
   values: Record<string, string | undefined>,
   imageKey: string,
 ): AlbumImageSlot {
   const raw = values[imageKey];
   if (typeof raw !== "string" || raw.trim() === "") return null;
+  const json = parseJsonImageField(raw);
+  if (json) {
+    const url = json.url?.trim() ?? "";
+    return url ? normalizeCdnUrl(url) : null;
+  }
   return normalizeCdnUrl(raw);
 }
 
 function slotAlt(
   values: Record<string, string | undefined>,
+  imageKey: string,
   altKey: string,
 ): AlbumImageAltSlot {
-  const raw = values[altKey];
-  if (typeof raw !== "string" || raw.trim() === "") return null;
-  return raw.trim();
+  const rawAlt = values[altKey];
+  if (typeof rawAlt === "string" && rawAlt.trim()) return rawAlt.trim();
+  const rawImage = values[imageKey];
+  if (typeof rawImage === "string" && rawImage.trim()) {
+    const json = parseJsonImageField(rawImage);
+    if (json?.alt?.trim()) return json.alt.trim();
+  }
+  return null;
 }
 
 function mapEntryToAlbum(entry: ApiEntry, slotKeys: SlotKeys[]): Album {
@@ -112,7 +135,7 @@ function mapEntryToAlbum(entry: ApiEntry, slotKeys: SlotKeys[]): Album {
   const imageAlts: AlbumImageAltSlot[] = [];
   for (const { imageKey, altKey } of slotKeys) {
     images.push(slotImage(v, imageKey));
-    imageAlts.push(slotAlt(v, altKey));
+    imageAlts.push(slotAlt(v, imageKey, altKey));
   }
   const firstImageKey = slotKeys[0]?.imageKey ?? "image_1";
 
