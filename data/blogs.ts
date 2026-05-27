@@ -1,7 +1,7 @@
 import { cache } from "react";
 
 const DEFAULT_BLOGS_API_URL =
-  "https://cms-api-production-e357.up.railway.app/api/public/v1/projects/prj-mpgoaaki-42/categories/cat-mpgoaaki-41";
+  "https://cms-api-production-e357.up.railway.app/api/public/v1/projects/prj-mpgp9m4i-am/categories/cat-mpo41ep7-15";
 
 export type Blog = {
   id: string;
