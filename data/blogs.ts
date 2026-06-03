@@ -1,7 +1,7 @@
 import { cache } from "react";
 
 const DEFAULT_BLOGS_API_URL =
-  "https://cms-api-production-e357.up.railway.app/api/public/v1/projects/prj-mpgp9m4i-am/categories/cat-mpo41ep7-15";
+  "https://canopy-production-7f21.up.railway.app/api/v1/photolab/blog";
 
 export type Blog = {
   id: string;
@@ -19,23 +19,25 @@ export type Blog = {
 
 type ApiEntry = {
   id: string;
-  values: Record<string, string | undefined>;
+  Date?: string;
+  Slug?: string;
+  Tags?: string;
+  Image?: string;
+  Title?: string;
+  Content?: string;
+  Featured?: string;
 };
 
 type ApiResponse = {
-  category?: {
-    entries?: ApiEntry[];
-  };
-};
-
-type ParsedImage = {
-  url: string;
-  alt?: string;
+  data?: ApiEntry[];
 };
 
 function blogsApiUrl(): string {
-  const fromEnv = process.env.BLOGS_API_URL?.trim();
-  return fromEnv || DEFAULT_BLOGS_API_URL;
+  return process.env.BLOGS_API_URL?.trim() || DEFAULT_BLOGS_API_URL;
+}
+
+function cmsApiKey(): string {
+  return process.env.NEXT_PUBLIC_CMS_API_KEY?.trim() ?? "";
 }
 
 function parseBoolean(value: string | undefined): boolean {
@@ -56,48 +58,36 @@ function normalizeCdnUrl(url: string): string {
   return `${u}?scale-down-to=2048`;
 }
 
-function parseImage(value: string | undefined): ParsedImage {
-  if (!value?.trim()) return { url: "" };
-
-  try {
-    const parsed = JSON.parse(value) as Partial<ParsedImage>;
-    return {
-      url: typeof parsed.url === "string" ? normalizeCdnUrl(parsed.url) : "",
-      alt: typeof parsed.alt === "string" ? parsed.alt : undefined,
-    };
-  } catch {
-    return { url: normalizeCdnUrl(value) };
-  }
-}
-
 function byPublishedDateDesc(a: Blog, b: Blog): number {
   return b.publishedAt.localeCompare(a.publishedAt);
 }
 
 function mapEntryToBlog(entry: ApiEntry): Blog {
-  const v = entry.values;
-  const image = parseImage(v.image);
-  const title = v.title?.trim() ?? "";
+  const title = entry.Title?.trim() ?? "";
+  const imageUrl = entry.Image?.trim() ? normalizeCdnUrl(entry.Image) : "";
 
   return {
     id: entry.id,
-    featured: parseBoolean(v.featured),
+    featured: parseBoolean(entry.Featured),
     title,
-    slug: v.slug?.trim() ?? "",
-    publishedAt: v.date?.trim() ?? "",
-    imageUrl: image.url,
-    imageAlt: image.alt?.trim() || title,
-    tags: parseTags(v.tags),
-    content: v.content ?? "",
+    slug: entry.Slug?.trim() ?? "",
+    publishedAt: entry.Date?.trim() ?? "",
+    imageUrl,
+    imageAlt: title,
+    tags: parseTags(entry.Tags),
+    content: entry.Content ?? "",
   };
 }
 
 async function fetchBlogs(): Promise<Blog[]> {
   const url = blogsApiUrl();
-  if (!url) return [];
+  const key = cmsApiKey();
 
   try {
-    const res = await fetch(url, { next: { revalidate: 60 } });
+    const headers: Record<string, string> = {};
+    if (key) headers["Authorization"] = `Bearer ${key}`;
+
+    const res = await fetch(url, { headers, next: { revalidate: 60 } });
 
     if (!res.ok) {
       console.warn(`Blogs API failed (${res.status}). Returning empty array.`);
@@ -105,7 +95,7 @@ async function fetchBlogs(): Promise<Blog[]> {
     }
 
     const data = (await res.json()) as ApiResponse;
-    const entries = data.category?.entries ?? [];
+    const entries = data.data ?? [];
 
     return entries
       .map(mapEntryToBlog)
