@@ -30,7 +30,7 @@ type ApiResponse = {
 };
 
 function blogsApiUrl(): string {
-  const base = process.env.CMS_BASE_URL?.trim();
+  const base = process.env.CMS_BASE_URL?.trim().replace(/\/$/, "");
   if (!base) throw new Error("CMS_BASE_URL is not set");
   return `${base}/photolab/blog`;
 }
@@ -82,6 +82,8 @@ async function fetchBlogs(): Promise<Blog[]> {
   const url = blogsApiUrl();
   const key = cmsApiKey();
 
+  console.log(`[blogs] fetching ${url} (key present: ${!!key})`);
+
   try {
     const headers: Record<string, string> = {};
     if (key) headers["Authorization"] = `Bearer ${key}`;
@@ -89,18 +91,20 @@ async function fetchBlogs(): Promise<Blog[]> {
     const res = await fetch(url, { headers, next: { revalidate: 60 } });
 
     if (!res.ok) {
-      console.warn(`Blogs API failed (${res.status}). Returning empty array.`);
+      console.warn(`[blogs] API failed — status ${res.status} from ${url}`);
       return [];
     }
 
     const data = (await res.json()) as ApiResponse;
     const entries = data.data ?? [];
 
+    console.log(`[blogs] received ${entries.length} entries`);
+
     return entries
       .map(mapEntryToBlog)
       .filter((blog) => blog.slug !== "" && blog.title !== "");
   } catch (error) {
-    console.warn("Blogs API unreachable. Returning empty array.", error);
+    console.warn(`[blogs] fetch error for ${url}:`, error);
     return [];
   }
 }
