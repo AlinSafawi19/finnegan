@@ -4,7 +4,7 @@ import type { Album, AlbumImageAltSlot, AlbumImageSlot } from "@/data/albums";
 const SLOT_COUNT = 20;
 
 function albumsApiUrl(): string {
-  const base = process.env.CMS_BASE_URL?.trim().replace(/\/$/, "");
+  const base = process.env.CMS_BASE_URL?.trim();
   if (!base) throw new Error("CMS_BASE_URL is not set");
   return `${base}/photolab/albums`;
 }
@@ -69,8 +69,6 @@ async function fetchAlbums(): Promise<Album[]> {
   const url = albumsApiUrl();
   const key = cmsApiKey();
 
-  console.log(`[albums] fetching ${url} (key present: ${!!key})`);
-
   try {
     const headers: Record<string, string> = {};
     if (key) headers["Authorization"] = `Bearer ${key}`;
@@ -78,18 +76,16 @@ async function fetchAlbums(): Promise<Album[]> {
     const res = await fetch(url, { headers, next: { revalidate: 60 } });
 
     if (!res.ok) {
-      console.warn(`[albums] API failed — status ${res.status} from ${url}`);
+      console.warn(`Albums API failed (${res.status}). Returning empty array.`);
       return [];
     }
 
     const data = (await res.json()) as ApiResponse;
     const entries = data.data ?? [];
 
-    console.log(`[albums] received ${entries.length} entries`);
-
     return entries.map(mapEntryToAlbum).filter((a) => a.slug !== "");
   } catch (error) {
-    console.warn(`[albums] fetch error for ${url}:`, error);
+    console.warn("Albums API unreachable. Returning empty array.", error);
     return [];
   }
 }
