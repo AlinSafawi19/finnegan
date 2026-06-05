@@ -1,17 +1,16 @@
 import { cache } from "react";
 import type { Album, AlbumImageAltSlot, AlbumImageSlot } from "@/data/albums";
 
-const DEFAULT_ALBUMS_API_URL =
-  "https://canopy-production-7f21.up.railway.app/api/v1/photolab/albums";
-
 const SLOT_COUNT = 20;
 
 function albumsApiUrl(): string {
-  return process.env.ALBUMS_API_URL?.trim() || DEFAULT_ALBUMS_API_URL;
+  const base = process.env.CMS_BASE_URL?.trim();
+  if (!base) throw new Error("CMS_BASE_URL is not set");
+  return `${base}/photolab/albums`;
 }
 
 function cmsApiKey(): string {
-  return process.env.NEXT_PUBLIC_CMS_API_KEY?.trim() ?? "";
+  return process.env.CMS_API_KEY?.trim() ?? "";
 }
 
 type ApiEntry = {

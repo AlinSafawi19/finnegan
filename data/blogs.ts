@@ -1,8 +1,5 @@
 import { cache } from "react";
 
-const DEFAULT_BLOGS_API_URL =
-  "https://canopy-production-7f21.up.railway.app/api/v1/photolab/blog";
-
 export type Blog = {
   id: string;
   featured: boolean;
@@ -33,11 +30,13 @@ type ApiResponse = {
 };
 
 function blogsApiUrl(): string {
-  return process.env.BLOGS_API_URL?.trim() || DEFAULT_BLOGS_API_URL;
+  const base = process.env.CMS_BASE_URL?.trim();
+  if (!base) throw new Error("CMS_BASE_URL is not set");
+  return `${base}/photolab/blog`;
 }
 
 function cmsApiKey(): string {
-  return process.env.NEXT_PUBLIC_CMS_API_KEY?.trim() ?? "";
+  return process.env.CMS_API_KEY?.trim() ?? "";
 }
 
 function parseBoolean(value: string | undefined): boolean {
