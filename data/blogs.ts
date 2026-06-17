@@ -32,7 +32,7 @@ type ApiResponse = {
 function blogsApiUrl(): string {
   const base = process.env.CMS_BASE_URL?.trim();
   if (!base) throw new Error("CMS_BASE_URL is not set");
-  return `${base}/photolab/blog`;
+  return `${base}/finnegan-monroe-photography/blog`;
 }
 
 function cmsApiKey(): string {
